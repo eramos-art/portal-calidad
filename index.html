@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Portal de Calidad — Grupo Sole</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a2332;min-height:100vh;padding-bottom:40px}
+.app{max-width:820px;margin:0 auto;padding:12px}
+.header{background:#1a3a5c;color:white;border-radius:14px;padding:16px 20px;margin-bottom:14px;box-shadow:0 4px 12px rgba(26,58,92,0.25)}
+.header h1{font-size:19px;font-weight:800}
+.header p{font-size:12px;opacity:0.75;margin-top:2px}
+.tabs{display:flex;gap:8px;margin-bottom:14px}
+.tab-btn{flex:1;padding:12px;border-radius:12px;border:1.5px solid #E2E8F0;background:white;color:#475569;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
+.tab-btn.active{background:#1a3a5c;color:white;border-color:#1a3a5c}
+.tab-page{display:none}
+.tab-page.active{display:block}
+.card{background:white;border:1px solid #E2E8F0;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.section-title{font-size:11px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.field label{font-size:12px;color:#475569;font-weight:600}
+.field input,.field select,.field textarea{font-family:inherit;font-size:14px;padding:10px 12px;border:1.5px solid #E2E8F0;border-radius:10px;background:#F8FAFC;color:#1a2332;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#378ADD;background:white}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{padding:12px 16px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-primary{background:#1a3a5c;color:white;width:100%}
+.btn-primary:disabled{opacity:0.5}
+.btn-add{width:100%;padding:10px;border:1.5px dashed #CBD5E1;background:transparent;color:#64748B;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.spec-section{border:1px solid #E2E8F0;border-radius:10px;margin-bottom:8px;overflow:hidden}
+.spec-header{background:#EBF4FF;padding:9px 12px;font-size:12px;font-weight:700;color:#1E40AF;cursor:pointer;display:flex;justify-content:space-between}
+.spec-body{padding:8px 12px}
+.spec-row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid #F1F5F9;font-size:13px}
+.spec-row:last-child{border-bottom:none}
+.spec-row .k{color:#64748B;flex:0 0 42%}
+.spec-row .v{color:#1a2332;font-weight:600;flex:1;text-align:right}
+.ficha-header{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:12px;margin-bottom:12px}
+.ficha-header .code{font-family:monospace;font-size:15px;font-weight:800;color:#1a3a5c}
+.ficha-header .desc{font-size:13px;color:#475569;margin-top:2px}
+.ficha-header .meta{font-size:11px;color:#94A3B8;margin-top:6px}
+.hallazgo-card{background:#FEF2F2;border:1.5px solid #FCA5A5;border-radius:10px;padding:10px;margin-bottom:8px}
+.hallazgo-card.estetico{background:#FFF7ED;border-color:#FED7AA}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.badge.func{background:#FEE2E2;color:#991B1B}
+.badge.estet{background:#FEF3C7;color:#92400E}
+.alert{padding:10px 14px;border-radius:10px;font-size:12px;margin-bottom:10px}
+.alert.red{background:#FEF2F2;border:1px solid #FCA5A5;color:#991B1B}
+.alert.green{background:#F0FDF4;border:1px solid #86EFAC;color:#166534}
+.chip{display:inline-flex;align-items:center;gap:6px;background:#EBF4FF;color:#1E40AF;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;margin:3px 4px 3px 0}
+.chip .rm{cursor:pointer;font-weight:800}
+.foto-slot{width:64px;height:64px;border-radius:8px;border:2px dashed #CBD5E1;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;flex-shrink:0}
+.foto-slot img{width:100%;height:100%;object-fit:cover}
+.foto-slot .rm{position:absolute;top:-4px;right:-4px;background:#DC2626;color:white;border-radius:50%;width:18px;height:18px;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.loading{text-align:center;padding:30px;color:#64748B;font-size:13px}
+.config-warning{background:#FFF7ED;border:1.5px solid #FED7AA;color:#92400E;padding:10px 14px;border-radius:10px;font-size:12px;margin-bottom:12px}
+/* WIZARD */
+.progress-bar{display:flex;gap:4px;margin-bottom:14px}
+.step-dot{flex:1;height:5px;border-radius:3px;background:#CBD5E1;transition:background 0.3s}
+.step-dot.done{background:#1a3a5c}
+.step-dot.active{background:#378ADD}
+.step-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.step-header .ico{width:38px;height:38px;background:#1a3a5c;color:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.step-header .lbl{font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:0.05em;font-weight:700}
+.step-header .ttl{font-size:15px;font-weight:800;color:#1a2332}
+.step-page{display:none}
+.step-page.active{display:block}
+.nav-row{display:flex;gap:10px;margin-top:16px}
+.btn-nav{flex:1;padding:14px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:inherit}
+.btn-back{background:#F1F5F9;color:#334155}
+.btn-next{background:#1a3a5c;color:white}
+.sig-area{border:1.5px solid #E2E8F0;border-radius:10px;background:#F8FAFC;cursor:crosshair;display:block;width:100%;touch-action:none}
+.sig-status{font-size:12px;color:#94A3B8;margin-top:6px}
+.sig-status.signed{color:#10B981;font-weight:600}
+.ref-row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:12px}
+.ref-row .k{color:#64748B}
+.ref-row .v{color:#1a2332;font-weight:600;text-align:right}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <h1>🔬 Portal de Calidad — Grupo Sole</h1>
+    <p>Fichas técnicas e historial de muestreos</p>
+    <div id="onedriveStatusBox" style="margin-top:10px"></div>
+  </div>
+
+  <div id="configWarning" class="config-warning" style="display:none">
+    ⚠️ Falta conectar la base de datos. Abre este archivo con un editor de texto y reemplaza
+    <code>PEGAR_AQUI_TU_URL_DE_APPS_SCRIPT</code> por la URL que copiaste al implementar el script (termina en /exec).
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tabBtnA" onclick="switchTab('A')">🔎 Buscar ficha</button>
+    <button class="tab-btn" id="tabBtnB" onclick="switchTab('B')">📋 Registrar muestreo</button>
+    <button class="tab-btn" id="tabBtnC" onclick="switchTab('C')">📊 Resumen del día</button>
+  </div>
+
+  <!-- ═══ MÓDULO A: BUSCAR FICHA ═══ -->
+  <div class="tab-page active" id="tabA">
+    <div class="card">
+      <div class="section-title">Buscar código SAP</div>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="buscarCodigo" placeholder="Ej: 3120SOLCO049V2" style="flex:1;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-family:monospace;text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')buscarFicha()">
+        <button class="btn btn-primary" style="width:auto" onclick="buscarFicha()">Buscar</button>
+      </div>
+    </div>
+    <div id="fichaResultado"></div>
+  </div>
+
+  <!-- ═══ MÓDULO B: REGISTRAR MUESTREO (WIZARD) ═══ -->
+  <div class="tab-page" id="tabB">
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="step-header">
+      <div class="ico" id="stepIco">1</div>
+      <div><div class="lbl" id="stepLbl">Paso 1 de 5</div><div class="ttl" id="stepTtl">Datos generales</div></div>
+    </div>
+
+    <!-- PASO 0: DATOS GENERALES -->
+    <div class="step-page active" id="step0">
+      <div class="card">
+        <div class="section-title">Datos generales del muestreo</div>
+        <div class="grid2">
+          <div class="field"><label>Código SAP ⚠️</label><input type="text" id="mCodigo" placeholder="Ej: 3120SOLCO049V2" style="text-transform:uppercase;font-family:monospace" oninput="this.value=this.value.toUpperCase()" onblur="cargarFichaReferencia()"></div>
+          <div class="field"><label>Lote ⚠️</label><input type="text" id="mLote" placeholder="L-2026-XXX"></div>
+          <div class="field"><label>Fecha ⚠️</label><input type="date" id="mFecha"></div>
+          <div class="field"><label>Línea</label><input type="text" id="mLinea" placeholder="Ej: Encimeras a gas"></div>
+          <div class="field"><label>Cant. total lote ⚠️</label><input type="number" id="mCantLote" min="0"></div>
+          <div class="field"><label>Cant. muestra 1 ⚠️</label><input type="number" id="mCantM1" min="0"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 1: FICHA DE REFERENCIA + PERSONAL -->
+    <div class="step-page" id="step1">
+      <div class="card">
+        <div class="section-title">📄 Ficha técnica de referencia</div>
+        <div id="fichaReferencia"><p style="font-size:12px;color:#94A3B8">Ingresa el código SAP en el paso anterior para traer la ficha automáticamente.</p></div>
+      </div>
+      <div class="card">
+        <div class="section-title">👥 Personal — Ronda 1</div>
+        <div id="personalR1Chips" style="margin-bottom:8px"></div>
+        <div style="display:flex;gap:8px">
+          <select id="personalR1Sel" style="flex:1;padding:10px;border:1.5px solid #E2E8F0;border-radius:10px"><option value="">Seleccionar...</option></select>
+          <button class="btn" style="background:#EBF4FF;color:#1E40AF" onclick="agregarPersonal(1)">+ Agregar</button>
+        </div>
+        <div class="grid2" style="margin-top:10px">
+          <div class="field"><label>Hora inicio</label><input type="time" id="mHoraInicioR1"></div>
+          <div class="field"><label>Hora fin</label><input type="time" id="mHoraFinR1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 2: PRUEBAS Y HALLAZGOS RONDA 1 -->
+    <div class="step-page" id="step2">
+      <div class="card">
+        <div class="section-title">🔬 Pruebas realizadas — evidencia paso a paso</div>
+        <p style="font-size:12px;color:#64748B;margin-bottom:10px">Marca cada prueba que corresponda a esta línea de producto. Deja constancia aunque todo salga conforme.</p>
+        <div id="pruebasCatalogo"></div>
+      </div>
+      <div class="card">
+        <div class="section-title">🔍 Hallazgos — Ronda 1</div>
+        <div id="hallazgosR1"></div>
+        <button class="btn-add" onclick="addHallazgo(1)">+ Agregar hallazgo</button>
+      </div>
+      <div id="alertaR2"></div>
+    </div>
+
+    <!-- PASO 3: SEGUNDA MUESTRA -->
+    <div class="step-page" id="step3">
+      <div id="bloqueRonda2">
+        <div class="card">
+          <div class="section-title">👥 Personal — Ronda 2</div>
+          <div id="personalR2Chips" style="margin-bottom:8px"></div>
+          <div style="display:flex;gap:8px">
+            <select id="personalR2Sel" style="flex:1;padding:10px;border:1.5px solid #E2E8F0;border-radius:10px"><option value="">Seleccionar...</option></select>
+            <button class="btn" style="background:#EBF4FF;color:#1E40AF" onclick="agregarPersonal(2)">+ Agregar</button>
+          </div>
+          <div class="grid2" style="margin-top:10px">
+            <div class="field"><label>Hora inicio</label><input type="time" id="mHoraInicioR2"></div>
+            <div class="field"><label>Hora fin</label><input type="time" id="mHoraFinR2"></div>
+          </div>
+          <div class="field" style="margin-top:6px"><label>Cant. muestra 2</label><input type="number" id="mCantM2" min="0"></div>
+        </div>
+        <div class="card">
+          <div class="section-title">🔍 Hallazgos — Ronda 2</div>
+          <div id="hallazgosR2"></div>
+          <button class="btn-add" onclick="addHallazgo(2)">+ Agregar hallazgo</button>
+          <div class="field" style="margin-top:10px"><label>¿Persiste el hallazgo original?</label>
+            <select id="mPersiste"><option value="">Seleccionar...</option><option value="Sí">Sí — persiste</option><option value="No">No — no se repitió</option></select>
+          </div>
+        </div>
+      </div>
+      <div id="sinSegundaMuestra" class="card" style="display:none;text-align:center;padding:30px 16px">
+        <div style="font-size:32px;margin-bottom:8px">✅</div>
+        <div style="font-size:14px;font-weight:700;color:#1a3a5c">No se requirió segunda muestra</div>
+        <p style="font-size:12px;color:#64748B;margin-top:6px">No se encontraron defectos funcionales, ni la jefatura solicitó una segunda muestra por defectos estéticos. Puedes continuar.</p>
+      </div>
+    </div>
+
+    <!-- PASO 4: DECISIÓN Y FIRMA -->
+    <div class="step-page" id="step4">
+      <div class="card" style="border:2px solid #334155">
+        <div class="section-title">✅ Decisión de empleo</div>
+        <div id="sugerenciaDecision" style="margin-bottom:10px"></div>
+        <div class="grid2">
+          <div class="field"><label>Decisión final ⚠️</label>
+            <select id="mDecision">
+              <option value="">Seleccionar...</option>
+              <option value="Liberado">✅ Liberado</option>
+              <option value="Tolerado">⚠️ Tolerado</option>
+              <option value="Bloqueado - Retroceso">🔴 Bloqueado — Retroceso</option>
+            </select>
+          </div>
+          <div class="field"><label>Decidido por</label>
+            <select id="mDecididoPor"><option value="">Seleccionar...</option></select>
+          </div>
+          <div class="field"><label>Fecha decisión</label><input type="date" id="mFechaDecision"></div>
+          <div class="field"><label>N° Reporte Reproceso <span style="font-weight:400;color:#94A3B8">(si aplica)</span></label><input type="text" id="mNReproceso" placeholder="Ej: REP-000045"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-title">📹 Evidencia adicional</div>
+        <div class="field">
+          <label>🔗 Link de video del proceso <span style="font-weight:400;color:#94A3B8">(opcional)</span></label>
+          <input type="url" id="mVideoLink" placeholder="Pega aquí el link de Drive u OneDrive">
+          <p style="font-size:11px;color:#94A3B8;margin-top:2px">Graba con el celular, súbelo a Drive/OneDrive y pega el link — el video queda muy pesado para guardarlo directo en la app.</p>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Observaciones generales del muestreo <span style="font-weight:400;color:#94A3B8">(opcional)</span></label>
+          <textarea id="mObsGenerales" rows="3" placeholder="Notas que no correspondan a un hallazgo o prueba específica..." style="resize:vertical"></textarea>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-title">✍️ Firma del inspector responsable</div>
+        <canvas class="sig-area" id="sigInspector" height="120"></canvas>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn" style="background:white;border:1.5px solid #E2E8F0;color:#475569" onclick="clearSig()">🗑 Limpiar</button>
+        </div>
+        <div class="sig-status" id="sigStatus">Sin firma aún — dibuja tu firma arriba</div>
+      </div>
+      <button class="btn btn-primary" id="btnGuardarMuestreo" onclick="guardarMuestreo()">💾 Guardar en base de datos</button>
+      <button class="btn btn-primary" style="background:#059669;margin-top:8px" onclick="generarPDFMuestreo()">📄 Generar PDF del muestreo</button>
+      <div id="successMsg"></div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-nav btn-back" id="btnBack" onclick="prevStepB()" style="display:none">◀ Anterior</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextStepB()">Siguiente ▶</button>
+    </div>
+  </div>
+
+  <!-- ═══ MÓDULO C: RESUMEN DEL DÍA ═══ -->
+  <div class="tab-page" id="tabC">
+    <div class="card">
+      <div class="section-title">📊 Resumen del día</div>
+      <div class="grid2">
+        <div class="field"><label>Fecha</label><input type="date" id="resumenFecha" onchange="cargarResumenDia()"></div>
+        <div class="field" style="justify-content:flex-end">
+          <button class="btn btn-primary" style="margin-top:22px" onclick="generarPDFResumen()">📄 Generar PDF para tu jefa</button>
+        </div>
+      </div>
+    </div>
+    <div id="resumenContenido"><div class="loading">Selecciona una fecha para ver el resumen.</div></div>
+
+    <div class="card">
+      <div class="section-title">📈 Recurrencia por proveedor (histórico completo)</div>
+      <p style="font-size:12px;color:#64748B;margin-bottom:10px">No solo el día de hoy — esto mira todo el historial para detectar proveedores con fallas repetidas.</p>
+      <div id="recurrenciaProveedor"><div class="loading">🔎 Calculando...</div></div>
+    </div>
+  </div>
+</div>
+
+<input type="file" accept="image/*" capture="environment" id="hiddenFile" style="display:none">
+<input type="file" accept="image/*" id="hiddenFileGallery" style="display:none">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- Modal: gestionar términos de defecto por categoría -->
+<div class="modal-overlay" id="defectCatModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px">
+  <div style="background:white;border-radius:16px;padding:20px;max-width:420px;width:100%;font-family:inherit">
+    <h3 id="defectCatModalTitle" style="font-size:15px;margin-bottom:12px;color:#1a3a5c">⚙️ Defectos</h3>
+    <div id="defectCatChips" style="min-height:36px;padding:6px;background:#F8FAFC;border-radius:10px;margin-bottom:10px"></div>
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <input type="text" id="newDefectCatInput" placeholder="Nuevo término técnico..." style="flex:1;padding:9px 12px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:13px" onkeydown="if(event.key==='Enter')addDefectoCategoria()">
+      <button onclick="addDefectoCategoria()" style="padding:9px 14px;background:#2563EB;color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">+</button>
+    </div>
+    <button onclick="closeDefectCatModal()" style="width:100%;padding:11px;background:#F1F5F9;color:#475569;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Listo ✓</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// CONFIG — reemplaza esto por la URL de tu Apps Script (termina en /exec)
+// ══════════════════════════════════════════════
+const SCRIPT_URL = 'PEGAR_AQUI_TU_URL_DE_APPS_SCRIPT';
+
+if(!SCRIPT_URL || SCRIPT_URL.indexOf('PEGAR_AQUI')===0){
+  document.getElementById('configWarning').style.display='block';
+}
+
+// ══════════════════════════════════════════════
+// CONFIG — OneDrive (Azure AD) — pega aquí el Application (client) ID y
+// el Directory (tenant) ID que copiaste al registrar la app en Azure.
+// La REDIRECT_URI debe ser EXACTAMENTE la misma URL que pusiste en Azure.
+// ══════════════════════════════════════════════
+const MSAL_CLIENT_ID = 'PEGAR_AQUI_TU_CLIENT_ID';
+const MSAL_TENANT_ID = 'PEGAR_AQUI_TU_TENANT_ID';
+const REDIRECT_URI = window.location.origin + window.location.pathname;
+const MSAL_SCOPES = ['Files.ReadWrite','User.Read'];
+const ONEDRIVE_FOLDER = 'PortalCalidad_Evidencias';
+// Nombre EXACTO de la carpeta (con acceso directo ya agregado a tu OneDrive) donde
+// viven las fichas técnicas originales. Si la renombran, actualiza esto.
+const ONEDRIVE_FICHAS_FOLDER = 'Repositorio de Fichas Técnicas';
+let msalToken = null;
+let msalUserName = '';
+
+function onedriveConfigurado(){
+  return MSAL_CLIENT_ID && MSAL_CLIENT_ID.indexOf('PEGAR_AQUI')!==0;
+}
+
+// ══════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════
+function switchTab(t){
+  document.getElementById('tabA').classList.toggle('active', t==='A');
+  document.getElementById('tabB').classList.toggle('active', t==='B');
+  document.getElementById('tabC').classList.toggle('active', t==='C');
+  document.getElementById('tabBtnA').classList.toggle('active', t==='A');
+  document.getElementById('tabBtnB').classList.toggle('active', t==='B');
+  document.getElementById('tabBtnC').classList.toggle('active', t==='C');
+  if(t==='C' && !window._resumenCargadoUnaVez){
+    window._resumenCargadoUnaVez = true;
+    document.getElementById('resumenFecha').value = new Date().toISOString().split('T')[0];
+    cargarResumenDia();
+    cargarRecurrenciaProveedor();
+  }
+}
+
+// ══════════════════════════════════════════════
+// WIZARD — Registrar muestreo
+// ══════════════════════════════════════════════
+const STEPS_B = [
+  {ico:'1',lbl:'Paso 1 de 5',ttl:'Datos generales'},
+  {ico:'2',lbl:'Paso 2 de 5',ttl:'Ficha de referencia y personal'},
+  {ico:'3',lbl:'Paso 3 de 5',ttl:'Pruebas y hallazgos'},
+  {ico:'4',lbl:'Paso 4 de 5',ttl:'Segunda muestra'},
+  {ico:'5',lbl:'Paso 5 de 5',ttl:'Decisión y firma'},
+];
+let currentStepB = 0;
+function buildProgressB(){
+  const bar = document.getElementById('progressBar');
+  bar.innerHTML = STEPS_B.map((_,i)=>`<div class="step-dot ${i<currentStepB?'done':i===currentStepB?'active':''}"></div>`).join('');
+}
+function updateNavB(){
+  const s = STEPS_B[currentStepB];
+  document.getElementById('stepIco').textContent = s.ico;
+  document.getElementById('stepLbl').textContent = s.lbl;
+  document.getElementById('stepTtl').textContent = s.ttl;
+  document.querySelectorAll('.step-page').forEach((p,i)=>p.classList.toggle('active', i===currentStepB));
+  document.getElementById('btnBack').style.display = currentStepB>0 ? 'block' : 'none';
+  const btnNext = document.getElementById('btnNext');
+  btnNext.style.display = currentStepB<STEPS_B.length-1 ? 'block' : 'none';
+  buildProgressB();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function validateStepB(step){
+  if(step===0){
+    const req = ['mCodigo','mLote','mFecha','mCantLote','mCantM1'];
+    for(const id of req){ if(!document.getElementById(id).value.trim()){ alert('⚠️ Completa los campos obligatorios (⚠️) antes de continuar.'); return false; } }
+  }
+  return true;
+}
+function nextStepB(){
+  if(!validateStepB(currentStepB)) return;
+  if(currentStepB===2){
+    // al salir del paso de pruebas/hallazgos, decide si mostrar la sección de segunda muestra
+    evaluarSegundaMuestra();
+  }
+  if(currentStepB < STEPS_B.length-1){ currentStepB++; updateNavB(); }
+}
+function prevStepB(){
+  if(currentStepB>0){ currentStepB--; updateNavB(); }
+}
+
+// ══════════════════════════════════════════════
+// LISTA DE PERSONAL (gestionable, localStorage)
+// ══════════════════════════════════════════════
+const LS_PERSONAL_KEY = 'sole_calidad_personal_v1';
+let misPersonal = [];
+function loadPersonal(){
+  try{ const s=localStorage.getItem(LS_PERSONAL_KEY); if(s) misPersonal=JSON.parse(s); }catch(e){}
+  if(!misPersonal.length) misPersonal=['(agregar personal en el código fuente o próxima versión)'];
+  ['personalR1Sel','personalR2Sel','mDecididoPor'].forEach(id=>{
+    const sel=document.getElementById(id);
+    sel.innerHTML='<option value="">Seleccionar...</option>'+misPersonal.map(p=>`<option value="${p}">${p}</option>`).join('');
+  });
+}
+
+// ══════════════════════════════════════════════
+// CATÁLOGO DE DEFECTOS con categoría (Funcional / Estético)
+// ══════════════════════════════════════════════
+const LS_DEFECTOS_KEY = 'sole_calidad_defectos_v1';
+let misDefectos = []; // {nombre, categoria}
+function loadDefectosCatalogo(){
+  try{ const s=localStorage.getItem(LS_DEFECTOS_KEY); if(s) misDefectos=JSON.parse(s); }catch(e){}
+  if(!misDefectos.length){
+    misDefectos = [
+      {nombre:'Falla en encendido', categoria:'Funcional'},
+      {nombre:'No enciende', categoria:'Funcional'},
+      {nombre:'Fuga de gas', categoria:'Funcional'},
+      {nombre:'Medida fuera de tolerancia', categoria:'Funcional'},
+      {nombre:'Rayadura superficial', categoria:'Estético'},
+      {nombre:'Golpe leve', categoria:'Estético'},
+      {nombre:'Mancha de pintura', categoria:'Estético'},
+      {nombre:'Etiqueta mal colocada', categoria:'Estético'},
+    ];
+    saveDefectosCatalogo();
+  }
+}
+function saveDefectosCatalogo(){ try{ localStorage.setItem(LS_DEFECTOS_KEY, JSON.stringify(misDefectos)); }catch(e){} }
+
+// ══════════════════════════════════════════════
+// ONEDRIVE — login y subida de evidencias (fotos/video)
+// ══════════════════════════════════════════════
+function renderOnedriveStatus(){
+  const box = document.getElementById('onedriveStatusBox');
+  if(!onedriveConfigurado()){
+    box.innerHTML = `<div style="font-size:11px;background:rgba(255,255,255,0.15);color:white;padding:6px 10px;border-radius:8px">☁️ OneDrive: falta completar el registro en Azure (ver instrucciones)</div>`;
+    return;
+  }
+  if(msalToken){
+    box.innerHTML = `<div style="font-size:11px;background:rgba(16,185,129,0.25);color:white;padding:6px 10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center">
+      <span>☁️ OneDrive conectado — ${msalUserName}</span>
+      <button onclick="doLogoutOneDrive()" style="background:none;border:none;color:white;text-decoration:underline;cursor:pointer;font-size:11px">Salir</button>
+    </div>`;
+  } else {
+    box.innerHTML = `<button onclick="doLoginOneDrive()" style="width:100%;padding:8px;background:#0078D4;color:white;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">☁️ Conectar OneDrive para subir evidencias</button>`;
+  }
+}
+
+function getMsalAuthUrl(){
+  const p = new URLSearchParams({
+    client_id: MSAL_CLIENT_ID, response_type:'token', redirect_uri: REDIRECT_URI,
+    scope: MSAL_SCOPES.join(' '), response_mode:'fragment'
+  });
+  return 'https://login.microsoftonline.com/'+MSAL_TENANT_ID+'/oauth2/v2.0/authorize?'+p;
+}
+function loginPopup(){
+  return new Promise((resolve,reject)=>{
+    const popup = window.open(getMsalAuthUrl(),'mslogin','width=500,height=650,left=100,top=100');
+    if(!popup){ reject(new Error('Permite los popups en el navegador.')); return; }
+    const timer = setInterval(()=>{
+      try{
+        if(popup.closed){ clearInterval(timer); reject(new Error('Ventana cerrada.')); return; }
+        const hash = popup.location.hash;
+        if(hash && hash.includes('access_token')){
+          clearInterval(timer); popup.close();
+          const p = new URLSearchParams(hash.substring(1));
+          resolve(p.get('access_token'));
+        }
+      }catch(e){}
+    },300);
+    setTimeout(()=>{ clearInterval(timer); if(!popup.closed) popup.close(); reject(new Error('Tiempo agotado.')); },120000);
+  });
+}
+async function graphRequest(method, path, body, contentType){
+  const res = await fetch('https://graph.microsoft.com/v1.0'+path, {
+    method,
+    headers: {'Authorization':'Bearer '+msalToken, ...(contentType?{'Content-Type':contentType}:{})},
+    body: body||undefined
+  });
+  if(!res.ok){ const e = await res.text(); throw new Error(e); }
+  return res.json();
+}
+async function doLoginOneDrive(){
+  if(!onedriveConfigurado()){ alert('⚠️ Falta configurar OneDrive — pega el Client ID y Tenant ID en el código.'); return; }
+  try{
+    msalToken = await loginPopup();
+    const me = await graphRequest('GET','/me');
+    msalUserName = me.displayName || me.userPrincipalName;
+    renderOnedriveStatus();
+  }catch(err){
+    alert('❌ No se pudo conectar a OneDrive: '+err.message);
+  }
+}
+function doLogoutOneDrive(){
+  msalToken = null; msalUserName = '';
+  renderOnedriveStatus();
+}
+
+let _onedriveFolderId = null;
+async function getOrCreateOnedriveFolder(){
+  if(_onedriveFolderId) return _onedriveFolderId;
+  try{
+    const f = await graphRequest('GET','/me/drive/root:/'+ONEDRIVE_FOLDER);
+    _onedriveFolderId = f.id;
+  }catch(e){
+    const f = await graphRequest('POST','/me/drive/root/children', JSON.stringify({name:ONEDRIVE_FOLDER, folder:{}, '@microsoft.graph.conflictBehavior':'rename'}), 'application/json');
+    _onedriveFolderId = f.id;
+  }
+  return _onedriveFolderId;
+}
+function dataUrlToBlob(dataUrl){
+  const arr = dataUrl.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  const u8 = new Uint8Array(bstr.length);
+  for(let i=0;i<bstr.length;i++) u8[i]=bstr.charCodeAt(i);
+  return new Blob([u8], {type:mime});
+}
+// Sube una foto (dataURL base64) a OneDrive y devuelve el link para guardar en la base de datos.
+// Si OneDrive no está conectado, devuelve null y quien llama debe avisar al usuario.
+async function subirFotoAOneDrive(dataUrl, nombreArchivo){
+  if(!msalToken) return null;
+  try{
+    const folderId = await getOrCreateOnedriveFolder();
+    const blob = dataUrlToBlob(dataUrl);
+    const subida = await fetch('https://graph.microsoft.com/v1.0/me/drive/items/'+folderId+':/'+nombreArchivo+':/content', {
+      method:'PUT', headers:{'Authorization':'Bearer '+msalToken,'Content-Type':'image/jpeg'}, body:blob
+    });
+    if(!subida.ok) throw new Error(await subida.text());
+    const item = await subida.json();
+    // Crear link de acceso para que quede visible desde el reporte
+    const linkRes = await graphRequest('POST','/me/drive/items/'+item.id+'/createLink', JSON.stringify({type:'view', scope:'organization'}), 'application/json');
+    return linkRes.link ? linkRes.link.webUrl : item.webUrl;
+  }catch(err){
+    console.warn('Error subiendo a OneDrive:', err.message);
+    return null;
+  }
+}
+
+// ══════════════════════════════════════════════
+// BUSCAR LA FICHA TÉCNICA ORIGINAL (PDF) DENTRO DE TU ONEDRIVE
+// Esto NO reemplaza la ficha estructurada de la base de datos — es para
+// validar visualmente contra el documento original tal como lo guardan hoy.
+// ══════════════════════════════════════════════
+async function buscarFichaEnOneDrive(codigo){
+  const cont = document.getElementById('oneDriveFichaResultado');
+  if(!msalToken){
+    cont.innerHTML = `<div class="alert" style="background:#EBF4FF;border:1px solid #93C5FD;color:#1E40AF">☁️ Conecta OneDrive arriba (encabezado) para buscar la ficha original aquí.</div>`;
+    return;
+  }
+  cont.innerHTML = '<div class="loading">🔎 Buscando en tu OneDrive...</div>';
+  try{
+    let archivos = [];
+    let fuenteCarpeta = true;
+    // 1) Buscar directo dentro de la carpeta compartida específica (más confiable con accesos directos)
+    try{
+      const resCarpeta = await graphRequest('GET', `/me/drive/root:/${encodeURIComponent(ONEDRIVE_FICHAS_FOLDER)}:/search(q='${encodeURIComponent(codigo)}')`);
+      archivos = (resCarpeta.value||[]).filter(f=>f.file);
+    }catch(e){ fuenteCarpeta = false; }
+    // 2) Si no hay resultados ahí (o la carpeta no se llama así), probar la búsqueda general del OneDrive
+    if(!archivos.length){
+      fuenteCarpeta = false;
+      const resGeneral = await graphRequest('GET', `/me/drive/root/search(q='${encodeURIComponent(codigo)}')`);
+      archivos = (resGeneral.value||[]).filter(f=>f.file);
+    }
+    if(!archivos.length){
+      cont.innerHTML = `<div class="alert" style="background:#FFF7ED;border:1px solid #FED7AA;color:#92400E">No se encontró ningún archivo con "${codigo}" — ni en "${ONEDRIVE_FICHAS_FOLDER}" ni en el resto de tu OneDrive. Verifica el nombre exacto de la carpeta o si el archivo ya fue subido.</div>`;
+      return;
+    }
+    cont.innerHTML = (fuenteCarpeta ? `<p style="font-size:10px;color:#94A3B8;margin-bottom:6px">Encontrado en "${ONEDRIVE_FICHAS_FOLDER}"</p>` : '') + archivos.map(f=>`
+      <div style="border:1px solid #E2E8F0;border-radius:10px;padding:10px 12px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:700;color:#1a2332;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">📄 ${f.name}</div>
+            <div style="font-size:10px;color:#94A3B8">Modificado: ${new Date(f.lastModifiedDateTime).toLocaleDateString('es-PE')}</div>
+          </div>
+          <button onclick="verFichaOneDrive('${f.id}','${f.name.replace(/'/g,"")}')" style="flex-shrink:0;padding:7px 12px;background:#0078D4;color:white;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">👁 Ver</button>
+        </div>
+        <div id="preview_${f.id}" style="margin-top:8px"></div>
+      </div>`).join('');
+  }catch(err){
+    cont.innerHTML = `<div class="alert red">❌ Error al buscar en OneDrive: ${err.message}</div>`;
+  }
+}
+
+async function verFichaOneDrive(itemId, nombre){
+  const cont = document.getElementById('preview_'+itemId);
+  cont.innerHTML = '<div class="loading">🔎 Abriendo vista previa...</div>';
+  try{
+    const preview = await graphRequest('POST','/me/drive/items/'+itemId+'/preview', JSON.stringify({}), 'application/json');
+    cont.innerHTML = `<iframe src="${preview.getUrl}" style="width:100%;height:420px;border:1px solid #E2E8F0;border-radius:8px" allowfullscreen></iframe>`;
+  }catch(err){
+    // Si la vista previa embebida falla, ofrecer abrir en pestaña nueva como respaldo
+    const item = await graphRequest('GET','/me/drive/items/'+itemId);
+    cont.innerHTML = `<a href="${item.webUrl}" target="_blank" style="display:block;text-align:center;padding:10px;background:#EBF4FF;color:#1E40AF;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">🔗 Abrir "${nombre}" en OneDrive (nueva pestaña)</a>`;
+  }
+}
+
+// ══════════════════════════════════════════════
+// MÓDULO A — BUSCAR FICHA
+// ══════════════════════════════════════════════
+async function apiGet(sheet, codigo){
+  const url = `${SCRIPT_URL}?sheet=${encodeURIComponent(sheet)}${codigo?'&codigo='+encodeURIComponent(codigo):''}`;
+  const res = await fetch(url);
+  const json = await res.json();
+  if(json.status!=='ok') throw new Error(json.message||'Error de conexión');
+  return json.data;
+}
+
+function renderFichaHTML(m, specs){
+  let html = `<div class="ficha-header">
+    <div class="code">${m['Código SAP']}</div>
+    <div class="desc">${m['Descripción']||''}</div>
+    <div class="meta">Línea: ${m['Línea']||'—'} · Proveedor: ${m['Proveedor']||'—'} · Edición vigente: ${m['Edición Vigente']||'—'} (${m['Fecha Edición']||''})</div>
+  </div>`;
+  const secciones = {};
+  specs.forEach(r=>{
+    const sec = r['Sección']||'Otros';
+    if(!secciones[sec]) secciones[sec]=[];
+    secciones[sec].push(r);
+  });
+  Object.keys(secciones).forEach((sec,i)=>{
+    const rows = secciones[sec].map(r=>`<div class="spec-row"><span class="k">${r['Campo']}</span><span class="v">${r['Valor']}</span></div>`).join('');
+    html += `<div class="spec-section">
+      <div class="spec-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+        <span>${sec}</span><span>▼</span>
+      </div>
+      <div class="spec-body" style="display:none">${rows}</div>
+    </div>`;
+  });
+  return html;
+}
+
+async function buscarFicha(){
+  const codigo = document.getElementById('buscarCodigo').value.trim();
+  const cont = document.getElementById('fichaResultado');
+  if(!codigo){ cont.innerHTML=''; return; }
+  cont.innerHTML = '<div class="loading">🔎 Buscando...</div>';
+  try{
+    const [maestro, specs] = await Promise.all([
+      apiGet('Maestro_Codigos', codigo),
+      apiGet('Especificaciones', codigo)
+    ]);
+    let html = '';
+    if(!maestro.length){
+      html = `<div class="alert red">No se encontró el código ${codigo} en la base de datos estructurada. Puede que aún no esté cargado — mientras tanto, revisa abajo si el documento original ya está en tu OneDrive.</div>`;
+    } else {
+      const m = maestro[0];
+      html = renderFichaHTML(m, specs);
+      html += `<button class="btn btn-primary" onclick="iniciarInspeccionDesdeFicha('${m['Código SAP']}','${(m['Línea']||'').replace(/'/g,"")}')">📋 Iniciar muestreo con este código</button>`;
+      html += `<div id="historialCodigo" style="margin-top:14px"><div class="loading">🔎 Cargando historial...</div></div>`;
+    }
+    html += `<div class="card" style="margin-top:14px">
+      <div class="section-title">📁 Ficha técnica original (documento en tu OneDrive)</div>
+      <p style="font-size:11px;color:#94A3B8;margin-bottom:10px">Para validar visualmente contra el PDF tal como lo guardan hoy, sin pasar por la base de datos.</p>
+      <div id="oneDriveFichaResultado"></div>
+    </div>`;
+    cont.innerHTML = html;
+    if(maestro.length) renderHistorialCodigo(codigo);
+    buscarFichaEnOneDrive(codigo);
+  }catch(err){
+    cont.innerHTML = '<div class="alert red">❌ '+err.message+'</div>';
+  }
+}
+
+// ══════════════════════════════════════════════
+// HISTORIAL DE INSPECCIONES POR CÓDIGO — el corazón del pedido:
+// "que al arrastrar/buscar la ficha, salga en el acto qué pasó antes con ese código"
+// ══════════════════════════════════════════════
+async function renderHistorialCodigo(codigo){
+  const cont = document.getElementById('historialCodigo');
+  try{
+    const muestreos = await apiGet('Muestreos', codigo);
+    if(!muestreos.length){
+      cont.innerHTML = `<div class="card"><div class="section-title">🕒 Historial de inspecciones</div><p style="font-size:12px;color:#94A3B8">Este código no tiene inspecciones registradas todavía — será la primera vez que se muestrea en el sistema.</p></div>`;
+      return;
+    }
+    // Traer hallazgos y personal de TODOS los muestreos, y filtrar solo los que corresponden a este código
+    const idsMuestreo = muestreos.map(m=>m['ID Muestreo']);
+    const [todosHallazgos, todoPersonal] = await Promise.all([
+      apiGet('Muestreo_Hallazgos'),
+      apiGet('Muestreo_Personal')
+    ]);
+    muestreos.sort((a,b)=> new Date(b['Fecha']) - new Date(a['Fecha']));
+    const html = muestreos.map(m=>{
+      const hallazgosDeEste = todosHallazgos.filter(h=>h['ID Muestreo']===m['ID Muestreo']);
+      const personalDeEste = todoPersonal.filter(p=>p['ID Muestreo']===m['ID Muestreo'] && String(p['Ronda'])==='1').map(p=>p['Nombre']);
+      const decisionColor = m['Decisión Final']==='Liberado' ? '#166534' : m['Decisión Final']==='Tolerado' ? '#92400E' : '#991B1B';
+      const decisionBg = m['Decisión Final']==='Liberado' ? '#F0FDF4' : m['Decisión Final']==='Tolerado' ? '#FFF7ED' : '#FEF2F2';
+      const hallazgosResumen = hallazgosDeEste.length
+        ? hallazgosDeEste.map(h=>`<span class="badge ${h['Categoría']==='Funcional'?'func':'estet'}" style="margin:2px 4px 2px 0">${h['Categoría']}: ${h['Campo / Componente']||'—'}</span>`).join('')
+        : '<span style="font-size:11px;color:#94A3B8">Sin hallazgos — conforme</span>';
+      return `<div style="border:1px solid #E2E8F0;border-radius:10px;padding:10px 12px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:12px;font-weight:700;color:#1a3a5c">📅 ${m['Fecha']} · Lote ${m['Lote']}</span>
+          <span class="badge" style="background:${decisionBg};color:${decisionColor}">${m['Decisión Final']||'—'}</span>
+        </div>
+        <div style="font-size:11px;color:#64748B;margin-bottom:6px">Inspector(es): ${personalDeEste.join(', ')||'—'} · ID ${m['ID Muestreo']}</div>
+        <div>${hallazgosResumen}</div>
+      </div>`;
+    }).join('');
+    cont.innerHTML = `<div class="card"><div class="section-title">🕒 Historial de inspecciones (${muestreos.length})</div>${html}</div>`;
+  }catch(err){
+    cont.innerHTML = `<div class="alert red">❌ No se pudo cargar el historial: ${err.message}</div>`;
+  }
+}
+
+function iniciarInspeccionDesdeFicha(codigo, linea){
+  document.getElementById('mCodigo').value = codigo;
+  document.getElementById('mLinea').value = linea;
+  switchTab('B');
+  cargarFichaReferencia();
+}
+
+// Trae la ficha automáticamente en el paso 2 del wizard, para que quede visible mientras inspeccionan
+let fichaReferenciaActual = null;
+let fichaReferenciaSpecs = [];
+async function cargarFichaReferencia(){
+  const codigo = document.getElementById('mCodigo').value.trim();
+  const cont = document.getElementById('fichaReferencia');
+  if(!codigo){ return; }
+  cont.innerHTML = '<div class="loading">🔎 Buscando ficha...</div>';
+  try{
+    const [maestro, specs] = await Promise.all([
+      apiGet('Maestro_Codigos', codigo),
+      apiGet('Especificaciones', codigo)
+    ]);
+    if(!maestro.length){
+      cont.innerHTML = '<div class="alert red">No se encontró esta ficha en la base de datos. Puedes continuar igual, pero no habrá referencia para comparar.</div>';
+      fichaReferenciaActual = null; fichaReferenciaSpecs = [];
+      return;
+    }
+    fichaReferenciaActual = maestro[0];
+    fichaReferenciaSpecs = specs;
+    if(!document.getElementById('mLinea').value) document.getElementById('mLinea').value = maestro[0]['Línea']||'';
+    cont.innerHTML = renderFichaHTML(maestro[0], specs) + `<div id="historialCodigo" style="margin-top:10px"><div class="loading">🔎 Cargando historial...</div></div>`;
+    renderHistorialCodigo(codigo);
+  }catch(err){
+    cont.innerHTML = '<div class="alert red">❌ '+err.message+'</div>';
+  }
+}
+
+// ══════════════════════════════════════════════
+// CATÁLOGO DE DEFECTOS POR CATEGORÍA (técnico, extensible — se guarda en localStorage)
+// ══════════════════════════════════════════════
+const LS_DEFECTOS_CAT_KEY = 'sole_calidad_defectos_categoria_v1';
+const DEFECTOS_CATEGORIA_DEFAULT = {
+  'Visual': ['Rayadura superficial','Abolladura','Despostillamiento / desconche','Rajadura / fisura','Mal acabado / acabado irregular','Mancha / decoloración','Oxidación / corrosión','Porosidad','Ampolla / burbuja','Cráter','Escurrimiento de pintura o esmalte','Falta de brillo / opacidad','Etiqueta mal colocada o ilegible','Empaque dañado'],
+  'Dimensional': ['Medida fuera de tolerancia','Desalineación de componentes','Deformación estructural','Espesor de material no conforme'],
+  'Eléctrica': ['Consumo eléctrico fuera de especificación','Resistencia de aislamiento fuera de rango','Falla de continuidad','Cortocircuito','Cableado suelto o mal conexionado','Componente eléctrico dañado'],
+  'Gas': ['Fuga de gas (hermeticidad)','Presión de gas fuera de rango','Falla de encendido','Llama irregular / inestable','Boquilla obstruida o mal calibrada'],
+  'Agua': ['Fuga de agua','Flujo de agua fuera de especificación','Presión de agua fuera de rango'],
+  'Térmica': ['Temperatura superficial fuera de rango','Punto caliente anómalo (termografía)','Aislamiento térmico deficiente'],
+  'Recubrimientos': ['Espesor de recubrimiento fuera de tolerancia','Adherencia deficiente','Descascarillado del recubrimiento'],
+  'Mecánica': ['Torque fuera de especificación','Ajuste flojo / tornillería suelta','Rotura de componente','Desgaste prematuro'],
+  'Ambiental': ['Flujo de aire fuera de especificación','Ruido excesivo'],
+};
+let defectosCategoria = {};
+function loadDefectosCategoria(){
+  try{ const s=localStorage.getItem(LS_DEFECTOS_CAT_KEY); if(s) defectosCategoria=JSON.parse(s); }catch(e){}
+  Object.keys(DEFECTOS_CATEGORIA_DEFAULT).forEach(cat=>{
+    if(!defectosCategoria[cat]) defectosCategoria[cat] = [...DEFECTOS_CATEGORIA_DEFAULT[cat]];
+  });
+  saveDefectosCategoria();
+}
+function saveDefectosCategoria(){ try{ localStorage.setItem(LS_DEFECTOS_CAT_KEY, JSON.stringify(defectosCategoria)); }catch(e){} }
+
+let categoriaModalActual = null;
+function openDefectCatModal(categoria){
+  categoriaModalActual = categoria;
+  document.getElementById('defectCatModalTitle').textContent = '⚙️ Defectos — categoría ' + categoria;
+  renderDefectCatChips();
+  document.getElementById('defectCatModal').classList.add('open');
+}
+function closeDefectCatModal(){
+  document.getElementById('defectCatModal').classList.remove('open');
+  renderPruebasCatalogo();
+}
+function renderDefectCatChips(){
+  const cont = document.getElementById('defectCatChips');
+  const lista = defectosCategoria[categoriaModalActual] || [];
+  cont.innerHTML = lista.map((d,i)=>`<span class="chip">${d}<span class="rm" onclick="removeDefectoCategoria(${i})">×</span></span>`).join('') || '<span style="font-size:12px;color:#94A3B8">Sin términos aún</span>';
+}
+function addDefectoCategoria(){
+  const inp = document.getElementById('newDefectCatInput');
+  const val = inp.value.trim();
+  if(!val) return;
+  if(!defectosCategoria[categoriaModalActual].includes(val)) defectosCategoria[categoriaModalActual].push(val);
+  saveDefectosCategoria();
+  renderDefectCatChips();
+  inp.value=''; inp.focus();
+}
+function removeDefectoCategoria(idx){
+  defectosCategoria[categoriaModalActual].splice(idx,1);
+  saveDefectosCategoria();
+  renderDefectCatChips();
+}
+
+// ══════════════════════════════════════════════
+// CATÁLOGO DE PRUEBAS — nombres técnicos, con el instrumento real de tu equipo
+// ══════════════════════════════════════════════
+const CATALOGO_PRUEBAS = [
+  {categoria:'Visual', nombre:'Inspección visual general', instrumento:'Cámara / inspección directa'},
+  {categoria:'Dimensional', nombre:'Verificación dimensional', instrumento:'Vernier digital / Wincha o flexómetro'},
+  {categoria:'Dimensional', nombre:'Verificación de peso', instrumento:'Balanza / Gramera'},
+  {categoria:'Eléctrica', nombre:'Verificación de consumo eléctrico', instrumento:'Vatímetro / Pinza amperimétrica'},
+  {categoria:'Eléctrica', nombre:'Prueba de resistencia de aislamiento', instrumento:'Megóhmetro'},
+  {categoria:'Gas', nombre:'Prueba de hermeticidad (fuga de gas)', instrumento:'Manómetro + líquido jabonoso'},
+  {categoria:'Gas', nombre:'Verificación de presión de gas', instrumento:'Manómetro'},
+  {categoria:'Agua', nombre:'Prueba de flujo y presión de agua', instrumento:'Flujómetro / Manómetro'},
+  {categoria:'Térmica', nombre:'Medición de temperatura superficial', instrumento:'Termómetro infrarrojo / láser / Pirómetro'},
+  {categoria:'Térmica', nombre:'Inspección termográfica', instrumento:'Cámara termográfica'},
+  {categoria:'Recubrimientos', nombre:'Medición de espesor de recubrimiento', instrumento:'Medidor de espesores (pintura / esmalte / tarjeta electrónica)'},
+  {categoria:'Mecánica', nombre:'Verificación de torque', instrumento:'Torquímetro'},
+  {categoria:'Mecánica', nombre:'Prueba neumática', instrumento:'Aire comprimido'},
+  {categoria:'Ambiental', nombre:'Medición de flujo de aire', instrumento:'Anemómetro'},
+];
+
+let pruebasEstado = {}; // nombre -> {realizada, resultado, instrumento, foto, observacion, tipoDefecto}
+CATALOGO_PRUEBAS.forEach(p=>{ pruebasEstado[p.nombre] = {realizada:false, resultado:'Conforme', instrumento:p.instrumento, foto:null, observacion:'', tipoDefecto:''}; });
+
+function renderPruebasCatalogo(){
+  const cont = document.getElementById('pruebasCatalogo');
+  const categorias = [...new Set(CATALOGO_PRUEBAS.map(p=>p.categoria))];
+  cont.innerHTML = categorias.map(cat=>{
+    const items = CATALOGO_PRUEBAS.filter(p=>p.categoria===cat);
+    return `<div class="spec-section">
+      <div class="spec-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+        <span>${cat}</span><span>▼</span>
+      </div>
+      <div class="spec-body">
+        ${items.map(p=>renderPruebaItem(p)).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderPruebaItem(p){
+  const st = pruebasEstado[p.nombre];
+  const listaDefectos = defectosCategoria[p.categoria] || [];
+  return `<div style="border-bottom:1px solid #F1F5F9;padding:8px 0">
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:4px">
+      <input type="checkbox" ${st.realizada?'checked':''} onchange="togglePrueba('${p.nombre}',this.checked)" style="width:16px;height:16px">
+      ${p.nombre}
+    </label>
+    <div style="font-size:11px;color:#94A3B8;margin-left:24px;margin-bottom:6px">🔧 ${p.instrumento}</div>
+    ${st.realizada ? `
+    <div style="margin-left:24px">
+      <div class="grid2" style="margin-bottom:6px">
+        <select onchange="cambiarResultadoPrueba('${p.nombre}',this.value)" style="padding:8px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px">
+          <option ${st.resultado==='Conforme'?'selected':''}>Conforme</option>
+          <option ${st.resultado==='No conforme'?'selected':''}>No conforme</option>
+        </select>
+        <input type="text" placeholder="Observación (opcional)" value="${st.observacion}" oninput="pruebasEstado['${p.nombre}'].observacion=this.value" style="padding:8px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px">
+      </div>
+      ${st.resultado==='No conforme' ? `
+      <select onchange="if(this.value==='__manage__'){this.value=pruebasEstado['${p.nombre}'].tipoDefecto||'';openDefectCatModal('${p.categoria}');}else{pruebasEstado['${p.nombre}'].tipoDefecto=this.value;}" style="width:100%;padding:8px;border:1.5px solid #FCA5A5;border-radius:8px;font-size:12px;background:#FEF2F2;margin-bottom:6px">
+        <option value="">Tipo de defecto...</option>
+        ${listaDefectos.map(d=>`<option value="${d}" ${st.tipoDefecto===d?'selected':''}>${d}</option>`).join('')}
+        <option value="__manage__">⚙️ Agregar / gestionar términos...</option>
+      </select>` : ''}
+      <div style="display:flex;align-items:center;gap:8px">
+        ${st.foto ? `<div class="foto-slot"><img src="${st.foto}"><span class="rm" onclick="event.stopPropagation();pruebasEstado['${p.nombre}'].foto=null;renderPruebasCatalogo()">×</span></div><span style="font-size:11px;color:#16A34A;font-weight:600">✅ Evidencia lista</span>`
+        : `<button onclick="addFotoPrueba('${p.nombre}')" style="display:flex;align-items:center;gap:6px;padding:7px 10px;background:#EBF4FF;border:1.5px dashed #378ADD;border-radius:8px;color:#1E40AF;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">📷 Foto de la prueba</button>`}
+      </div>
+    </div>` : ''}
+  </div>`;
+}
+function cambiarResultadoPrueba(nombre, valor){
+  pruebasEstado[nombre].resultado = valor;
+  renderPruebasCatalogo();
+}
+
+function togglePrueba(nombre, checked){
+  pruebasEstado[nombre].realizada = checked;
+  renderPruebasCatalogo();
+}
+
+function addFotoPrueba(nombre){
+  const inp = document.getElementById('hiddenFile');
+  inp.onchange = e=>{
+    const file = e.target.files[0]; if(!file) return;
+    const r = new FileReader();
+    r.onload = ev=>compressImg(ev.target.result, async data=>{
+      pruebasEstado[nombre].foto = data;
+      renderPruebasCatalogo();
+      if(msalToken){
+        const id = generarIdMuestreo();
+        const link = await subirFotoAOneDrive(data, `Prueba_${id}_${nombre.replace(/[^a-zA-Z0-9]/g,'_')}_${Date.now()}.jpg`);
+        pruebasEstado[nombre].fotoLink = link;
+      }
+    });
+    r.readAsDataURL(file); inp.value='';
+  };
+  inp.click();
+}
+
+// ══════════════════════════════════════════════
+// MÓDULO B — REGISTRAR MUESTREO
+// ══════════════════════════════════════════════
+let personalRonda = {1:[], 2:[]};
+let hallazgos = {1:[], 2:[]};
+
+function agregarPersonal(ronda){
+  const sel = document.getElementById('personalR'+ronda+'Sel');
+  const val = sel.value;
+  if(!val) return;
+  if(!personalRonda[ronda].includes(val)) personalRonda[ronda].push(val);
+  renderPersonalChips(ronda);
+  sel.value='';
+}
+function quitarPersonal(ronda, idx){
+  personalRonda[ronda].splice(idx,1);
+  renderPersonalChips(ronda);
+}
+function renderPersonalChips(ronda){
+  const cont = document.getElementById('personalR'+ronda+'Chips');
+  cont.innerHTML = personalRonda[ronda].map((p,i)=>`<span class="chip">${p}<span class="rm" onclick="quitarPersonal(${ronda},${i})">×</span></span>`).join('') || '<span style="font-size:12px;color:#94A3B8">Sin personal agregado aún</span>';
+}
+
+function addHallazgo(ronda){
+  hallazgos[ronda].push({campo:'',categoria:'Funcional',cantidad:1,descripcion:'',foto:null});
+  renderHallazgos(ronda);
+}
+function delHallazgo(ronda, idx){
+  hallazgos[ronda].splice(idx,1);
+  renderHallazgos(ronda);
+  evaluarSegundaMuestra();
+}
+function renderHallazgos(ronda){
+  const cont = document.getElementById('hallazgosR'+ronda);
+  cont.innerHTML = hallazgos[ronda].map((h,i)=>{
+    const catClass = h.categoria==='Funcional' ? '' : 'estetico';
+    return `<div class="hallazgo-card ${catClass}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span class="badge ${h.categoria==='Funcional'?'func':'estet'}">${h.categoria}</span>
+        <button onclick="delHallazgo(${ronda},${i})" style="background:none;border:none;color:#94A3B8;font-size:16px;cursor:pointer">×</button>
+      </div>
+      <div class="grid2" style="margin-bottom:8px">
+        <select onchange="hallazgos[${ronda}][${i}].categoria=this.value;renderHallazgos(${ronda});evaluarSegundaMuestra()" style="padding:9px;border:1.5px solid #E2E8F0;border-radius:8px">
+          <option value="Funcional" ${h.categoria==='Funcional'?'selected':''}>⚠️ Funcional</option>
+          <option value="Estético" ${h.categoria==='Estético'?'selected':''}>🎨 Estético</option>
+        </select>
+        <input type="number" min="1" placeholder="Cantidad" value="${h.cantidad}" oninput="hallazgos[${ronda}][${i}].cantidad=this.value">
+      </div>
+      <input type="text" placeholder="Campo / componente afectado (ej: Encendido automático)" value="${h.campo}"
+        oninput="hallazgos[${ronda}][${i}].campo=this.value" style="margin-bottom:8px;width:100%;padding:9px;border:1.5px solid #E2E8F0;border-radius:8px">
+      <input type="text" placeholder="Descripción del hallazgo" value="${h.descripcion}"
+        oninput="hallazgos[${ronda}][${i}].descripcion=this.value" style="margin-bottom:8px;width:100%;padding:9px;border:1.5px solid #E2E8F0;border-radius:8px">
+      <div style="display:flex;align-items:center;gap:10px">
+        ${h.foto ? `<div class="foto-slot"><img src="${h.foto}"><span class="rm" onclick="event.stopPropagation();hallazgos[${ronda}][${i}].foto=null;renderHallazgos(${ronda})">×</span></div><span style="font-size:11px;color:#16A34A;font-weight:600">✅ Foto lista</span>`
+        : `<button onclick="addFotoHallazgo(${ronda},${i})" style="display:flex;align-items:center;gap:6px;padding:8px 12px;background:#FEF2F2;border:1.5px dashed #EF4444;border-radius:8px;color:#DC2626;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">📷 Foto obligatoria</button>`}
+      </div>
+    </div>`;
+  }).join('') || '<div style="font-size:12px;color:#94A3B8;padding:6px 0">Sin hallazgos — si no encontraron nada, no agregues ninguno.</div>';
+}
+
+function addFotoHallazgo(ronda, idx){
+  const inp = document.getElementById('hiddenFile');
+  inp.onchange = e=>{
+    const file = e.target.files[0]; if(!file) return;
+    const r = new FileReader();
+    r.onload = ev=>compressImg(ev.target.result, async data=>{
+      hallazgos[ronda][idx].foto = data;
+      renderHallazgos(ronda);
+      if(msalToken){
+        const id = generarIdMuestreo();
+        const link = await subirFotoAOneDrive(data, `Hallazgo_${id}_R${ronda}_${idx}_${Date.now()}.jpg`);
+        hallazgos[ronda][idx].fotoLink = link;
+      }
+    });
+    r.readAsDataURL(file); inp.value='';
+  };
+  inp.click();
+}
+function compressImg(dataUrl, cb, maxDim=1200, quality=0.78){
+  const img = new Image();
+  img.onload = ()=>{
+    let w=img.width, h=img.height;
+    if(w>h){ if(w>maxDim){h=h*maxDim/w;w=maxDim;} } else { if(h>maxDim){w=w*maxDim/h;h=maxDim;} }
+    const c=document.createElement('canvas'); c.width=w; c.height=h;
+    c.getContext('2d').drawImage(img,0,0,w,h);
+    cb(c.toDataURL('image/jpeg', quality));
+  };
+  img.src=dataUrl;
+}
+
+// ── Evalúa automáticamente si se requiere segunda muestra ──
+function evaluarSegundaMuestra(){
+  const tieneFuncional = hallazgos[1].some(h=>h.categoria==='Funcional');
+  const tieneEstetico = hallazgos[1].some(h=>h.categoria==='Estético');
+  const alerta = document.getElementById('alertaR2');
+  const bloque = document.getElementById('bloqueRonda2');
+  if(tieneFuncional){
+    alerta.innerHTML = '<div class="alert red">🔴 <strong>Se encontró un defecto funcional — segunda muestra obligatoria</strong> (automático, sin importar la cantidad).</div>';
+    bloque.style.display='block';
+  } else if(tieneEstetico){
+    alerta.innerHTML = `<div class="alert" style="background:#FFF7ED;border:1px solid #FED7AA;color:#92400E">
+      🎨 Se encontraron defectos estéticos. La decisión de pedir segunda muestra queda a criterio de la jefatura.
+      <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-weight:600;cursor:pointer">
+        <input type="checkbox" id="chkSolicitaR2" onchange="document.getElementById('bloqueRonda2').style.display=this.checked?'block':'none';sincronizarVistaR2()" style="width:16px;height:16px">
+        La jefatura solicita segunda muestra
+      </label>
+    </div>`;
+    bloque.style.display='none';
+  } else {
+    alerta.innerHTML='';
+    bloque.style.display='none';
+  }
+  sincronizarVistaR2();
+  sugerirDecision();
+}
+function sincronizarVistaR2(){
+  const bloqueVisible = document.getElementById('bloqueRonda2').style.display !== 'none';
+  document.getElementById('sinSegundaMuestra').style.display = bloqueVisible ? 'none' : 'block';
+}
+
+function sugerirDecision(){
+  const cont = document.getElementById('sugerenciaDecision');
+  const tieneFuncional = hallazgos[1].some(h=>h.categoria==='Funcional') || hallazgos[2].some(h=>h.categoria==='Funcional');
+  const persiste = document.getElementById('mPersiste') ? document.getElementById('mPersiste').value : '';
+  const huboHallazgos = hallazgos[1].length>0;
+  let sugerencia, color;
+  if(!huboHallazgos){ sugerencia='Sin hallazgos → sugerido: Liberado'; color='green'; }
+  else if(tieneFuncional && persiste==='Sí'){ sugerencia='Defecto funcional persiste en 2da muestra → sugerido: Bloqueado — Retroceso'; color='red'; }
+  else if(tieneFuncional && persiste==='No'){ sugerencia='Defecto funcional no persistió → sugerido: Liberado'; color='green'; }
+  else { sugerencia='Solo hallazgos estéticos → sugerido: Tolerado (según criterio de jefatura)'; color='green'; }
+  cont.innerHTML = `<div class="alert ${color==='red'?'red':'green'}">💡 Sugerencia automática: ${sugerencia}. <strong>La decisión final la confirma tu jefa.</strong></div>`;
+}
+document.addEventListener('change', e=>{ if(e.target.id==='mPersiste') sugerirDecision(); });
+
+// ══════════════════════════════════════════════
+// GUARDAR MUESTREO
+// ══════════════════════════════════════════════
+async function apiPost(sheet, values){
+  await fetch(SCRIPT_URL, {
+    method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({sheet, values})
+  });
+}
+
+function generarIdMuestreo(){
+  if(!window._idMuestreoActual) window._idMuestreoActual = 'MST-'+Date.now().toString().slice(-8);
+  return window._idMuestreoActual;
+}
+
+function validarMuestreoCompleto(){
+  const codigo = document.getElementById('mCodigo').value.trim();
+  const lote = document.getElementById('mLote').value.trim();
+  const fecha = document.getElementById('mFecha').value;
+  const cantLote = document.getElementById('mCantLote').value;
+  const cantM1 = document.getElementById('mCantM1').value;
+  const decision = document.getElementById('mDecision').value;
+  if(!codigo || !lote || !fecha || !cantLote || !cantM1 || !decision){
+    alert('⚠️ Completa los campos obligatorios (⚠️) en Datos generales y Decisión antes de continuar.');
+    return false;
+  }
+  const todosHallazgos = [...hallazgos[1].map(h=>({...h,ronda:1})), ...hallazgos[2].map(h=>({...h,ronda:2}))];
+  for(const h of todosHallazgos){
+    if(!h.foto){ alert('⚠️ Falta la foto del hallazgo "'+ (h.campo||'sin nombre') +'" (Ronda '+h.ronda+').'); return false; }
+  }
+  return true;
+}
+
+async function guardarMuestreo(){
+  if(!validarMuestreoCompleto()) return;
+  const codigo = document.getElementById('mCodigo').value.trim();
+  const lote = document.getElementById('mLote').value.trim();
+  const fecha = document.getElementById('mFecha').value;
+  const cantLote = document.getElementById('mCantLote').value;
+  const cantM1 = document.getElementById('mCantM1').value;
+  const decision = document.getElementById('mDecision').value;
+  const btn = document.getElementById('btnGuardarMuestreo');
+  btn.disabled = true; btn.textContent = '⏳ Guardando...';
+  try{
+    const id = generarIdMuestreo();
+    const requiereR2 = hallazgos[1].some(h=>h.categoria==='Funcional') ? 'Sí — automático (funcional)'
+      : (document.getElementById('chkSolicitaR2') && document.getElementById('chkSolicitaR2').checked) ? 'Sí — solicitado por jefatura (estético)' : 'No';
+
+    await apiPost('Muestreos', [
+      id, codigo, fichaReferenciaActual ? fichaReferenciaActual['Edición Vigente'] : '', lote, fecha, document.getElementById('mLinea').value,
+      cantLote, cantM1, requiereR2,
+      hallazgos[1].map(h=>h.campo).join(', '),
+      document.getElementById('mCantM2') ? document.getElementById('mCantM2').value : '',
+      document.getElementById('mPersiste') ? document.getElementById('mPersiste').value : '',
+      'Cerrado', decision,
+      document.getElementById('mDecididoPor').value,
+      document.getElementById('mFechaDecision').value,
+      document.getElementById('mNReproceso').value,
+      document.getElementById('mVideoLink').value,
+      document.getElementById('mObsGenerales').value
+    ]);
+
+    for(const ronda of [1,2]){
+      for(const p of personalRonda[ronda]){
+        await apiPost('Muestreo_Personal', [id, ronda, p, 'Inspector de Calidad',
+          document.getElementById('mHoraInicioR'+ronda) ? document.getElementById('mHoraInicioR'+ronda).value : '',
+          document.getElementById('mHoraFinR'+ronda) ? document.getElementById('mHoraFinR'+ronda).value : '']);
+      }
+      for(const h of hallazgos[ronda]){
+        await apiPost('Muestreo_Hallazgos', [id, ronda, h.campo, h.categoria, h.cantidad, h.descripcion, h.fotoLink || (h.foto ? '(foto tomada, sin subir a OneDrive)' : '—')]);
+      }
+    }
+
+    for(const p of CATALOGO_PRUEBAS){
+      const st = pruebasEstado[p.nombre];
+      if(st.realizada){
+        const obs = st.resultado==='No conforme' && st.tipoDefecto ? `[${st.tipoDefecto}] ${st.observacion}` : st.observacion;
+        await apiPost('Muestreo_Pruebas', [id, 1, p.categoria, p.nombre, st.instrumento, st.resultado, st.fotoLink || (st.foto ? '(foto tomada, sin subir a OneDrive)' : '—'), obs]);
+      }
+    }
+
+    document.getElementById('successMsg').innerHTML = '<div class="alert green" style="margin-top:10px">✅ Muestreo '+id+' guardado correctamente en la base de datos.</div>';
+    btn.textContent = '💾 Guardar en base de datos';
+    btn.disabled = false;
+  }catch(err){
+    alert('❌ Error al guardar: '+err.message);
+    btn.textContent = '💾 Guardar en base de datos';
+    btn.disabled = false;
+  }
+}
+
+// ══════════════════════════════════════════════
+// FIRMA DIGITAL
+// ══════════════════════════════════════════════
+let sigCtx=null, sigDrawing=false, sigSigned=false;
+function setupSig(){
+  const c = document.getElementById('sigInspector');
+  if(!c) return;
+  c.width = c.offsetWidth || 600;
+  sigCtx = c.getContext('2d');
+  const pos = e=>{
+    const r = c.getBoundingClientRect();
+    const sx = c.width/r.width, sy=c.height/r.height;
+    if(e.touches) return {x:(e.touches[0].clientX-r.left)*sx, y:(e.touches[0].clientY-r.top)*sy};
+    return {x:(e.clientX-r.left)*sx, y:(e.clientY-r.top)*sy};
+  };
+  const start = e=>{ e.preventDefault(); sigDrawing=true; const p=pos(e); sigCtx.beginPath(); sigCtx.moveTo(p.x,p.y); };
+  const draw = e=>{
+    e.preventDefault(); if(!sigDrawing) return;
+    const p=pos(e); sigCtx.lineWidth=2.2; sigCtx.lineCap='round'; sigCtx.strokeStyle='#1a2332';
+    sigCtx.lineTo(p.x,p.y); sigCtx.stroke();
+    sigSigned = true;
+    const st = document.getElementById('sigStatus');
+    st.textContent = '✅ Firmado a las '+new Date().toLocaleTimeString();
+    st.className = 'sig-status signed';
+  };
+  const stop = ()=>{ sigDrawing=false; };
+  c.addEventListener('mousedown',start); c.addEventListener('mousemove',draw); c.addEventListener('mouseup',stop); c.addEventListener('mouseleave',stop);
+  c.addEventListener('touchstart',start,{passive:false}); c.addEventListener('touchmove',draw,{passive:false}); c.addEventListener('touchend',stop);
+}
+function clearSig(){
+  const c = document.getElementById('sigInspector');
+  sigCtx.clearRect(0,0,c.width,c.height);
+  sigSigned = false;
+  const st = document.getElementById('sigStatus');
+  st.textContent = 'Sin firma aún — dibuja tu firma arriba';
+  st.className = 'sig-status';
+}
+
+// ══════════════════════════════════════════════
+// GENERAR PDF DEL MUESTREO
+// ══════════════════════════════════════════════
+function buildPDFMuestreo(){
+  const V = id => (document.getElementById(id)?.value) || '—';
+  const id = generarIdMuestreo();
+  const codigo = V('mCodigo');
+  const fechaHoy = new Date().toLocaleString('es-PE');
+  const sigImg = document.getElementById('sigInspector').toDataURL('image/png');
+
+  const fichaHTML = fichaReferenciaActual ? `
+    <div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin-bottom:6px">2 &nbsp; FICHA TÉCNICA DE REFERENCIA</div>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:8px">
+      <tr><td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700;width:22%">Código SAP</td><td style="padding:4px 8px;border:1px solid #E2E8F0;font-family:monospace">${fichaReferenciaActual['Código SAP']}</td>
+          <td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700;width:20%">Edición</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${fichaReferenciaActual['Edición Vigente']||'—'}</td></tr>
+      <tr><td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">Descripción</td><td colspan="3" style="padding:4px 8px;border:1px solid #E2E8F0">${fichaReferenciaActual['Descripción']||'—'}</td></tr>
+      <tr><td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">Proveedor</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${fichaReferenciaActual['Proveedor']||'—'}</td>
+          <td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">País origen</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${fichaReferenciaActual['País Origen']||'—'}</td></tr>
+    </table>` : `<div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin-bottom:6px">2 &nbsp; FICHA TÉCNICA DE REFERENCIA</div><p style="font-size:9pt;color:#94A3B8">No se encontró ficha cargada para este código al momento de la inspección.</p>`;
+
+  const pruebasFilas = CATALOGO_PRUEBAS.filter(p=>pruebasEstado[p.nombre].realizada).map(p=>{
+    const st = pruebasEstado[p.nombre];
+    const color = st.resultado==='Conforme' ? '#166534' : '#991B1B';
+    const bg = st.resultado==='Conforme' ? '#F0FDF4' : '#FEF2F2';
+    return `<tr style="background:${bg}"><td style="padding:4px 6px;border:1px solid #E2E8F0;font-size:8.5pt">${p.categoria}</td>
+      <td style="padding:4px 6px;border:1px solid #E2E8F0;font-size:8.5pt">${p.nombre}</td>
+      <td style="padding:4px 6px;border:1px solid #E2E8F0;font-size:8.5pt">${st.instrumento}</td>
+      <td style="padding:4px 6px;border:1px solid #E2E8F0;font-size:8.5pt;font-weight:700;color:${color}">${st.resultado}${st.tipoDefecto?' — '+st.tipoDefecto:''}</td></tr>`;
+  }).join('') || '<tr><td colspan="4" style="padding:8px;text-align:center;color:#94A3B8;font-size:9pt">Sin pruebas registradas</td></tr>';
+
+  function hallazgosHTML(ronda){
+    if(!hallazgos[ronda].length) return '<p style="font-size:9pt;color:#94A3B8">Sin hallazgos registrados en esta ronda.</p>';
+    return hallazgos[ronda].map(h=>`
+      <div style="border:1px solid #E2E8F0;border-radius:6px;padding:8px;margin-bottom:6px;page-break-inside:avoid">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          ${h.foto ? `<img src="${h.foto}" style="width:80px;height:80px;object-fit:cover;border-radius:4px;flex-shrink:0">` : ''}
+          <div>
+            <div style="font-size:9.5pt;font-weight:700;color:${h.categoria==='Funcional'?'#991B1B':'#92400E'}">${h.categoria} — ${h.campo||'(sin nombre)'} (Cant: ${h.cantidad})</div>
+            <div style="font-size:9pt;color:#475569;margin-top:2px">${h.descripcion||''}</div>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  const requiereR2 = hallazgos[1].some(h=>h.categoria==='Funcional') ? 'Sí — automático (defecto funcional)'
+    : (document.getElementById('chkSolicitaR2') && document.getElementById('chkSolicitaR2').checked) ? 'Sí — solicitado por jefatura' : 'No';
+
+  const html = `
+  <div style="width:780px;font-family:'Segoe UI',Arial,sans-serif;background:white;font-size:10pt;color:#1a2332;margin:0 auto">
+    <div style="background:#1a3a5c;color:white;padding:14px 18px;border-radius:8px 8px 0 0">
+      <div style="font-size:16pt;font-weight:800;letter-spacing:0.02em">GRUPO SOLE</div>
+      <div style="font-size:9pt;opacity:0.75">Rinnai Corporation · Gerencia de Innovación y Calidad</div>
+    </div>
+    <div style="background:#EBF4FF;padding:8px 18px;font-size:9pt;color:#1E40AF;font-weight:700;display:flex;justify-content:space-between">
+      <span>REPORTE DE MUESTREO DE CALIDAD</span><span>${id}</span>
+    </div>
+    <div style="padding:16px 18px">
+
+      <div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin-bottom:6px">1 &nbsp; DATOS GENERALES</div>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:10px">
+        <tr><td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700;width:22%">Código SAP</td><td style="padding:4px 8px;border:1px solid #E2E8F0;font-family:monospace">${codigo}</td>
+            <td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700;width:18%">Lote</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${V('mLote')}</td></tr>
+        <tr><td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">Fecha</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${V('mFecha')}</td>
+            <td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">Línea</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${V('mLinea')}</td></tr>
+        <tr><td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">Cant. total lote</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${V('mCantLote')}</td>
+            <td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">Cant. muestra 1</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${V('mCantM1')}</td></tr>
+        <tr><td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">Personal Ronda 1</td><td colspan="3" style="padding:4px 8px;border:1px solid #E2E8F0">${personalRonda[1].join(', ')||'—'} (${V('mHoraInicioR1')} a ${V('mHoraFinR1')})</td></tr>
+      </table>
+
+      ${fichaHTML}
+
+      <div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin:10px 0 6px">3 &nbsp; PRUEBAS REALIZADAS</div>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:10px">
+        <thead><tr style="background:#1a3a5c;color:white"><th style="padding:5px;font-size:8.5pt;text-align:left">Categoría</th><th style="padding:5px;font-size:8.5pt;text-align:left">Prueba</th><th style="padding:5px;font-size:8.5pt;text-align:left">Instrumento</th><th style="padding:5px;font-size:8.5pt;text-align:left">Resultado</th></tr></thead>
+        <tbody>${pruebasFilas}</tbody>
+      </table>
+
+      <div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin:10px 0 6px">4 &nbsp; HALLAZGOS — RONDA 1</div>
+      ${hallazgosHTML(1)}
+
+      <div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin:10px 0 6px">5 &nbsp; SEGUNDA MUESTRA</div>
+      <p style="font-size:9pt;margin-bottom:6px"><strong>¿Requirió segunda muestra?</strong> ${requiereR2}</p>
+      ${personalRonda[2].length ? `<p style="font-size:9pt;margin-bottom:6px"><strong>Personal Ronda 2:</strong> ${personalRonda[2].join(', ')} (${V('mHoraInicioR2')} a ${V('mHoraFinR2')}) — Cant. muestra 2: ${V('mCantM2')}</p>${hallazgosHTML(2)}<p style="font-size:9pt;margin-top:6px"><strong>¿Persiste el hallazgo?</strong> ${V('mPersiste')}</p>` : '<p style="font-size:9pt;color:#94A3B8">No aplicó segunda muestra.</p>'}
+
+      <div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin:10px 0 6px">6 &nbsp; DECISIÓN DE EMPLEO</div>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:10px">
+        <tr><td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700;width:22%">Decisión final</td><td style="padding:4px 8px;border:1px solid #E2E8F0;font-weight:700">${V('mDecision')}</td>
+            <td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700;width:18%">Decidido por</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${V('mDecididoPor')}</td></tr>
+        <tr><td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">Fecha decisión</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${V('mFechaDecision')}</td>
+            <td style="padding:4px 8px;background:#F8FAFC;border:1px solid #E2E8F0;font-weight:700">N° Reproceso</td><td style="padding:4px 8px;border:1px solid #E2E8F0">${V('mNReproceso')}</td></tr>
+      </table>
+
+      ${V('mVideoLink')!=='—' || V('mObsGenerales')!=='—' ? `
+      <div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin:10px 0 6px">7 &nbsp; EVIDENCIA ADICIONAL</div>
+      ${V('mVideoLink')!=='—' ? `<p style="font-size:9pt;margin-bottom:6px"><strong>🔗 Video del proceso:</strong> <a href="${V('mVideoLink')}">${V('mVideoLink')}</a></p>` : ''}
+      ${V('mObsGenerales')!=='—' ? `<p style="font-size:9pt;margin-bottom:10px"><strong>Observaciones generales:</strong> ${V('mObsGenerales')}</p>` : ''}
+      ` : ''}
+
+      <div style="border:1.5px solid #1a3a5c;border-radius:8px;padding:10px;max-width:320px">
+        <div style="font-size:9pt;font-weight:700;color:#1a3a5c;margin-bottom:6px">Firma del inspector responsable</div>
+        <img src="${sigImg}" style="height:60px;object-fit:contain">
+        <div style="font-size:8pt;color:#94A3B8;margin-top:4px">${sigSigned ? 'Firmado digitalmente' : 'Sin firma registrada'}</div>
+      </div>
+
+    </div>
+    <div style="background:#1a3a5c;color:white;padding:6px 18px;font-size:7.5pt;display:flex;justify-content:space-between">
+      <span>Grupo Sole · Rinnai Corporation · Gerencia de Innovación y Calidad</span><span>Generado: ${fechaHoy}</span>
+    </div>
+  </div>`;
+
+  const el = document.createElement('div');
+  el.innerHTML = html;
+  return el;
+}
+
+async function generarPDFMuestreo(){
+  if(!validarMuestreoCompleto()) return;
+  const btn = document.querySelector('button[onclick="generarPDFMuestreo()"]');
+  btn.disabled = true; btn.textContent = '⏳ Generando PDF...';
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:white;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px';
+  overlay.innerHTML = '<div style="font-size:40px">📄</div><div style="font-size:14px;font-weight:700;color:#1a3a5c">Generando PDF...</div>';
+  document.body.appendChild(overlay);
+  try{
+    const el = buildPDFMuestreo();
+    // El elemento se agrega al flujo normal del documento (no fuera de pantalla) — posicionar
+    // con coordenadas negativas produce PDF en blanco en varios navegadores móviles.
+    document.body.appendChild(el);
+    await new Promise(r=>setTimeout(r,50));
+    const id = generarIdMuestreo();
+    await html2pdf().set({
+      margin:[10,10,10,10],
+      filename:`Muestreo_${id}_${document.getElementById('mCodigo').value.trim()}.pdf`,
+      image:{type:'jpeg',quality:0.92},
+      html2canvas:{scale:1.6,useCORS:true,backgroundColor:'#ffffff',logging:false,scrollX:0,scrollY:0},
+      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['avoid-all','css']}
+    }).from(el).save();
+    document.body.removeChild(el);
+  }catch(err){
+    alert('❌ Error al generar el PDF: '+err.message);
+  }finally{
+    document.body.removeChild(overlay);
+    btn.disabled = false; btn.textContent = '📄 Generar PDF del muestreo';
+  }
+}
+
+// ══════════════════════════════════════════════
+// MÓDULO C — RESUMEN DEL DÍA
+// ══════════════════════════════════════════════
+async function cargarResumenDia(){
+  const fecha = document.getElementById('resumenFecha').value;
+  const cont = document.getElementById('resumenContenido');
+  if(!fecha){ cont.innerHTML=''; return; }
+  cont.innerHTML = '<div class="loading">🔎 Cargando muestreos del día...</div>';
+  try{
+    const [todos, maestro, hallazgos] = await Promise.all([
+      apiGet('Muestreos'), apiGet('Maestro_Codigos'), apiGet('Muestreo_Hallazgos')
+    ]);
+    const delDia = todos.filter(m => String(m['Fecha']).slice(0,10) === fecha);
+    if(!delDia.length){
+      cont.innerHTML = `<div class="card"><p style="font-size:12px;color:#94A3B8;text-align:center;padding:20px 0">No hay muestreos registrados en esta fecha.</p></div>`;
+      return;
+    }
+    const mapaProveedor = {};
+    maestro.forEach(m=>{ mapaProveedor[m['Código SAP']] = m['Proveedor']||'—'; });
+
+    const totLiberado = delDia.filter(m=>m['Decisión Final']==='Liberado').length;
+    const totTolerado = delDia.filter(m=>m['Decisión Final']==='Tolerado').length;
+    const totBloqueado = delDia.filter(m=>m['Decisión Final']==='Bloqueado - Retroceso').length;
+
+    let html = `<div class="card">
+      <div class="grid2" style="grid-template-columns:repeat(4,1fr);gap:8px">
+        <div style="text-align:center;padding:10px;background:#F8FAFC;border-radius:10px"><div style="font-size:20px;font-weight:800;color:#1a3a5c">${delDia.length}</div><div style="font-size:10px;color:#64748B">Inspeccionados</div></div>
+        <div style="text-align:center;padding:10px;background:#F0FDF4;border-radius:10px"><div style="font-size:20px;font-weight:800;color:#166534">${totLiberado}</div><div style="font-size:10px;color:#64748B">Liberados</div></div>
+        <div style="text-align:center;padding:10px;background:#FFF7ED;border-radius:10px"><div style="font-size:20px;font-weight:800;color:#92400E">${totTolerado}</div><div style="font-size:10px;color:#64748B">Tolerados</div></div>
+        <div style="text-align:center;padding:10px;background:#FEF2F2;border-radius:10px"><div style="font-size:20px;font-weight:800;color:#991B1B">${totBloqueado}</div><div style="font-size:10px;color:#64748B">Bloqueados</div></div>
+      </div>
+    </div>`;
+
+    html += delDia.map(m=>{
+      const hDeEste = hallazgos.filter(h=>h['ID Muestreo']===m['ID Muestreo']);
+      const decisionColor = m['Decisión Final']==='Liberado' ? '#166534' : m['Decisión Final']==='Tolerado' ? '#92400E' : '#991B1B';
+      const decisionBg = m['Decisión Final']==='Liberado' ? '#F0FDF4' : m['Decisión Final']==='Tolerado' ? '#FFF7ED' : '#FEF2F2';
+      const resumenHallazgos = hDeEste.length ? hDeEste.map(h=>`<span class="badge ${h['Categoría']==='Funcional'?'func':'estet'}" style="margin:2px 4px 2px 0">${h['Campo / Componente']||h['Categoría']}</span>`).join('') : '<span style="font-size:11px;color:#94A3B8">Sin hallazgos</span>';
+      return `<div class="card" style="margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-family:monospace;font-weight:700;color:#1a3a5c">${m['Código SAP']}</span>
+          <span class="badge" style="background:${decisionBg};color:${decisionColor}">${m['Decisión Final']||'—'}</span>
+        </div>
+        <div style="font-size:11px;color:#64748B;margin-bottom:6px">Proveedor: ${mapaProveedor[m['Código SAP']]||'—'} · Lote ${m['Lote']} · Muestra: ${m['Cant. Muestra 1']}${m['Cant. Muestra 2']?' + '+m['Cant. Muestra 2']+' (2da)':''}</div>
+        <div>${resumenHallazgos}</div>
+      </div>`;
+    }).join('');
+
+    cont.innerHTML = html;
+  }catch(err){
+    cont.innerHTML = `<div class="alert red">❌ ${err.message}</div>`;
+  }
+}
+
+async function cargarRecurrenciaProveedor(){
+  const cont = document.getElementById('recurrenciaProveedor');
+  try{
+    const [todos, maestro, hallazgos] = await Promise.all([
+      apiGet('Muestreos'), apiGet('Maestro_Codigos'), apiGet('Muestreo_Hallazgos')
+    ]);
+    const mapaProveedor = {};
+    maestro.forEach(m=>{ mapaProveedor[m['Código SAP']] = m['Proveedor']||'Sin proveedor'; });
+    const stats = {}; // proveedor -> {muestreos, funcional, estetico, bloqueados}
+    todos.forEach(m=>{
+      const prov = mapaProveedor[m['Código SAP']] || 'Sin proveedor';
+      if(!stats[prov]) stats[prov] = {muestreos:0, funcional:0, estetico:0, bloqueados:0};
+      stats[prov].muestreos++;
+      if(m['Decisión Final']==='Bloqueado - Retroceso') stats[prov].bloqueados++;
+      hallazgos.filter(h=>h['ID Muestreo']===m['ID Muestreo']).forEach(h=>{
+        if(h['Categoría']==='Funcional') stats[prov].funcional++;
+        else stats[prov].estetico++;
+      });
+    });
+    const filas = Object.entries(stats).sort((a,b)=> (b[1].funcional+b[1].bloqueados) - (a[1].funcional+a[1].bloqueados));
+    if(!filas.length){ cont.innerHTML = '<p style="font-size:12px;color:#94A3B8">Sin datos históricos aún.</p>'; return; }
+    cont.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr style="background:#1a3a5c;color:white"><th style="padding:6px;text-align:left">Proveedor</th><th style="padding:6px">Muestreos</th><th style="padding:6px">Func.</th><th style="padding:6px">Estét.</th><th style="padding:6px">Bloqueados</th></tr></thead>
+      <tbody>${filas.map(([prov,s],i)=>`<tr style="background:${i%2===0?'#fff':'#F8FAFC'}">
+        <td style="padding:6px;border-bottom:1px solid #F1F5F9">${prov}</td>
+        <td style="padding:6px;text-align:center;border-bottom:1px solid #F1F5F9">${s.muestreos}</td>
+        <td style="padding:6px;text-align:center;border-bottom:1px solid #F1F5F9;color:${s.funcional>0?'#991B1B':'#94A3B8'};font-weight:700">${s.funcional}</td>
+        <td style="padding:6px;text-align:center;border-bottom:1px solid #F1F5F9;color:${s.estetico>0?'#92400E':'#94A3B8'}">${s.estetico}</td>
+        <td style="padding:6px;text-align:center;border-bottom:1px solid #F1F5F9;color:${s.bloqueados>0?'#991B1B':'#94A3B8'};font-weight:700">${s.bloqueados}</td>
+      </tr>`).join('')}</tbody>
+    </table>`;
+  }catch(err){
+    cont.innerHTML = `<div class="alert red">❌ ${err.message}</div>`;
+  }
+}
+
+async function generarPDFResumen(){
+  const btn = document.querySelector('button[onclick="generarPDFResumen()"]');
+  btn.disabled = true; btn.textContent = '⏳ Generando...';
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:white;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px';
+  overlay.innerHTML = '<div style="font-size:40px">📄</div><div style="font-size:14px;font-weight:700;color:#1a3a5c">Generando PDF...</div>';
+  document.body.appendChild(overlay);
+  try{
+    const fecha = document.getElementById('resumenFecha').value;
+    const resumenHTML = document.getElementById('resumenContenido').innerHTML;
+    const recurrenciaHTML = document.getElementById('recurrenciaProveedor').innerHTML;
+    const el = document.createElement('div');
+    el.innerHTML = `<div style="width:780px;font-family:'Segoe UI',Arial,sans-serif;background:white;font-size:10pt;color:#1a2332;margin:0 auto">
+      <div style="background:#1a3a5c;color:white;padding:14px 18px;border-radius:8px 8px 0 0">
+        <div style="font-size:16pt;font-weight:800">GRUPO SOLE</div>
+        <div style="font-size:9pt;opacity:0.75">Resumen diario de inspecciones — Gerencia de Innovación y Calidad</div>
+      </div>
+      <div style="padding:16px 18px">
+        <p style="font-size:11pt;font-weight:700;margin-bottom:10px">Fecha: ${fecha}</p>
+        <div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin-bottom:8px">MUESTREOS DEL DÍA</div>
+        ${resumenHTML}
+        <div style="font-size:10pt;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:3px;margin:14px 0 8px">RECURRENCIA POR PROVEEDOR (HISTÓRICO)</div>
+        ${recurrenciaHTML}
+      </div>
+      <div style="background:#1a3a5c;color:white;padding:6px 18px;font-size:7.5pt;display:flex;justify-content:space-between">
+        <span>Grupo Sole · Rinnai Corporation</span><span>Generado: ${new Date().toLocaleString('es-PE')}</span>
+      </div>
+    </div>`;
+    document.body.appendChild(el);
+    await new Promise(r=>setTimeout(r,50));
+    await html2pdf().set({
+      margin:[10,10,10,10],
+      filename:`Resumen_${fecha}.pdf`,
+      image:{type:'jpeg',quality:0.92},
+      html2canvas:{scale:1.6,useCORS:true,backgroundColor:'#ffffff',logging:false,scrollX:0,scrollY:0},
+      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['avoid-all','css']}
+    }).from(el).save();
+    document.body.removeChild(el);
+  }catch(err){
+    alert('❌ Error al generar el PDF: '+err.message);
+  }finally{
+    document.body.removeChild(overlay);
+    btn.disabled = false; btn.textContent = '📄 Generar PDF para tu jefa';
+  }
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+renderOnedriveStatus();
+loadPersonal();
+loadDefectosCatalogo();
+loadDefectosCategoria();
+renderPruebasCatalogo();
+document.getElementById('mFecha').value = new Date().toISOString().split('T')[0];
+document.getElementById('mFechaDecision').value = new Date().toISOString().split('T')[0];
+renderPersonalChips(1);
+renderPersonalChips(2);
+updateNavB();
+setTimeout(setupSig, 100);
+</script>
+</body>
+</html>
