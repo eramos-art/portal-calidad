@@ -91,6 +91,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a233
 
   <div class="tabs">
     <button class="tab-btn active" id="tabBtnA" onclick="switchTab('A')">🔎 Buscar ficha</button>
+    <button class="tab-btn" id="tabBtnD" onclick="switchTab('D')">📥 Validar ficha</button>
     <button class="tab-btn" id="tabBtnB" onclick="switchTab('B')">📋 Registrar muestreo</button>
     <button class="tab-btn" id="tabBtnC" onclick="switchTab('C')">📊 Resumen del día</button>
   </div>
@@ -249,6 +250,69 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a233
     </div>
   </div>
 
+  <!-- ═══ MÓDULO D: VALIDAR FICHA (arrastrar PDF desde OneDrive) ═══ -->
+  <div class="tab-page" id="tabD">
+    <div class="card">
+      <div class="section-title">📥 Paso 1 — Trae la ficha desde OneDrive</div>
+      <p style="font-size:12px;color:#64748B;margin-bottom:12px">
+        Abre la carpeta <strong>Repositorio de Fichas Técnicas</strong> en OneDrive, busca el PDF del código a inspeccionar, y arrástralo aquí.
+        Esto es obligatorio en cada inspección para asegurar que trabajes con la <strong>versión vigente</strong> — los proveedores actualizan las fichas periódicamente.
+      </p>
+      <div id="dropZone" style="border:2.5px dashed #378ADD;border-radius:14px;padding:30px 16px;text-align:center;background:#F8FBFF;cursor:pointer;transition:all 0.2s" onclick="document.getElementById('fichaFileInput').click()">
+        <div style="font-size:38px;margin-bottom:8px">📄</div>
+        <div style="font-size:14px;font-weight:700;color:#1E40AF;margin-bottom:4px">Arrastra el PDF aquí</div>
+        <div style="font-size:12px;color:#64748B">o haz clic para seleccionarlo</div>
+      </div>
+      <input type="file" id="fichaFileInput" accept="application/pdf" style="display:none" onchange="procesarFichaArrastrada(this.files[0])">
+      <div id="fichaCargadaInfo" style="margin-top:12px"></div>
+    </div>
+
+    <div id="alertaRevision"></div>
+
+    <div id="bloqueValidacion" style="display:none">
+      <div class="card">
+        <div class="section-title">👁 Paso 2 — Revisa y traduce</div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+          <button class="btn" style="flex:1;min-width:140px;background:#EBF4FF;color:#1E40AF" onclick="abrirTraductor()">🌐 Traducir a español</button>
+          <button class="btn" style="flex:1;min-width:140px;background:#F1F5F9;color:#475569" onclick="togglePreview()">👁 Mostrar / ocultar PDF</button>
+        </div>
+        <div id="pdfPreviewCont"></div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">✅ Paso 3 — Valida la ficha</div>
+        <div class="grid2">
+          <div class="field"><label>Código SAP ⚠️</label><input type="text" id="vCodigo" placeholder="Se detecta solo del nombre del archivo" style="text-transform:uppercase;font-family:monospace" oninput="this.value=this.value.toUpperCase();cargarHistorialValidaciones()"></div>
+          <div class="field"><label>Revisión / Edición</label><input type="text" id="vRevision" placeholder="Ej: REV5"></div>
+          <div class="field"><label>Validado por ⚠️</label><select id="vValidadoPor"><option value="">Seleccionar...</option></select></div>
+          <div class="field"><label>Resultado ⚠️</label>
+            <select id="vResultado">
+              <option value="">Seleccionar...</option>
+              <option value="Conforme">✅ Conforme — ficha completa y clara</option>
+              <option value="Con observaciones">⚠️ Con observaciones</option>
+              <option value="No conforme">🔴 No conforme — falta información</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>Cambios detectados respecto a la versión anterior</label>
+          <textarea id="vCambios" rows="2" placeholder="Ej: cambió la medida del soporte de olla de 148.99mm a 150.77mm" style="resize:vertical"></textarea>
+        </div>
+        <div class="field" style="margin-bottom:0"><label>Observaciones</label>
+          <textarea id="vObservaciones" rows="2" placeholder="Notas sobre la ficha..." style="resize:vertical"></textarea>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="btnGuardarValidacion" onclick="guardarValidacionFicha()">💾 Guardar validación</button>
+      <button class="btn btn-primary" style="background:#059669;margin-top:8px" onclick="irAMuestreoDesdeValidacion()">📋 Continuar al muestreo →</button>
+      <div id="validacionMsg"></div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="section-title">🕒 Historial de validaciones de este código</div>
+      <div id="historialValidaciones"><p style="font-size:12px;color:#94A3B8">Arrastra una ficha o escribe un código para ver su historial.</p></div>
+    </div>
+  </div>
+
   <!-- ═══ MÓDULO C: RESUMEN DEL DÍA ═══ -->
   <div class="tab-page" id="tabC">
     <div class="card">
@@ -274,6 +338,19 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a233
 <input type="file" accept="image/*" id="hiddenFileGallery" style="display:none">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- Modal: gestionar lista de personal -->
+<div id="personalModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px">
+  <div style="background:white;border-radius:16px;padding:20px;max-width:420px;width:100%;font-family:inherit">
+    <h3 style="font-size:15px;margin-bottom:12px;color:#1a3a5c">⚙️ Personal de calidad</h3>
+    <div id="personalModalChips" style="min-height:36px;padding:6px;background:#F8FAFC;border-radius:10px;margin-bottom:10px"></div>
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <input type="text" id="newPersonalInput" placeholder="Nombre completo..." style="flex:1;padding:9px 12px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:13px" onkeydown="if(event.key==='Enter')addPersonalALista()">
+      <button onclick="addPersonalALista()" style="padding:9px 14px;background:#2563EB;color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">+</button>
+    </div>
+    <button onclick="closePersonalModal()" style="width:100%;padding:11px;background:#F1F5F9;color:#475569;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Listo ✓</button>
+  </div>
+</div>
 
 <!-- Modal: gestionar términos de defecto por categoría -->
 <div class="modal-overlay" id="defectCatModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px">
@@ -322,12 +399,12 @@ function onedriveConfigurado(){
 // TABS
 // ══════════════════════════════════════════════
 function switchTab(t){
-  document.getElementById('tabA').classList.toggle('active', t==='A');
-  document.getElementById('tabB').classList.toggle('active', t==='B');
-  document.getElementById('tabC').classList.toggle('active', t==='C');
-  document.getElementById('tabBtnA').classList.toggle('active', t==='A');
-  document.getElementById('tabBtnB').classList.toggle('active', t==='B');
-  document.getElementById('tabBtnC').classList.toggle('active', t==='C');
+  ['A','B','C','D'].forEach(x=>{
+    const page = document.getElementById('tab'+x);
+    const btn = document.getElementById('tabBtn'+x);
+    if(page) page.classList.toggle('active', t===x);
+    if(btn) btn.classList.toggle('active', t===x);
+  });
   if(t==='C' && !window._resumenCargadoUnaVez){
     window._resumenCargadoUnaVez = true;
     document.getElementById('resumenFecha').value = new Date().toISOString().split('T')[0];
@@ -389,11 +466,49 @@ const LS_PERSONAL_KEY = 'sole_calidad_personal_v1';
 let misPersonal = [];
 function loadPersonal(){
   try{ const s=localStorage.getItem(LS_PERSONAL_KEY); if(s) misPersonal=JSON.parse(s); }catch(e){}
-  if(!misPersonal.length) misPersonal=['(agregar personal en el código fuente o próxima versión)'];
-  ['personalR1Sel','personalR2Sel','mDecididoPor'].forEach(id=>{
+  ['personalR1Sel','personalR2Sel','mDecididoPor','vValidadoPor'].forEach(id=>{
     const sel=document.getElementById(id);
-    sel.innerHTML='<option value="">Seleccionar...</option>'+misPersonal.map(p=>`<option value="${p}">${p}</option>`).join('');
+    if(!sel) return;
+    const actual = sel.value;
+    sel.innerHTML='<option value="">Seleccionar...</option>'
+      + misPersonal.map(p=>`<option value="${p}" ${p===actual?'selected':''}>${p}</option>`).join('')
+      + '<option value="__manage__">⚙️ Gestionar lista de personal...</option>';
+    sel.onchange = function(){
+      if(this.value==='__manage__'){ this.value = actual||''; openPersonalModal(id); }
+    };
   });
+}
+
+// ── Gestión de la lista de personal (se guarda en este navegador) ──
+let _personalModalSource = null;
+function openPersonalModal(sourceId){
+  _personalModalSource = sourceId;
+  renderPersonalModalChips();
+  document.getElementById('personalModal').style.display='flex';
+}
+function closePersonalModal(){
+  document.getElementById('personalModal').style.display='none';
+  loadPersonal();
+}
+function renderPersonalModalChips(){
+  const cont = document.getElementById('personalModalChips');
+  cont.innerHTML = misPersonal.length
+    ? misPersonal.map((p,i)=>`<span class="chip">${p}<span class="rm" onclick="removePersonalDeLista(${i})">×</span></span>`).join('')
+    : '<span style="font-size:12px;color:#94A3B8">Aún no hay nombres — agrega al equipo abajo.</span>';
+}
+function addPersonalALista(){
+  const inp = document.getElementById('newPersonalInput');
+  const val = inp.value.trim();
+  if(!val) return;
+  if(!misPersonal.includes(val)) misPersonal.push(val);
+  try{ localStorage.setItem(LS_PERSONAL_KEY, JSON.stringify(misPersonal)); }catch(e){}
+  renderPersonalModalChips();
+  inp.value=''; inp.focus();
+}
+function removePersonalDeLista(idx){
+  misPersonal.splice(idx,1);
+  try{ localStorage.setItem(LS_PERSONAL_KEY, JSON.stringify(misPersonal)); }catch(e){}
+  renderPersonalModalChips();
 }
 
 // ══════════════════════════════════════════════
@@ -1299,6 +1414,180 @@ async function generarPDFMuestreo(){
 }
 
 // ══════════════════════════════════════════════
+// MÓDULO D — VALIDAR FICHA (arrastrar PDF desde OneDrive)
+// El personal DEBE traer el PDF en cada inspección para garantizar que trabaja
+// con la versión vigente — los proveedores actualizan las fichas periódicamente.
+// ══════════════════════════════════════════════
+let fichaArrastrada = null; // {file, url, nombre, codigo, revision}
+
+function initDropZone(){
+  const dz = document.getElementById('dropZone');
+  if(!dz) return;
+  ['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev, e=>{
+    e.preventDefault(); e.stopPropagation();
+    dz.style.background='#EBF4FF'; dz.style.borderColor='#1E40AF';
+  }));
+  ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev, e=>{
+    e.preventDefault(); e.stopPropagation();
+    dz.style.background='#F8FBFF'; dz.style.borderColor='#378ADD';
+  }));
+  dz.addEventListener('drop', e=>{
+    const file = e.dataTransfer.files[0];
+    if(file) procesarFichaArrastrada(file);
+  });
+}
+
+// Extrae el código SAP y la revisión del nombre del archivo.
+// Ej: "3120SOLCO049V2_-_ENCIMERA_60CM_A_GAS-GREAIDEA_REV5.pdf" → código 3120SOLCO049V2, rev REV5
+function extraerDatosDeNombre(nombre){
+  const sinExt = nombre.replace(/\.pdf$/i,'');
+  // Código: primer bloque alfanumérico largo (los códigos SAP de Sole empiezan con dígitos)
+  const mCodigo = sinExt.match(/\b(\d{4}[A-Z0-9]{6,})\b/i);
+  // Revisión: REV5, REV_5, R5, EDICION 05, ED05...
+  const mRev = sinExt.match(/\b(REV[\s_-]?\d+|ED(?:ICION)?[\s_-]?\d+|R\d+)\b/i);
+  return {
+    codigo: mCodigo ? mCodigo[1].toUpperCase() : '',
+    revision: mRev ? mRev[1].toUpperCase().replace(/[\s_-]/g,'') : ''
+  };
+}
+
+function procesarFichaArrastrada(file){
+  if(!file) return;
+  if(file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)){
+    alert('⚠️ El archivo debe ser un PDF.');
+    return;
+  }
+  const {codigo, revision} = extraerDatosDeNombre(file.name);
+  const url = URL.createObjectURL(file);
+  fichaArrastrada = {file, url, nombre:file.name, codigo, revision};
+
+  document.getElementById('fichaCargadaInfo').innerHTML = `
+    <div style="background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:10px;padding:10px 12px">
+      <div style="font-size:12px;font-weight:700;color:#166534;margin-bottom:3px">✅ Ficha cargada</div>
+      <div style="font-size:11px;color:#475569;word-break:break-all">${file.name}</div>
+      <div style="font-size:11px;color:#64748B;margin-top:4px">
+        Código detectado: <strong>${codigo||'(no detectado — escríbelo abajo)'}</strong> ·
+        Revisión: <strong>${revision||'(no detectada)'}</strong>
+      </div>
+    </div>`;
+
+  document.getElementById('vCodigo').value = codigo;
+  document.getElementById('vRevision').value = revision;
+  document.getElementById('bloqueValidacion').style.display='block';
+  mostrarPreviewPDF();
+  if(codigo) cargarHistorialValidaciones();
+}
+
+function mostrarPreviewPDF(){
+  if(!fichaArrastrada) return;
+  document.getElementById('pdfPreviewCont').innerHTML =
+    `<iframe src="${fichaArrastrada.url}" style="width:100%;height:520px;border:1px solid #E2E8F0;border-radius:8px"></iframe>`;
+}
+function togglePreview(){
+  const cont = document.getElementById('pdfPreviewCont');
+  if(cont.innerHTML.trim()) cont.innerHTML='';
+  else mostrarPreviewPDF();
+}
+function abrirTraductor(){
+  // Google Translate Documentos: el usuario sube el mismo PDF y lo recibe traducido.
+  // No podemos subirlo automáticamente desde aquí por seguridad del navegador.
+  window.open('https://translate.google.com/?sl=en&tl=es&op=docs','_blank');
+  alert('Se abrió el traductor de Google en otra pestaña.\n\nSube ahí el mismo PDF que acabas de arrastrar y te lo devuelve en español.');
+}
+
+async function cargarHistorialValidaciones(){
+  const codigo = document.getElementById('vCodigo').value.trim();
+  const cont = document.getElementById('historialValidaciones');
+  const alertaCont = document.getElementById('alertaRevision');
+  if(!codigo){ cont.innerHTML='<p style="font-size:12px;color:#94A3B8">Escribe un código para ver su historial.</p>'; return; }
+  cont.innerHTML = '<div class="loading">🔎 Buscando validaciones anteriores...</div>';
+  try{
+    const validaciones = await apiGet('Validaciones_Ficha', codigo);
+    if(!validaciones.length){
+      cont.innerHTML = '<p style="font-size:12px;color:#94A3B8">Primera vez que se valida este código — no hay registros anteriores.</p>';
+      alertaCont.innerHTML = '';
+      return;
+    }
+    validaciones.sort((a,b)=> new Date(b['Fecha Validación']) - new Date(a['Fecha Validación']));
+    const ultima = validaciones[0];
+    const revActual = document.getElementById('vRevision').value.trim().toUpperCase();
+    const revAnterior = String(ultima['Revisión/Edición Detectada']||'').trim().toUpperCase();
+
+    // ── ALERTA DE CAMBIO DE REVISIÓN — el corazón de este módulo ──
+    if(revActual && revAnterior && revActual !== revAnterior){
+      alertaCont.innerHTML = `<div class="alert red" style="font-size:13px">
+        ⚠️ <strong>LA FICHA CAMBIÓ DE VERSIÓN</strong><br>
+        La última inspección usó <strong>${revAnterior}</strong> (${ultima['Fecha Validación']}, por ${ultima['Validado por']}).<br>
+        Ahora estás trayendo <strong>${revActual}</strong>. Revisa qué cambió antes de inspeccionar y anótalo abajo.
+      </div>`;
+    } else if(revActual && revAnterior && revActual === revAnterior){
+      alertaCont.innerHTML = `<div class="alert green" style="font-size:12px">
+        ✅ Misma versión que la última inspección (${revAnterior}, validada el ${ultima['Fecha Validación']} por ${ultima['Validado por']}).
+      </div>`;
+    } else {
+      alertaCont.innerHTML = '';
+    }
+
+    cont.innerHTML = validaciones.map(v=>{
+      const color = v['Resultado']==='Conforme' ? '#166534' : v['Resultado']==='Con observaciones' ? '#92400E' : '#991B1B';
+      const bg = v['Resultado']==='Conforme' ? '#F0FDF4' : v['Resultado']==='Con observaciones' ? '#FFF7ED' : '#FEF2F2';
+      return `<div style="border:1px solid #E2E8F0;border-radius:10px;padding:10px 12px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;gap:8px">
+          <span style="font-size:12px;font-weight:700;color:#1a3a5c">📅 ${v['Fecha Validación']} · ${v['Revisión/Edición Detectada']||'—'}</span>
+          <span class="badge" style="background:${bg};color:${color}">${v['Resultado']||'—'}</span>
+        </div>
+        <div style="font-size:11px;color:#64748B;margin-bottom:4px">Validado por: ${v['Validado por']||'—'}</div>
+        <div style="font-size:10px;color:#94A3B8;word-break:break-all;margin-bottom:4px">📄 ${v['Archivo Ficha']||'—'}</div>
+        ${v['Cambios Detectados'] ? `<div style="font-size:11px;color:#92400E;background:#FFF7ED;padding:5px 8px;border-radius:6px;margin-top:4px">🔄 ${v['Cambios Detectados']}</div>` : ''}
+        ${v['Observaciones'] ? `<div style="font-size:11px;color:#475569;margin-top:4px">${v['Observaciones']}</div>` : ''}
+      </div>`;
+    }).join('');
+  }catch(err){
+    cont.innerHTML = `<div class="alert red">❌ ${err.message}</div>`;
+  }
+}
+
+async function guardarValidacionFicha(){
+  const codigo = document.getElementById('vCodigo').value.trim();
+  const validadoPor = document.getElementById('vValidadoPor').value;
+  const resultado = document.getElementById('vResultado').value;
+  if(!codigo || !validadoPor || !resultado){
+    alert('⚠️ Completa los campos obligatorios (⚠️): código, validado por y resultado.');
+    return;
+  }
+  const btn = document.getElementById('btnGuardarValidacion');
+  btn.disabled = true; btn.textContent = '⏳ Guardando...';
+  try{
+    const id = 'VAL-'+Date.now().toString().slice(-8);
+    await apiPost('Validaciones_Ficha', [
+      id, codigo,
+      fichaArrastrada ? fichaArrastrada.nombre : '(sin archivo)',
+      document.getElementById('vRevision').value.trim(),
+      new Date().toISOString().split('T')[0],
+      validadoPor, resultado,
+      document.getElementById('vCambios').value,
+      document.getElementById('vObservaciones').value
+    ]);
+    document.getElementById('validacionMsg').innerHTML =
+      `<div class="alert green" style="margin-top:10px">✅ Validación ${id} guardada. Quedará en el historial de este código.</div>`;
+    setTimeout(cargarHistorialValidaciones, 800);
+  }catch(err){
+    alert('❌ Error al guardar: '+err.message);
+  }finally{
+    btn.disabled = false; btn.textContent = '💾 Guardar validación';
+  }
+}
+
+function irAMuestreoDesdeValidacion(){
+  const codigo = document.getElementById('vCodigo').value.trim();
+  if(codigo){
+    document.getElementById('mCodigo').value = codigo;
+    cargarFichaReferencia();
+  }
+  switchTab('B');
+}
+
+// ══════════════════════════════════════════════
 // MÓDULO C — RESUMEN DEL DÍA
 // ══════════════════════════════════════════════
 async function cargarResumenDia(){
@@ -1439,6 +1728,7 @@ async function generarPDFResumen(){
 // INIT
 // ══════════════════════════════════════════════
 renderOnedriveStatus();
+initDropZone();
 loadPersonal();
 loadDefectosCatalogo();
 loadDefectosCategoria();
