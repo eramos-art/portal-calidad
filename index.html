@@ -124,7 +124,20 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a233
           <div class="field"><label>Código SAP ⚠️</label><input type="text" id="mCodigo" placeholder="Ej: 3120SOLCO049V2" style="text-transform:uppercase;font-family:monospace" oninput="this.value=this.value.toUpperCase()" onblur="cargarFichaReferencia()"></div>
           <div class="field"><label>Lote ⚠️</label><input type="text" id="mLote" placeholder="L-2026-XXX"></div>
           <div class="field"><label>Fecha ⚠️</label><input type="date" id="mFecha"></div>
-          <div class="field"><label>Línea</label><input type="text" id="mLinea" placeholder="Ej: Encimeras a gas"></div>
+          <div class="field"><label>Línea ⚠️</label>
+            <select id="mLinea" onchange="renderPruebasCatalogo()">
+              <option value="">Seleccionar...</option>
+              <option>Calentadores a gas / paso continuo</option>
+              <option>Termotanques eléctricos</option>
+              <option>Duchas / Rápiduchas eléctricas</option>
+              <option>Cocinas / Estufas (con horno)</option>
+              <option>Encimeras / Hornillas</option>
+              <option>Campanas extractoras</option>
+              <option>Aires acondicionados</option>
+              <option>Refrigeradores / Congeladores</option>
+              <option>Otra</option>
+            </select>
+          </div>
           <div class="field"><label>Cant. total lote ⚠️</label><input type="number" id="mCantLote" min="0"></div>
           <div class="field"><label>Cant. muestra 1 ⚠️</label><input type="number" id="mCantM1" min="0"></div>
         </div>
@@ -273,9 +286,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a233
       <div class="card">
         <div class="section-title">👁 Paso 2 — Revisa y traduce</div>
         <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
-          <button class="btn" style="flex:1;min-width:140px;background:#EBF4FF;color:#1E40AF" onclick="abrirTraductor()">🌐 Traducir a español</button>
+          <button class="btn" id="btnTraducir" style="flex:1;min-width:140px;background:#EBF4FF;color:#1E40AF" onclick="traducirFichaAutomatico()">🌐 Traducir automáticamente</button>
           <button class="btn" style="flex:1;min-width:140px;background:#F1F5F9;color:#475569" onclick="togglePreview()">👁 Mostrar / ocultar PDF</button>
         </div>
+        <div id="traduccionCont"></div>
         <div id="pdfPreviewCont"></div>
       </div>
 
@@ -338,6 +352,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a233
 <input type="file" accept="image/*" id="hiddenFileGallery" style="display:none">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <!-- Modal: gestionar lista de personal -->
 <div id="personalModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px">
@@ -442,7 +457,7 @@ function updateNavB(){
 }
 function validateStepB(step){
   if(step===0){
-    const req = ['mCodigo','mLote','mFecha','mCantLote','mCantM1'];
+    const req = ['mCodigo','mLote','mFecha','mCantLote','mCantM1','mLinea'];
     for(const id of req){ if(!document.getElementById(id).value.trim()){ alert('⚠️ Completa los campos obligatorios (⚠️) antes de continuar.'); return false; } }
   }
   return true;
@@ -839,7 +854,7 @@ async function cargarFichaReferencia(){
     }
     fichaReferenciaActual = maestro[0];
     fichaReferenciaSpecs = specs;
-    if(!document.getElementById('mLinea').value) document.getElementById('mLinea').value = maestro[0]['Línea']||'';
+    if(!document.getElementById('mLinea').value) matchLineaSelect(maestro[0]['Línea']||'');
     cont.innerHTML = renderFichaHTML(maestro[0], specs) + `<div id="historialCodigo" style="margin-top:10px"><div class="loading">🔎 Cargando historial...</div></div>`;
     renderHistorialCodigo(codigo);
   }catch(err){
@@ -904,47 +919,89 @@ function removeDefectoCategoria(idx){
 }
 
 // ══════════════════════════════════════════════
-// CATÁLOGO DE PRUEBAS — nombres técnicos, con el instrumento real de tu equipo
+// CATÁLOGO DE PRUEBAS — nombres técnicos, con el instrumento real de tu equipo,
+// qué líneas de producto aplican, y si pide un valor medido con su unidad.
+// '*' en líneas = aplica a todas.
 // ══════════════════════════════════════════════
+const LINEAS_GAS = ['Calentadores a gas / paso continuo','Cocinas / Estufas (con horno)','Encimeras / Hornillas'];
+const LINEAS_AGUA = ['Calentadores a gas / paso continuo','Termotanques eléctricos','Duchas / Rápiduchas eléctricas'];
+const LINEAS_REFRIGERACION = ['Aires acondicionados','Refrigeradores / Congeladores'];
+const LINEAS_CALOR = ['Calentadores a gas / paso continuo','Termotanques eléctricos','Duchas / Rápiduchas eléctricas','Cocinas / Estufas (con horno)'];
+const LINEAS_AIRE_MOVIL = ['Aires acondicionados','Campanas extractoras'];
+const LINEAS_RECUBIERTAS = ['Cocinas / Estufas (con horno)','Encimeras / Hornillas','Campanas extractoras','Refrigeradores / Congeladores'];
+
 const CATALOGO_PRUEBAS = [
-  {categoria:'Visual', nombre:'Inspección visual general', instrumento:'Cámara / inspección directa'},
-  {categoria:'Dimensional', nombre:'Verificación dimensional', instrumento:'Vernier digital / Wincha o flexómetro'},
-  {categoria:'Dimensional', nombre:'Verificación de peso', instrumento:'Balanza / Gramera'},
-  {categoria:'Eléctrica', nombre:'Verificación de consumo eléctrico', instrumento:'Vatímetro / Pinza amperimétrica'},
-  {categoria:'Eléctrica', nombre:'Prueba de resistencia de aislamiento', instrumento:'Megóhmetro'},
-  {categoria:'Gas', nombre:'Prueba de hermeticidad (fuga de gas)', instrumento:'Manómetro + líquido jabonoso'},
-  {categoria:'Gas', nombre:'Verificación de presión de gas', instrumento:'Manómetro'},
-  {categoria:'Agua', nombre:'Prueba de flujo y presión de agua', instrumento:'Flujómetro / Manómetro'},
-  {categoria:'Térmica', nombre:'Medición de temperatura superficial', instrumento:'Termómetro infrarrojo / láser / Pirómetro'},
-  {categoria:'Térmica', nombre:'Inspección termográfica', instrumento:'Cámara termográfica'},
-  {categoria:'Recubrimientos', nombre:'Medición de espesor de recubrimiento', instrumento:'Medidor de espesores (pintura / esmalte / tarjeta electrónica)'},
-  {categoria:'Mecánica', nombre:'Verificación de torque', instrumento:'Torquímetro'},
-  {categoria:'Mecánica', nombre:'Prueba neumática', instrumento:'Aire comprimido'},
-  {categoria:'Ambiental', nombre:'Medición de flujo de aire', instrumento:'Anemómetro'},
+  {categoria:'Visual', nombre:'Inspección visual general', instrumento:'Cámara / inspección directa', lineas:['*']},
+  {categoria:'Dimensional', nombre:'Verificación dimensional', instrumento:'Vernier digital / Wincha o flexómetro', lineas:['*'], requiereValor:true, unidad:'mm'},
+  {categoria:'Dimensional', nombre:'Verificación de peso', instrumento:'Balanza / Gramera', lineas:['*'], requiereValor:true, unidad:'kg'},
+  {categoria:'Eléctrica', nombre:'Verificación de consumo eléctrico', instrumento:'Vatímetro / Pinza amperimétrica', lineas:['*'], requiereValor:true, unidad:'W / A'},
+  {categoria:'Eléctrica', nombre:'Prueba de resistencia de aislamiento', instrumento:'Megóhmetro', lineas:['*'], requiereValor:true, unidad:'MΩ'},
+  {categoria:'Gas', nombre:'Prueba de hermeticidad (fuga de gas)', instrumento:'Manómetro + líquido jabonoso', lineas:LINEAS_GAS},
+  {categoria:'Gas', nombre:'Verificación de presión de gas', instrumento:'Manómetro', lineas:LINEAS_GAS, requiereValor:true, unidad:'kPa / mbar'},
+  {categoria:'Agua', nombre:'Prueba de flujo y presión de agua', instrumento:'Flujómetro / Manómetro', lineas:LINEAS_AGUA, requiereValor:true, unidad:'L/min'},
+  {categoria:'Térmica', nombre:'Medición de temperatura superficial', instrumento:'Termómetro infrarrojo / láser / Pirómetro', lineas:LINEAS_CALOR, requiereValor:true, unidad:'°C'},
+  {categoria:'Térmica', nombre:'Inspección termográfica', instrumento:'Cámara termográfica', lineas:LINEAS_CALOR.concat(LINEAS_REFRIGERACION)},
+  {categoria:'Refrigeración', nombre:'Verificación de temperatura de refrigeración', instrumento:'Termómetro', lineas:LINEAS_REFRIGERACION, requiereValor:true, unidad:'°C'},
+  {categoria:'Refrigeración', nombre:'Prueba de presión de refrigerante', instrumento:'Manómetro', lineas:LINEAS_REFRIGERACION, requiereValor:true, unidad:'psi'},
+  {categoria:'Recubrimientos', nombre:'Medición de espesor de recubrimiento', instrumento:'Medidor de espesores (pintura / esmalte / tarjeta electrónica)', lineas:LINEAS_RECUBIERTAS, requiereValor:true, unidad:'µm'},
+  {categoria:'Mecánica', nombre:'Verificación de torque', instrumento:'Torquímetro', lineas:['*'], requiereValor:true, unidad:'N·m'},
+  {categoria:'Mecánica', nombre:'Prueba neumática', instrumento:'Aire comprimido', lineas:LINEAS_GAS.concat(LINEAS_REFRIGERACION)},
+  {categoria:'Ambiental', nombre:'Medición de flujo de aire', instrumento:'Anemómetro', lineas:LINEAS_AIRE_MOVIL, requiereValor:true, unidad:'m/s'},
 ];
 
-let pruebasEstado = {}; // nombre -> {realizada, resultado, instrumento, foto, observacion, tipoDefecto}
-CATALOGO_PRUEBAS.forEach(p=>{ pruebasEstado[p.nombre] = {realizada:false, resultado:'Conforme', instrumento:p.instrumento, foto:null, observacion:'', tipoDefecto:''}; });
+let pruebasEstado = {}; // nombre -> {realizada, resultado, instrumento, foto, observacion, tipoDefecto, valorMedido}
+CATALOGO_PRUEBAS.forEach(p=>{ pruebasEstado[p.nombre] = {realizada:false, resultado:'Conforme', instrumento:p.instrumento, foto:null, observacion:'', tipoDefecto:'', valorMedido:''}; });
+
+// Intenta calzar el texto de línea que trae la ficha con una opción del select; si no calza, usa 'Otra'
+function matchLineaSelect(textoLinea){
+  const sel = document.getElementById('mLinea');
+  if(!sel) return;
+  const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const t = norm(textoLinea);
+  let encontrado = '';
+  for(const opt of sel.options){
+    if(opt.value && t.includes(norm(opt.value).split(' / ')[0].split(' ')[0])){ encontrado = opt.value; break; }
+  }
+  sel.value = encontrado || 'Otra';
+  renderPruebasCatalogo();
+}
+
+function pruebaAplicaALinea(p, linea){
+  if(!linea) return true; // sin línea elegida aún: se muestran todas, sin marcar No aplica
+  if(p.lineas.includes('*')) return true;
+  return p.lineas.includes(linea);
+}
 
 function renderPruebasCatalogo(){
   const cont = document.getElementById('pruebasCatalogo');
+  const linea = document.getElementById('mLinea') ? document.getElementById('mLinea').value : '';
   const categorias = [...new Set(CATALOGO_PRUEBAS.map(p=>p.categoria))];
   cont.innerHTML = categorias.map(cat=>{
     const items = CATALOGO_PRUEBAS.filter(p=>p.categoria===cat);
+    if(!items.some(p=>pruebaAplicaALinea(p,linea))) return ''; // categoría entera no aplica a esta línea
     return `<div class="spec-section">
       <div class="spec-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
         <span>${cat}</span><span>▼</span>
       </div>
       <div class="spec-body">
-        ${items.map(p=>renderPruebaItem(p)).join('')}
+        ${items.map(p=>renderPruebaItem(p, pruebaAplicaALinea(p,linea))).join('')}
       </div>
     </div>`;
   }).join('');
 }
 
-function renderPruebaItem(p){
+function renderPruebaItem(p, aplica){
   const st = pruebasEstado[p.nombre];
   const listaDefectos = defectosCategoria[p.categoria] || [];
+  if(!aplica){
+    return `<div style="border-bottom:1px solid #F1F5F9;padding:8px 0;opacity:0.55">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#94A3B8">
+        <input type="checkbox" disabled style="width:16px;height:16px">
+        ${p.nombre}
+      </label>
+      <div style="font-size:11px;color:#94A3B8;margin-left:24px">🚫 No aplica a esta línea de producto</div>
+    </div>`;
+  }
   return `<div style="border-bottom:1px solid #F1F5F9;padding:8px 0">
     <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:4px">
       <input type="checkbox" ${st.realizada?'checked':''} onchange="togglePrueba('${p.nombre}',this.checked)" style="width:16px;height:16px">
@@ -953,6 +1010,12 @@ function renderPruebaItem(p){
     <div style="font-size:11px;color:#94A3B8;margin-left:24px;margin-bottom:6px">🔧 ${p.instrumento}</div>
     ${st.realizada ? `
     <div style="margin-left:24px">
+      ${p.requiereValor ? `
+      <div style="margin-bottom:6px">
+        <input type="text" placeholder="Valor medido" value="${st.valorMedido}" oninput="pruebasEstado['${p.nombre}'].valorMedido=this.value"
+          style="width:70%;padding:8px;border:1.5px solid #93C5FD;border-radius:8px 0 0 8px;font-size:12px;border-right:none">
+        <span style="display:inline-block;width:29%;padding:8px;background:#EBF4FF;border:1.5px solid #93C5FD;border-radius:0 8px 8px 0;font-size:11px;color:#1E40AF;text-align:center;font-weight:700;box-sizing:border-box">${p.unidad}</span>
+      </div>` : ''}
       <div class="grid2" style="margin-bottom:6px">
         <select onchange="cambiarResultadoPrueba('${p.nombre}',this.value)" style="padding:8px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px">
           <option ${st.resultado==='Conforme'?'selected':''}>Conforme</option>
@@ -1214,7 +1277,8 @@ async function guardarMuestreo(){
       const st = pruebasEstado[p.nombre];
       if(st.realizada){
         const obs = st.resultado==='No conforme' && st.tipoDefecto ? `[${st.tipoDefecto}] ${st.observacion}` : st.observacion;
-        await apiPost('Muestreo_Pruebas', [id, 1, p.categoria, p.nombre, st.instrumento, st.resultado, st.fotoLink || (st.foto ? '(foto tomada, sin subir a OneDrive)' : '—'), obs]);
+        const valorConUnidad = st.valorMedido ? `${st.valorMedido} ${p.unidad||''}`.trim() : '—';
+        await apiPost('Muestreo_Pruebas', [id, 1, p.categoria, p.nombre, st.instrumento, st.resultado, st.fotoLink || (st.foto ? '(foto tomada, sin subir a OneDrive)' : '—'), obs, valorConUnidad]);
       }
     }
 
@@ -1462,9 +1526,10 @@ function procesarFichaArrastrada(file){
   fichaArrastrada = {file, url, nombre:file.name, codigo, revision};
 
   document.getElementById('fichaCargadaInfo').innerHTML = `
-    <div style="background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:10px;padding:10px 12px">
-      <div style="font-size:12px;font-weight:700;color:#166534;margin-bottom:3px">✅ Ficha cargada</div>
-      <div style="font-size:11px;color:#475569;word-break:break-all">${file.name}</div>
+    <div style="background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:10px;padding:10px 12px;position:relative">
+      <button onclick="borrarFichaArrastrada()" title="Quitar esta ficha" style="position:absolute;top:8px;right:8px;background:#FEE2E2;color:#991B1B;border:none;border-radius:8px;width:28px;height:28px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center">🗑</button>
+      <div style="font-size:12px;font-weight:700;color:#166534;margin-bottom:3px;padding-right:32px">✅ Ficha cargada</div>
+      <div style="font-size:11px;color:#475569;word-break:break-all;padding-right:32px">${file.name}</div>
       <div style="font-size:11px;color:#64748B;margin-top:4px">
         Código detectado: <strong>${codigo||'(no detectado — escríbelo abajo)'}</strong> ·
         Revisión: <strong>${revision||'(no detectada)'}</strong>
@@ -1478,6 +1543,24 @@ function procesarFichaArrastrada(file){
   if(codigo) cargarHistorialValidaciones();
 }
 
+// Por si arrastraron la ficha equivocada por error — reinicia todo el paso 1 sin recargar la página
+function borrarFichaArrastrada(){
+  if(fichaArrastrada && fichaArrastrada.url) URL.revokeObjectURL(fichaArrastrada.url);
+  fichaArrastrada = null;
+  document.getElementById('fichaCargadaInfo').innerHTML = '';
+  document.getElementById('fichaFileInput').value = '';
+  document.getElementById('bloqueValidacion').style.display = 'none';
+  document.getElementById('pdfPreviewCont').innerHTML = '';
+  document.getElementById('alertaRevision').innerHTML = '';
+  document.getElementById('vCodigo').value = '';
+  document.getElementById('vRevision').value = '';
+  document.getElementById('vCambios').value = '';
+  document.getElementById('vObservaciones').value = '';
+  document.getElementById('vResultado').value = '';
+  const trad = document.getElementById('traduccionCont');
+  if(trad) trad.innerHTML = '';
+}
+
 function mostrarPreviewPDF(){
   if(!fichaArrastrada) return;
   document.getElementById('pdfPreviewCont').innerHTML =
@@ -1488,9 +1571,66 @@ function togglePreview(){
   if(cont.innerHTML.trim()) cont.innerHTML='';
   else mostrarPreviewPDF();
 }
-function abrirTraductor(){
-  // Google Translate Documentos: el usuario sube el mismo PDF y lo recibe traducido.
-  // No podemos subirlo automáticamente desde aquí por seguridad del navegador.
+// ── Traducción automática de la ficha (sin salir de la app) ──
+// 1) Extrae el texto del PDF con pdf.js (100% en el navegador, no sube nada a ningún lado)
+// 2) Traduce ese texto por bloques usando el endpoint gratuito de Google Translate
+// NOTA: este endpoint no es una API oficial de pago de Google — es el mismo que usa la
+// página web de Google Translate. Es gratis y funciona bien para textos cortos/medianos,
+// pero al no ser oficial podría fallar alguna vez — por eso siempre queda el botón de
+// respaldo para abrir Google Translate manualmente si esto no responde.
+async function extraerTextoPDF(file){
+  const buf = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({data: buf}).promise;
+  let textoPorPagina = [];
+  for(let i=1; i<=pdf.numPages; i++){
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    const linea = content.items.map(it=>it.str).join(' ');
+    textoPorPagina.push(linea);
+  }
+  return textoPorPagina;
+}
+
+async function traducirTexto(texto){
+  if(!texto.trim()) return '';
+  const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=es&dt=t&q=' + encodeURIComponent(texto);
+  const res = await fetch(url);
+  if(!res.ok) throw new Error('Respuesta '+res.status);
+  const data = await res.json();
+  return data[0].map(seg=>seg[0]).join('');
+}
+
+async function traducirFichaAutomatico(){
+  if(!fichaArrastrada){ alert('⚠️ Primero arrastra la ficha.'); return; }
+  const btn = document.getElementById('btnTraducir');
+  const cont = document.getElementById('traduccionCont');
+  btn.disabled = true; btn.textContent = '⏳ Leyendo el PDF...';
+  cont.innerHTML = '<div class="loading">🔎 Extrayendo texto del documento...</div>';
+  try{
+    const paginas = await extraerTextoPDF(fichaArrastrada.file);
+    btn.textContent = '⏳ Traduciendo...';
+    const traducidas = [];
+    for(let i=0; i<paginas.length; i++){
+      cont.innerHTML = `<div class="loading">🔎 Traduciendo página ${i+1} de ${paginas.length}...</div>`;
+      // Trozamos cada página en bloques de ~1800 caracteres para no pasarnos del límite del endpoint
+      const bloques = paginas[i].match(/[\s\S]{1,1800}/g) || [''];
+      let textoPagina = '';
+      for(const b of bloques){ textoPagina += await traducirTexto(b) + ' '; }
+      traducidas.push(textoPagina.trim());
+    }
+    cont.innerHTML = `<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:12px;max-height:420px;overflow-y:auto">
+      <div style="font-size:11px;font-weight:700;color:#1E40AF;margin-bottom:8px">🌐 Traducción automática (revisa los valores numéricos contra el PDF original)</div>
+      ${traducidas.map((t,i)=>`<div style="margin-bottom:10px"><div style="font-size:10px;font-weight:700;color:#94A3B8;margin-bottom:3px">— Página ${i+1} —</div><div style="font-size:12px;color:#1a2332;white-space:pre-wrap;line-height:1.5">${t}</div></div>`).join('')}
+    </div>`;
+  }catch(err){
+    cont.innerHTML = `<div class="alert red">❌ No se pudo traducir automáticamente (${err.message}). Usa el respaldo manual:</div>
+      <button class="btn" style="width:100%;margin-top:6px;background:#EBF4FF;color:#1E40AF" onclick="abrirTraductorManual()">🌐 Abrir Google Translate (subir el PDF a mano)</button>`;
+  }finally{
+    btn.disabled = false; btn.textContent = '🌐 Traducir automáticamente';
+  }
+}
+
+function abrirTraductorManual(){
   window.open('https://translate.google.com/?sl=en&tl=es&op=docs','_blank');
   alert('Se abrió el traductor de Google en otra pestaña.\n\nSube ahí el mismo PDF que acabas de arrastrar y te lo devuelve en español.');
 }
@@ -1727,6 +1867,7 @@ async function generarPDFResumen(){
 // ══════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════
+if(window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 renderOnedriveStatus();
 initDropZone();
 loadPersonal();
