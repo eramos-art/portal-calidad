@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a2332;min-height:100vh;padding-bottom:40px}
-.app{max-width:880px;margin:0 auto;padding:12px}
+.app{max-width:900px;margin:0 auto;padding:12px}
 .header{background:#1a3a5c;color:white;border-radius:14px;margin-bottom:14px;box-shadow:0 4px 12px rgba(26,58,92,.25);overflow:hidden}
 .header table{width:100%;border-collapse:collapse;font-size:11px}
 .header td{padding:12px 16px;border-right:1px solid rgba(255,255,255,.2);vertical-align:top}
@@ -15,9 +15,23 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a233
 .header .t1{font-size:17px;font-weight:800}.header .t2{opacity:.75;font-size:10px}
 .hdr-status{padding:8px 16px;background:rgba(0,0,0,.18);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .tabs{display:flex;gap:5px;margin-bottom:14px;flex-wrap:wrap}
-.tab-btn{flex:1;min-width:98px;padding:11px 6px;border-radius:12px;border:1.5px solid #E2E8F0;background:white;color:#475569;font-weight:700;font-size:11.5px;cursor:pointer;font-family:inherit}
+.tab-btn{flex:1;min-width:90px;padding:11px 6px;border-radius:12px;border:1.5px solid #E2E8F0;background:white;color:#475569;font-weight:700;font-size:11.5px;cursor:pointer;font-family:inherit}
 .tab-btn.active{background:#1a3a5c;color:white;border-color:#1a3a5c}
 .tab-page{display:none}.tab-page.active{display:block}
+.hero{background:linear-gradient(135deg,#1a3a5c 0%,#2563a8 55%,#378ADD 100%);color:white;border-radius:16px;padding:24px;margin-bottom:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;box-shadow:0 6px 18px rgba(26,58,92,.3)}
+.hero h1{font-size:21px;font-weight:800;margin:6px 0}
+.hero p{font-size:12.5px;opacity:.92;max-width:540px;line-height:1.55}
+.hero-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.12em;opacity:.8;font-weight:700}
+.hero-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.hero-actions button{padding:12px 15px;border:none;border-radius:10px;font-weight:700;font-size:12.5px;cursor:pointer;font-family:inherit;background:white;color:#1a3a5c}
+.hero-actions button.alt{background:rgba(255,255,255,.16);color:white;border:1px solid rgba(255,255,255,.35)}
+.hero-imgs{display:flex;gap:8px;flex-wrap:wrap}
+.hero-imgs img{width:112px;height:112px;object-fit:cover;border-radius:12px;border:2px solid rgba(255,255,255,.45)}
+.hero-tile{width:112px;height:112px;border-radius:12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:32px}
+.hero-tile small{font-size:9px;opacity:.85;margin-top:4px}
+.auto-box{border:1.5px solid #86EFAC;background:#F0FDF4;border-radius:10px;padding:10px;margin-top:10px;font-size:12px}
+.ing-pick{display:inline-block;margin:4px 6px 0 0;padding:8px 10px;background:white;border:1.5px solid #CBD5E1;border-radius:10px;font-size:11.5px;cursor:pointer;font-weight:700;color:#1a3a5c}
+.ing-pick:hover{border-color:#378ADD;background:#F8FBFF}
 .card{background:white;border:1px solid #E2E8F0;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
 .section-title{font-size:11px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
 .field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
@@ -56,7 +70,6 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
 .check-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #F1F5F9;flex-wrap:wrap}
 .inline-h{background:#FEF2F2;border:1.5px solid #FCA5A5;border-radius:10px;padding:10px;margin-top:8px;width:100%}
 .loading{text-align:center;padding:26px;color:#64748B;font-size:13px}
-.config-warning{background:#FFF7ED;border:1.5px solid #FED7AA;color:#92400E;padding:10px 14px;border-radius:10px;font-size:12px;margin-bottom:12px}
 .progress-bar{display:flex;gap:4px;margin-bottom:14px}
 .step-dot{flex:1;height:5px;border-radius:3px;background:#CBD5E1;transition:background .3s}
 .step-dot.done{background:#1a3a5c}.step-dot.active{background:#378ADD}
@@ -74,8 +87,8 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
 .ficha-header .code{font-family:monospace;font-size:15px;font-weight:800;color:#1a3a5c}
 .ficha-header .desc{font-size:13px;color:#475569;margin-top:2px}
 .ficha-header .meta{font-size:11px;color:#94A3B8;margin-top:6px}
-.kpi{text-align:center;padding:12px;border-radius:10px}
-.kpi .n{font-size:26px;font-weight:800}.kpi .l{font-size:11px}
+.kpi{text-align:center;padding:14px;border-radius:12px}
+.kpi .n{font-size:28px;font-weight:800}.kpi .l{font-size:11px}
 .reloj{background:rgba(255,255,255,.14);border-radius:8px;padding:5px 12px;font-size:12px;font-variant-numeric:tabular-nums}
 .foot{text-align:center;font-size:11px;color:#94A3B8;padding:24px 0 8px}
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px}
@@ -87,7 +100,7 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
 .mob-tabs button.on{background:#1a3a5c;color:white}
 .mob-item{background:white;border:1px solid #E2E8F0;border-radius:10px;padding:10px;margin-bottom:8px}
 .mob-foto{width:74px;height:74px;font-size:26px}
-@media print{.tabs,.btn,.btn-nav,.btn-add,.config-warning,.nav-row,.foot,.hdr-status,.mini-btn{display:none!important}body{background:white;padding:0}.card{box-shadow:none;break-inside:avoid}.app{max-width:100%}}
+@media print{.tabs,.btn,.btn-nav,.btn-add,.nav-row,.foot,.hdr-status,.mini-btn{display:none!important}body{background:white;padding:0}.card{box-shadow:none;break-inside:avoid}.app{max-width:100%}}
 </style>
 </head>
 <body>
@@ -109,7 +122,8 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" id="tabBtnA" onclick="switchTab('A')">🔎 Consulta</button>
+    <button class="tab-btn active" id="tabBtnH" onclick="switchTab('H')">🏠 Inicio</button>
+    <button class="tab-btn" id="tabBtnA" onclick="switchTab('A')">🔎 Consulta</button>
     <button class="tab-btn" id="tabBtnI" onclick="switchTab('I')">📦 Ingresos</button>
     <button class="tab-btn" id="tabBtnD" onclick="switchTab('D')">📥 Validar ficha</button>
     <button class="tab-btn" id="tabBtnB" onclick="switchTab('B')">📋 Muestreo</button>
@@ -118,8 +132,35 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
     <button class="tab-btn" id="tabBtnF" onclick="switchTab('F')">⚙️ Config</button>
   </div>
 
+  <!-- ═══ H: PORTADA ═══ -->
+  <div class="tab-page active" id="tabH">
+    <div class="hero">
+      <div style="flex:1;min-width:280px">
+        <div class="hero-kicker">Grupo Sole · Sistema de Gestión de Calidad · Centro M310</div>
+        <h1>👋 Bienvenido al Portal de Inspecciones de Calidad</h1>
+        <p>Aquí controlas el ciclo completo: los <strong>ingresos del día</strong>, el <strong>muestreo por fases</strong> (visual · dimensional · funcional), la <strong>decisión de lote</strong> de la jefatura y los <strong>reportes</strong>. Todo conectado a SAP: el lote de inspección, file, proveedor y cantidad de muestra se cargan solos.</p>
+        <div class="hero-actions">
+          <button onclick="irMuestrearPendiente()">📋 Muestrear un ingreso pendiente</button>
+          <button class="alt" onclick="switchTab('I')">📦 Ingresos del día</button>
+          <button class="alt" onclick="switchTab('C')">📊 Reportes</button>
+        </div>
+      </div>
+      <div class="hero-imgs" id="heroImgs"></div>
+    </div>
+    <div class="grid3" id="homeKpis"></div>
+    <div class="card">
+      <div class="section-title">🟡 Próximos a muestrear (ingresos pendientes en la base)</div>
+      <p style="font-size:11px;color:#94A3B8;margin-bottom:8px">Vienen del CONTROL DE MERCADERIA. Un clic precarga todo el muestreo: lote SAP, file, muestra, almacén y proveedor.</p>
+      <div id="homePendientes"><div class="loading">Cargando ingresos...</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title">⏳ Esperando decisión de jefatura</div>
+      <div id="homeDecidir"><div class="loading">Cargando...</div></div>
+    </div>
+  </div>
+
   <!-- ═══ A: CONSULTA ═══ -->
-  <div class="tab-page active" id="tabA">
+  <div class="tab-page" id="tabA">
     <div class="card">
       <div class="section-title">Buscar material (código SAP, EAM, EAN o descripción)</div>
       <div class="autoc">
@@ -136,11 +177,14 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
   <!-- ═══ I: INGRESOS ═══ -->
   <div class="tab-page" id="tabI">
     <div class="card">
-      <div class="section-title">📦 Ingresos — CONTROL DE MERCADERIA (estados deducidos por la app)</div>
-      <p style="font-size:12px;color:#64748B;margin-bottom:10px">Quien importa guarda en la base (anti-duplicados por Lote SAP) y <strong>todos</strong> ven la misma bandeja al abrir esta pestaña. Nadie escribe estados: los deduce la app.</p>
+      <div class="section-title">📦 Ingresos — 3 pasos y listo</div>
+      <div class="alert blue" style="margin-bottom:10px">
+        <strong>① Importa</strong> el CONTROL DE MERCADERIA → <strong>② verifica</strong> el mapeo (se recuerda para siempre) → <strong>③ 💾 Guardar en base</strong>.<br>
+        Luego la bandeja queda <strong>compartida</strong>: todos la ven aquí, los estados los deduce la app y cada fila pendiente se muestrea con un clic.
+      </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-        <button class="btn" style="flex:1;min-width:170px;background:#F1F5F9;color:#475569" onclick="document.getElementById('ingFile').click()">📄 Importar .xlsx / .csv</button>
-        <button class="btn" style="flex:1;min-width:170px;background:#EBF4FF;color:#1E40AF" onclick="cargarIngresosDeBase()">⬇ Cargar desde base</button>
+        <button class="btn" style="flex:1;min-width:170px;background:#F1F5F9;color:#475569" onclick="document.getElementById('ingFile').click()">📄 ① Importar .xlsx / .csv</button>
+        <button class="btn" style="flex:1;min-width:170px;background:#EBF4FF;color:#1E40AF" onclick="cargarIngresosDeBase()">⬇ Ver bandeja de la base</button>
       </div>
       <input type="file" id="ingFile" accept=".xlsx,.xls,.csv" style="display:none" onchange="cargarArchivoIngresos(this.files[0])">
       <div id="ingHojas"></div>
@@ -209,24 +253,24 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
 
     <div class="step-page active" id="step0">
       <div class="card">
-        <div class="section-title">🏭 Datos de SAP y almacén (autollenados desde Ingresos)</div>
+        <div class="section-title">🏭 Datos de SAP y almacén — se autollenan solos</div>
+        <div class="alert blue" style="margin-bottom:10px">✍️ Escribe o escanea el <strong>Código SAP</strong> abajo: la app busca el ingreso pendiente en la base y llena lote SAP, file, doc. compras, proveedor, cant. lote, muestra y almacén automáticamente.</div>
         <div class="grid2">
-          <div class="field"><label>N° Lote inspección SAP ⚠️</label><input type="text" id="mLotInsp" placeholder="10000057124"></div>
-          <div class="field"><label>File de importación ⚠️</label><input type="text" id="mFile" placeholder="M25-562"></div>
-          <div class="field"><label>Doc. compras</label><input type="text" id="mDocComp" placeholder="4200013332"></div>
-          <div class="field"><label>Doc. material</label><input type="text" id="mDocMat" placeholder="5000307562"></div>
+          <div class="field"><label>N° Lote inspección SAP ⚠️</label><input type="text" id="mLotInsp" placeholder="Se llena solo desde Ingresos"></div>
+          <div class="field"><label>File de importación ⚠️</label><input type="text" id="mFile" placeholder="Se llena solo"></div>
+          <div class="field"><label>Doc. compras</label><input type="text" id="mDocComp" placeholder="Se llena solo"></div>
           <div class="field"><label>Almacén físico ⚠️</label><select id="mAlmFis"></select></div>
           <div class="field"><label>Código de almacén ⚠️</label><select id="mAlmCod"></select></div>
           <div class="field"><label>Proveedor ⚠️</label>
             <div style="display:flex;gap:6px">
-              <input type="text" id="mProveedor" list="dlProv" placeholder="Escribe o elige..." autocomplete="off">
+              <input type="text" id="mProveedor" list="dlProv" placeholder="Se llena solo" autocomplete="off">
               <button class="mini-btn" onclick="promptNuevoProveedor()">＋</button>
             </div>
             <datalist id="dlProv"></datalist>
           </div>
           <div class="field"><label>Fecha ⚠️ (auto)</label><input type="date" id="mFecha"></div>
         </div>
-        <div class="alert blue" style="margin:0">⏱ La <strong>hora de inicio</strong> se registra sola, la de <strong>fin</strong> al guardar. Usa <strong>🚀 Iniciar + QR</strong> para abrir este muestreo en el celular del equipo y tomar evidencias en el piso.</div>
+        <div class="alert blue" style="margin:0">⏱ La <strong>hora de inicio</strong> se registra sola, la de <strong>fin</strong> al guardar. Usa <strong>🚀 Iniciar + QR</strong> para abrir este muestreo en el celular del equipo.</div>
         <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
           <button class="btn" style="flex:1;min-width:170px;background:#0078D4;color:white" onclick="iniciarEnServidor()">🚀 Iniciar muestreo + QR</button>
           <button class="btn" style="flex:1;min-width:170px;background:#F1F5F9;color:#475569" onclick="traerAvance()">⬇ Traer avance del móvil</button>
@@ -234,7 +278,7 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
         <div id="evLinksBox"></div>
       </div>
       <div class="card">
-        <div class="section-title">📦 Material (autocompleta desde el maestro EAM)</div>
+        <div class="section-title">📦 Material (autocompleta + autollenado desde Ingresos)</div>
         <div class="autoc">
           <div class="field"><label>Código SAP ⚠️ <span style="font-weight:400">(código, EAM, EAN o escaneo Zebra)</span></label>
             <input type="text" id="mCodigo" style="text-transform:uppercase;font-family:monospace" oninput="this.value=this.value.toUpperCase();autocompletar('mCodigo')" onblur="setTimeout(()=>cerrarAutoc('mCodigo'),200);cargarFichaReferencia()"></div>
@@ -249,7 +293,7 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
           <button class="mini-btn" style="margin-bottom:12px" onclick="promptNuevaLinea()">＋ Nueva línea</button>
         </div>
         <div class="grid2"><div class="field"><label>Lote ⚠️</label><input type="text" id="mLote" placeholder="L-2026-XXX"></div></div>
-        <div id="fichaRefMini"><p style="font-size:12px;color:#94A3B8">Al elegir el código, la ficha vigente aparece aquí con su historial.</p></div>
+        <div id="fichaRefMini"><p style="font-size:12px;color:#94A3B8">Al escribir el código: ficha vigente + historial + autollenado del ingreso pendiente aparecen aquí.</p></div>
       </div>
       <div class="card">
         <div class="section-title">🔢 Plan de muestreo AQL — ISO 2859-1</div>
@@ -390,7 +434,7 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
   <!-- ═══ F: CONFIG ═══ -->
   <div class="tab-page" id="tabF">
     <div class="card">
-      <div class="section-title">🗂 Maestro de códigos SAP — carga Excel/CSV + alta en el acto</div>
+      <div class="section-title">🗂 Maestro de códigos SAP — carga Excel/CSV + alta en elacto</div>
       <p style="font-size:12px;color:#64748B">Detecta: Material, Texto breve, Nº antiguo/EAM, EAN, Peso, Volumen, Centro, Proveedor. Duplicados por almacén se limpian solos.</p>
       <input type="file" id="eamFile" accept=".csv,.txt,.xls,.xlsx" style="display:none" onchange="cargarArchivoMaestro(this.files[0])">
       <button class="btn-add" style="margin:10px 0" onclick="document.getElementById('eamFile').click()">📄 Seleccionar archivo del maestro</button>
@@ -398,7 +442,7 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
       <div style="margin-top:8px"><button class="mini-btn" onclick="promptNuevoMaterial()">＋ Crear material nuevo ahora</button></div>
     </div>
     <div class="card">
-      <div class="section-title">🚚 Maestro de proveedores — carga por hojas + alta en el acto</div>
+      <div class="section-title">🚚 Maestro de proveedores — carga por hojas + alta en elacto</div>
       <input type="file" id="provFile" accept=".csv,.txt,.xls,.xlsx" style="display:none" onchange="cargarArchivoProveedores(this.files[0])">
       <button class="btn-add" style="margin:10px 0" onclick="document.getElementById('provFile').click()">📄 Seleccionar Excel de proveedores (ej. hoja PROV)</button>
       <div id="provPreview"></div>
@@ -444,6 +488,12 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
       <div id="plantillaCfg"></div>
     </div>
     <div class="card">
+      <div class="section-title">🖼 Imágenes de la portada (opcional)</div>
+      <p style="font-size:12px;color:#64748B">Sube fotos de la empresa o productos a tu repositorio (carpeta <code>img/</code>) y pega las URLs separadas por coma. Sin URLs, la portada usa íconos de producto.</p>
+      <div class="field"><label>URLs de imágenes (separadas por coma)</label>
+        <input type="text" id="cfgHeroImgs" placeholder="img/producto1.jpg, img/planta.jpg" oninput="CFG.heroImgs=this.value.split(',').map(s=>s.trim()).filter(Boolean);saveCfgAll();renderHeroImgs()"></div>
+    </div>
+    <div class="card">
       <div class="section-title">🔔 Correo de jefatura (avisos automáticos)</div>
       <div class="field"><label>Correo(s) separados por coma</label><input type="text" id="cfgCorreos" placeholder="jefa@gruposole.pe" oninput="saveCfgAll()"></div>
     </div>
@@ -471,15 +521,14 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
 /* ═══ 1. CONFIG ═══ */
-const APP_VERSION='v4.4.1';
+const APP_VERSION='v4.5';
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbxNwxScMzR-pKcipiPZEaW8agLqFecYoM6ECiA6egTmTKJP-z3gAL-uokFobAPSo0S3hw/exec';
 const MSAL_CLIENT_ID='PEGAR_AQUI_TU_CLIENT_ID',MSAL_TENANT_ID='PEGAR_AQUI_TU_TENANT_ID';
 const REDIRECT_URI=window.location.origin+window.location.pathname;
 const MSAL_SCOPES=['Files.ReadWrite','User.Read'];
 const ONEDRIVE_FICHAS_FOLDER='Repositorio de Fichas Técnicas';
-const DEMO=!SCRIPT_URL||SCRIPT_URL.indexOf('PEGAR_AQUI')===0;
 const QS=new URLSearchParams(location.search);
-document.getElementById('footVer').textContent='Portal de Calidad '+APP_VERSION+' · QR móvil · Evidencias Drive · Guía QA32 espejo'+(DEMO?' · MODO DEMO':'');
+document.getElementById('footVer').textContent='Portal de Calidad '+APP_VERSION+' · Portada · Autollenado desde Ingresos · QR móvil · Guía QA32 espejo';
 let msalToken=null,msalUserName='';
 
 /* ═══ 2. HEADERS ═══ */
@@ -519,1223 +568,4 @@ const SEED_DEFECTOS=[
  ['FUNC','0010','FUNCIONA CONFORME','Conforme'],['FUNC','0020','NO ENCIENDE','Defecto'],['FUNC','0030','FALLA DE FUNCIONAMIENTO','Defecto'],['FUNC','0040','FUERA DE ESPECIFICACIÓN','Defecto'],
  ['DIM','0010','DIMENSIONES CONFORMES','Conforme'],['DIM','0020','FUERA DE TOLERANCIA','Defecto']];
 const G_EMB='A. EMPAQUE Y EMBALAJE',G_MAR='B. MARCAS Y TRAZABILIDAD',G_INT='C. PRODUCTO INTERNO',G_ACC='D. ACCESORIOS Y COMPONENTES SEGÚN FICHA';
-const SEED_CHECKLIST=[
- [G_EMB,'Estado de caja (golpes/humedad/roturas)'],[G_EMB,'Arte impreso de caja vigente'],[G_EMB,'Encintado correcto'],[G_EMB,'Zunchado / esquinado según file'],[G_EMB,'Tecnopor completo'],[G_EMB,'Bolsa interna limpia'],[G_EMB,'Rotulado de caja correcto'],
- [G_MAR,'Rating label legible y adherida'],[G_MAR,'Etiqueta de eficiencia energética'],[G_MAR,'Certificaciones según ficha'],[G_MAR,'N° de serie / código EAM legible'],[G_MAR,'N° de serie coincide con caja'],[G_MAR,'Manual en español incluido'],[G_MAR,'Logo SOLE según arte'],[G_MAR,'Código de barras escaneable (Zebra)'],
- [G_INT,'Sin grasa / polvo / suciedad'],[G_INT,'Sin rayaduras'],[G_INT,'Sin óxidos o manchas'],[G_INT,'Sin golpes / hendiduras'],[G_INT,'Pintura / esmalte sin desconche'],[G_INT,'Componentes internos completos'],
- [G_ACC,'Bandeja de horneado presente y sin daños'],[G_ACC,'Parrilla / rejilla presente y sin daños'],[G_ACC,'Soporte de espiedo (rotiserie) presente'],[G_ACC,'Enchufe / clavija tipo según ficha (chuko / VDE)'],[G_ACC,'Inyectores instalados según ficha (LPG/NG)'],[G_ACC,'Medidas de inyectores según ficha'],[G_ACC,'Kit de inyectores adicional incluido'],[G_ACC,'Quemadores completos (cantidad y tipo)'],[G_ACC,'Esparcidores / tapas de quemador completos'],[G_ACC,'Acoplamiento GLP incluido'],[G_ACC,'Tornillería y piezas de fijación incluidas']];
-const LINEAS_DEFAULT=['Calentadores a gas / paso continuo','Termotanques eléctricos','Duchas / Rápiduchas eléctricas','Cocinas / Estufas (con horno)','Encimeras / Hornillas','Campanas extractoras','Aires acondicionados','Refrigeradores / Congeladores','Otra'];
-const SEED_PLANTILLAS=[
- ['Termotanques eléctricos','Dimensional','Alto','cm','Flexómetro',''],['Termotanques eléctricos','Dimensional','Ancho','cm','Flexómetro',''],['Termotanques eléctricos','Dimensional','Profundidad','cm','Flexómetro',''],['Termotanques eléctricos','Dimensional','Longitud de cable','cm','Flexómetro',''],
- ['Termotanques eléctricos','Funcional','Temperatura de calentamiento','°C','Termómetro vástago','Instalar, llenar, esperar y registrar'],['Termotanques eléctricos','Funcional','Potencia','W','Vatímetro',''],['Termotanques eléctricos','Funcional','Consumo de corriente','A','Pinza amperimétrica',''],['Termotanques eléctricos','Funcional','Tiempo de recuperación (2da vez)','min','Cronómetro + Flujómetro','Tras 1er calentamiento, vaciar parcialmente y cronometrar'],['Termotanques eléctricos','Funcional','Resistencia de aislamiento','MΩ','Megómetro','500V DC'],['Termotanques eléctricos','Funcional','Presión de trabajo','kPa','Manómetro',''],['Termotanques eléctricos','Funcional','Fuga de agua','—','Visual','Revisar conexiones y soldaduras'],
- ['Calentadores a gas / paso continuo','Dimensional','Alto','cm','Flexómetro',''],['Calentadores a gas / paso continuo','Dimensional','Ancho','cm','Flexómetro',''],['Calentadores a gas / paso continuo','Dimensional','Profundidad','cm','Flexómetro',''],
- ['Calentadores a gas / paso continuo','Funcional','Encendido (3 niveles)','—','Visual',''],['Calentadores a gas / paso continuo','Funcional','Presión de gas','mmH2O','Manómetro baja presión',''],['Calentadores a gas / paso continuo','Funcional','Temperatura de salida','°C','Termómetro',''],['Calentadores a gas / paso continuo','Funcional','Tiempo de recuperación','min','Cronómetro + Flujómetro',''],['Calentadores a gas / paso continuo','Funcional','Seguridad (termocupla)','—','Visual','Con quemador encendido, cortar gas y verificar corte'],['Calentadores a gas / paso continuo','Funcional','Resistencia de aislamiento','MΩ','Megómetro',''],
- ['Duchas / Rápiduchas eléctricas','Dimensional','Largo','cm','Flexómetro',''],['Duchas / Rápiduchas eléctricas','Dimensional','Longitud de cable','cm','Flexómetro',''],
- ['Duchas / Rápiduchas eléctricas','Funcional','Potencia','W','Vatímetro',''],['Duchas / Rápiduchas eléctricas','Funcional','Consumo','A','Pinza amperimétrica',''],['Duchas / Rápiduchas eléctricas','Funcional','Resistencia de aislamiento','MΩ','Megómetro',''],['Duchas / Rápiduchas eléctricas','Funcional','Presión mínima de arranque','kPa','Manómetro',''],['Duchas / Rápiduchas eléctricas','Funcional','Temperatura por escalones','°C','Termómetro',''],
- ['Cocinas / Estufas (con horno)','Dimensional','Alto','cm','Flexómetro',''],['Cocinas / Estufas (con horno)','Dimensional','Ancho','cm','Flexómetro',''],['Cocinas / Estufas (con horno)','Dimensional','Profundidad','cm','Flexómetro',''],['Cocinas / Estufas (con horno)','Dimensional','Longitud de cable','cm','Flexómetro',''],
- ['Cocinas / Estufas (con horno)','Funcional','Encendido de quemadores (x4)','—','Visual',''],['Cocinas / Estufas (con horno)','Funcional','Diámetro de inyectores','mm','Vernier digital','Verificar kit LPG/NG según ficha'],['Cocinas / Estufas (con horno)','Funcional','Presión de gas','mmH2O','Manómetro baja presión',''],['Cocinas / Estufas (con horno)','Funcional','Temperatura de horno (rango)','°C','Termómetro tipo K / Pirómetro','Verificar rango según ficha'],['Cocinas / Estufas (con horno)','Funcional','Timer','—','Visual',''],['Cocinas / Estufas (con horno)','Funcional','Luz del horno','—','Visual',''],['Cocinas / Estufas (con horno)','Funcional','Válvula de seguridad','—','Visual',''],['Cocinas / Estufas (con horno)','Funcional','Resistencia de aislamiento','MΩ','Megómetro',''],['Cocinas / Estufas (con horno)','Funcional','Torque de tornillería','N·m','Torquímetro',''],
- ['Encimeras / Hornillas','Dimensional','Ancho','cm','Flexómetro',''],['Encimeras / Hornillas','Dimensional','Profundidad','cm','Flexómetro',''],
- ['Encimeras / Hornillas','Funcional','Encendido de quemadores','—','Visual',''],['Encimeras / Hornillas','Funcional','Diámetro de inyectores','mm','Vernier digital',''],['Encimeras / Hornillas','Funcional','Presión de gas','mmH2O','Manómetro baja presión',''],['Encimeras / Hornillas','Funcional','Resistencia de aislamiento','MΩ','Megómetro',''],
- ['Campanas extractoras','Dimensional','Ancho','cm','Flexómetro',''],['Campanas extractoras','Dimensional','Profundidad','cm','Flexómetro',''],['Campanas extractoras','Dimensional','Longitud de cable','cm','Flexómetro',''],
- ['Campanas extractoras','Funcional','Caudal de extracción','m³/h','Anemómetro','Medir velocidad en ducto × área'],['Campanas extractoras','Funcional','Potencia','W','Vatímetro',''],['Campanas extractoras','Funcional','Consumo','A','Pinza amperimétrica',''],['Campanas extractoras','Funcional','Niveles de velocidad','—','Visual',''],['Campanas extractoras','Funcional','Iluminación','—','Visual',''],['Campanas extractoras','Funcional','Nivel sonoro','dB','Sonómetro','Si disponible'],
- ['Aires acondicionados','Dimensional','Largo','cm','Flexómetro',''],['Aires acondicionados','Dimensional','Ancho','cm','Flexómetro',''],['Aires acondicionados','Dimensional','Alto','cm','Flexómetro',''],
- ['Aires acondicionados','Funcional','ΔT impulsión/retorno','°C','Termómetro / Cámara termográfica',''],['Aires acondicionados','Funcional','Potencia','W','Vatímetro',''],['Aires acondicionados','Funcional','Consumo','A','Pinza amperimétrica',''],['Aires acondicionados','Funcional','Resistencia de aislamiento','MΩ','Megómetro',''],['Aires acondicionados','Funcional','Presión de refrigerante','kPa','Manifold','Si disponible'],
- ['Refrigeradores / Congeladores','Dimensional','Alto','cm','Flexómetro',''],['Refrigeradores / Congeladores','Dimensional','Ancho','cm','Flexómetro',''],['Refrigeradores / Congeladores','Dimensional','Profundidad','cm','Flexómetro',''],
- ['Refrigeradores / Congeladores','Funcional','Temperatura de trabajo','°C','Termómetro / Cámara termográfica',''],['Refrigeradores / Congeladores','Funcional','Consumo','kWh','Vatímetro',''],['Refrigeradores / Congeladores','Funcional','Resistencia de aislamiento','MΩ','Megómetro',''],['Refrigeradores / Congeladores','Funcional','Luz interna','—','Visual',''],['Refrigeradores / Congeladores','Funcional','Termostato','—','Visual',''],
- ['Otra','Dimensional','— (agregar campo)','—','—',''],['Otra','Funcional','— (agregar campo)','—','—','']];
-const SEED_DESTRUCTIVA=[['Destructiva','Corte de cable — sección de cobre','mm²','Vernier digital',''],['Destructiva','Apertura de componente interno','—','Atornillador automático',''],['Destructiva','Ensayo de tensión mecánica','—','—','']];
-let CFG={personal:[],proveedores:[],defectos:null,checklist:null,plantillas:null,lineas:null,almFis:['ARGENTINA','MONTE AZUL'],almCod:['0121','0103','0176'],correos:'',ingMapeo:null};
-function loadCfg(){try{const s=localStorage.getItem('sole_cfg_v441');if(s)CFG=Object.assign(CFG,JSON.parse(s));}catch(e){}
- if(!CFG.defectos)CFG.defectos=SEED_DEFECTOS.slice();
- if(!CFG.checklist)CFG.checklist=SEED_CHECKLIST.slice();
- if(!CFG.plantillas)CFG.plantillas=SEED_PLANTILLAS.map(r=>r.slice());
- if(!CFG.lineas)CFG.lineas=LINEAS_DEFAULT.slice();
- saveCfgAll();}
-function saveCfgAll(){try{const c=document.getElementById('cfgCorreos');if(c)CFG.correos=c.value;localStorage.setItem('sole_cfg_v441',JSON.stringify(CFG))}catch(e){}}
-
-/* ═══ 5. SESIÓN ═══ */
-let sesion={nombre:'',rol:'Inspector'};
-try{const s=JSON.parse(localStorage.getItem('sole_sesion'));if(s)sesion=s;}catch(e){}
-function setSesion(n){sesion.nombre=n;localStorage.setItem('sole_sesion',JSON.stringify(sesion));renderSesion();}
-function setRol(r){sesion.rol=r;localStorage.setItem('sole_sesion',JSON.stringify(sesion));renderCfgAll();}
-function renderSesion(){
- const sel=document.getElementById('sesSel');
- if(!sel)return;
- if(!CFG.personal.length){sel.innerHTML='<option value="">— toca ＋ Persona —</option>';return;}
- sel.innerHTML='<option value="">— elegir —</option>'+CFG.personal.map(p=>`<option ${p===sesion.nombre?'selected':''}>${p}</option>`).join('');
- const rs=document.getElementById('rolSel');if(rs)rs.value=sesion.rol;}
-function promptAddPersonal(){
- const n=(prompt('Nombre completo de la persona (queda guardado):','')||'').trim();
- if(!n)return;
- if(!CFG.personal.includes(n))CFG.personal.push(n);
- saveCfgAll();renderPersonalSelects();renderSesion();renderPersonalCfg();
- if(!sesion.nombre)setSesion(n);}
-function promptNuevaLinea(){
- const n=(prompt('Nombre de la nueva línea de producto:','')||'').trim();
- if(!n)return;
- if(!CFG.lineas.includes(n))CFG.lineas.push(n);
- saveCfgAll();fillLineas('mLinea');fillLineas('cfgLinea');
- document.getElementById('mLinea').value=n;resetearPlantillas();}
-
-/* ═══ 6. TABS ═══ */
-function switchTab(t){
- ['A','I','D','B','E','C','F'].forEach(x=>{
-  const p=document.getElementById('tab'+x),b=document.getElementById('tabBtn'+x);
-  if(p)p.classList.toggle('active',t===x);if(b)b.classList.toggle('active',t===x);});
- if(t==='B')iniciarReloj();
- if(t==='I')initIngresos();
- if(t==='E')cargarPendientes();
- if(t==='C'&&!window._resCargado){window._resCargado=true;document.getElementById('resumenFecha').value=new Date().toISOString().split('T')[0];cargarResumenDia();cargarRecurrencia();}
- if(t==='F')renderCfgAll();}
-
-/* ═══ 7. RELOJ ═══ */
-let relojT0=null;
-function iniciarReloj(){
- if(relojT0)return;
- relojT0=new Date();
- const hi=document.getElementById('mHoraInicioR1');
- if(hi&&!hi.value)hi.value=relojT0.toTimeString().slice(0,5);
- document.getElementById('relojBox').style.display='block';
- setInterval(pintaReloj,1000);pintaReloj();}
-function pintaReloj(){
- if(!relojT0)return;
- const s=Math.floor((Date.now()-relojT0)/1000);
- document.getElementById('relojBox').innerHTML='⏱ Inicio '+relojT0.toTimeString().slice(0,5)+' · transcurrido <b>'+String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')+'</b>';}
-
-/* ═══ 8. AQL ═══ */
-const RANGOS=[[2,8],[9,15],[16,25],[26,50],[51,90],[91,150],[151,280],[281,500],[501,1200],[1201,3200],[3201,10000],[10001,35000],[35001,150000],[150001,500000],[500001,Infinity]];
-const N_NIV={I:[2,2,3,5,8,13,20,32,50,80,125,200,315,500,800],II:[2,3,5,8,13,20,32,50,80,125,200,315,500,800,1250],III:[5,8,13,20,32,50,80,125,200,315,500,800,1250,1250,1250]};
-const AC={'2.5':{2:0,3:0,5:0,8:0,13:1,20:1,32:2,50:3,80:5,125:7,200:10,315:14,500:21,800:21,1250:21},'4.0':{2:0,3:0,5:0,8:1,13:1,20:2,32:3,50:5,80:7,125:10,200:14,315:21,500:21,800:21,1250:21}};
-function calcularAQL(){
- const cont=document.getElementById('aqlSugerencia');const lote=parseInt(document.getElementById('mCantLote').value);
- if(!lote||lote<=0){cont.innerHTML='';return;}
- const sev=document.getElementById('mSeveridad').value;
- const nivel=sev==='Reducido'?'I':sev==='Reforzado'?'III':'II';
- const i=RANGOS.findIndex(r=>lote>=r[0]&&lote<=r[1]);const n=N_NIV[nivel][i];
- if(n===undefined){cont.innerHTML='';return;}
- const acF=AC['2.5'][n],acE=AC['4.0'][n];
- const m1=parseInt(document.getElementById('mCantM1').value)||0;
- const dif=m1&&m1!==n?`<div style="margin-top:6px">⚠️ <strong>Validación:</strong> el ingreso indica ${m1} u, pero AQL ${sev} para lote de ${lote.toLocaleString('es-PE')} → ${n} u. Confirma con Ingresos.</div>`:'';
- cont.innerHTML=`<div class="alert blue">📐 Lote de ${lote.toLocaleString('es-PE')} u · severidad <strong>${sev}</strong> → muestra: <strong>${n} unidades</strong><br>Funcional (AQL 2.5): acepta ${acF}/rechaza ${acF+1} · Estético (AQL 4.0): acepta ${acE}/rechaza ${acE+1}${dif}</div>`;}
-
-/* ═══ 9. MAESTRO ═══ */
-let MAESTRO=[];
-async function loadMaestro(){try{
- const r=await apiGet('Maestro_Codigos');
- MAESTRO=r.length?rowsToObjects('Maestro_Codigos',r):[];
-}catch(e){MAESTRO=[];}}
-function autocompletar(inputId){
- const inp=document.getElementById(inputId),q=inp.value.trim().toUpperCase(),lst=document.getElementById('al_'+inputId);
- if(!q||q.length<2){lst.style.display='none';return;}
- const res=MAESTRO.filter(m=>[m['Código SAP'],m['EAM'],m['EAN'],m['Descripción']].some(v=>String(v||'').toUpperCase().includes(q))).slice(0,8);
- let html=res.map(m=>`<div class="autoc-item" onclick="elegirMaestro('${inputId}','${m['Código SAP']}')"><span class="c">${m['Código SAP']}</span> <span class="d">${m['Descripción']||''}${m['EAM']?' · EAM: '+m['EAM']:''}</span></div>`).join('');
- if(inputId==='mCodigo')html+=`<div class="autoc-new" onclick="promptNuevoMaterial()">＋ Crear material nuevo "${esc(q)}" en la base</div>`;
- if(!html.length){lst.style.display='none';return;}
- lst.innerHTML=html;lst.style.display='block';}
-function cerrarAutoc(id){const l=document.getElementById('al_'+id);if(l)l.style.display='none';}
-function lineaDesdeDesc(d){
- d=(d||'').toUpperCase();
- if(/COCINA|ESTUFA/.test(d))return'Cocinas / Estufas (con horno)';
- if(/CAMPANA/.test(d))return'Campanas extractoras';
- if(/TERMOTANQUE|ACUMULADOR|TERMA|TERM A/.test(d))return'Termotanques eléctricos';
- if(/CALENTADOR|PASO CONT|CALENT\.INST/.test(d))return'Calentadores a gas / paso continuo';
- if(/DUCHA|RAPIDUCHA/.test(d))return'Duchas / Rápiduchas eléctricas';
- if(/AIRE ACOND|SPLIT|CLIMAT|ENFRIADOR/.test(d))return'Aires acondicionados';
- if(/REFRIGER|CONGEL|NEVERA|CAVA|FRIGOBAR/.test(d))return'Refrigeradores / Congeladores';
- if(/ENCIMERA|HORNILLA|EN CIMERA|TOPE/.test(d))return'Encimeras / Hornillas';
- if(/HORNO/.test(d))return'Cocinas / Estufas (con horno)';
- return'Otra';}
-function elegirMaestro(inputId,codigo){
- cerrarAutoc(inputId);
- const m=MAESTRO.find(x=>x['Código SAP']===codigo);if(!m)return;
- if(inputId==='buscarCodigo'){document.getElementById('buscarCodigo').value=codigo;buscarFicha();return;}
- document.getElementById('mCodigo').value=m['Código SAP'];
- document.getElementById('mDesc').value=m['Descripción']||'';
- document.getElementById('mRefPeso').value=`${m['Peso Bruto']||'—'} KG · ${m['Volumen']||'—'} M³ · EAM ${m['EAM']||'—'}`;
- const prov=document.getElementById('mProveedor');
- if(m['Proveedor']&&!prov.value)prov.value=m['Proveedor'];
- const cand=m['Línea']||lineaDesdeDesc(m['Descripción']);
- if(CFG.lineas.includes(cand))document.getElementById('mLinea').value=cand;
- resetearPlantillas();cargarFichaReferencia();}
-async function promptNuevoMaterial(pre){
- const cod=(pre||prompt('Código SAP del material nuevo:','')||'').trim().toUpperCase();
- if(!cod)return;
- if(MAESTRO.find(x=>x['Código SAP']===cod)){elegirMaestro('mCodigo',cod);return;}
- const desc=(prompt('Descripción (como en SAP):','')||'').trim().toUpperCase();
- if(!desc){alert('⚠️ Se requiere descripción.');return;}
- const prov=(prompt('Proveedor (opcional):','')||'').trim();
- const linea=(prompt('Línea (opcional — vacío = detectar por descripción):','')||'').trim();
- const m={['Código SAP']:cod,['Descripción']:desc,['Línea']:linea||lineaDesdeDesc(desc),['Proveedor']:prov,['Edición Vigente']:'',['Fecha Edición']:'',['EAM']:cod.replace(/^3\d*/,'')||'',['EAN']:'',['Peso Bruto']:'',['Peso Neto']:'',['Volumen']:'',['Unidad']:'UN',['Grupo Artículos']:'',['Centro']:'M310'};
- MAESTRO.push(m);
- try{await apiPost({accion:'guardarFilas',hoja:'Maestro_Codigos',filas:[HEADERS['Maestro_Codigos'].map(h=>m[h]||'')]});}catch(e){console.warn(e);}
- elegirMaestro('mCodigo',cod);
- alert('✅ Material '+cod+' creado y guardado en la base.');}
-
-/* ═══ 10. MÓDULO A ═══ */
-function renderFichaHTML(m,specs){
- let html=`<div class="ficha-header"><div class="code">${m['Código SAP']}</div><div class="desc">${m['Descripción']||''}</div>
- <div class="meta">Línea: ${m['Línea']||'—'} · Proveedor: ${m['Proveedor']||'—'} · EAM: ${m['EAM']||'—'} · EAN: ${m['EAN']||'—'} · Edición: ${m['Edición Vigente']||'—'}</div></div>`;
- const sec={};(specs||[]).forEach(r=>{const s=r['Sección']||'Otros';(sec[s]=sec[s]||[]).push(r);});
- Object.keys(sec).forEach(s=>{html+=`<div style="border:1px solid #E2E8F0;border-radius:10px;margin-bottom:8px;overflow:hidden"><div style="background:#EBF4FF;padding:9px 12px;font-size:12px;font-weight:700;color:#1E40AF;cursor:pointer;display:flex;justify-content:space-between" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'"><span>${s}</span><span>▼</span></div><div style="display:none;padding:8px 12px">${sec[s].map(r=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid #F1F5F9;font-size:13px"><span style="color:#64748B;flex:0 0 42%">${r['Campo']}</span><span style="font-weight:600;flex:1;text-align:right">${r['Valor']}</span></div>`).join('')}</div></div>`;});
- return html;}
-async function buscarFicha(){
- const codigo=document.getElementById('buscarCodigo').value.trim(),cont=document.getElementById('fichaResultado');
- if(!codigo){cont.innerHTML='';return;}
- cont.innerHTML='<div class="loading">🔎 Buscando...</div>';
- try{
-  const[mae,specs]=await Promise.all([apiGet('Maestro_Codigos',codigo),apiGet('Especificaciones',codigo)]);
-  let html='';
-  if(!mae.length)html=`<div class="alert amber">No se encontró ${codigo} en el maestro. Cárgalo en ⚙️ Config o créalo desde el muestreo.</div>`;
-  else{html=renderFichaHTML(mae[0],specs);
-   html+=`<button class="btn btn-primary" onclick="elegirMaestro('mCodigo','${mae[0]['Código SAP']}');switchTab('B')">📋 Iniciar muestreo con este código</button>
-   <div id="historialCodigo" style="margin-top:14px"><div class="loading">🔎 Cargando historial...</div></div>`;}
-  html+=`<div class="card" style="margin-top:14px"><div class="section-title">📁 Ficha técnica original (OneDrive)</div><div id="oneDriveFichaResultado"></div></div>`;
-  cont.innerHTML=html;
-  if(mae.length){renderHistorialCodigo(codigo);buscarFichaEnOneDrive(codigo);}
- }catch(e){cont.innerHTML='<div class="alert red">❌ '+e.message+'</div>';}}
-async function renderHistorialCodigo(codigo){
- const cont=document.getElementById('historialCodigo');
- try{
-  const ms=await apiGet('Muestreos',codigo);
-  if(!ms.length){cont.innerHTML='<div class="card"><div class="section-title">🕒 Historial de inspecciones</div><p style="font-size:12px;color:#94A3B8">Primera inspección de este código en el sistema.</p></div>';return;}
-  const objs=rowsToObjects('Muestreos',ms);
-  const hall=rowsToObjects('Muestreo_Hallazgos',await apiGet('Muestreo_Hallazgos'));
-  objs.sort((a,b)=>new Date(b['Fecha']||0)-new Date(a['Fecha']||0));
-  cont.innerHTML=`<div class="card"><div class="section-title">🕒 Historial (${objs.length}) — ¿cómo llegó la vez anterior?</div>`+objs.map(m=>{
-   const hs=hall.filter(h=>h['ID Muestreo']===m['ID Muestreo']);
-   const dec=m['Decisión Final']||'—';
-   const cls=dec==='Liberado'?'ok':dec==='Tolerado'?'estet':'func';
-   return`<div style="border:1px solid #E2E8F0;border-radius:10px;padding:10px 12px;margin-bottom:8px">
-    <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;font-weight:700;color:#1a3a5c">📅 ${m['Fecha']||'—'} · Lote ${m['Lote']||'—'} · SAP ${m['N° Lote Inspección SAP']||'—'}</span><span class="badge ${cls}">${dec}</span></div>
-    <div>${hs.length?hs.map(h=>`<span class="badge ${h['Fase']==='Funcional'||h['Fase']==='Dimensional'?'func':'estet'}" style="margin:2px 4px 2px 0">${h['Fase']}: ${h['Defecto']||h['Código Defecto SAP']||'—'}</span>`).join(''):'<span style="font-size:11px;color:#94A3B8">Sin hallazgos — conforme</span>'}</div></div>`;
-  }).join('')+'</div>';
- }catch(e){cont.innerHTML=`<div class="alert red">❌ ${e.message}</div>`;}}
-
-/* ═══ 11. ONEDRIVE (opcional — solo fichas PDF) ═══ */
-function onedriveOK(){return MSAL_CLIENT_ID&&MSAL_CLIENT_ID.indexOf('PEGAR_AQUI')!==0;}
-function renderOneDrive(){
- const box=document.getElementById('onedriveStatusBox');if(!box)return;
- if(!onedriveOK()){box.innerHTML='<span style="font-size:11px;opacity:.85">📄 Fichas: arrástralas manualmente (OneDrive opcional en Config)</span>';return;}
- if(msalToken)box.innerHTML=`<span style="font-size:11px">☁️ Conectado: ${msalUserName}</span> <button onclick="doLogoutOneDrive()" style="background:none;border:none;color:white;text-decoration:underline;cursor:pointer;font-size:11px">Salir</button>`;
- else box.innerHTML=`<button onclick="doLoginOneDrive()" style="padding:6px 12px;background:#0078D4;color:white;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">☁️ Conectar OneDrive (fichas)</button>`;}
-function getMsalAuthUrl(){const p=new URLSearchParams({client_id:MSAL_CLIENT_ID,response_type:'token',redirect_uri:REDIRECT_URI,scope:MSAL_SCOPES.join(' '),response_mode:'fragment'});return'https://login.microsoftonline.com/'+MSAL_TENANT_ID+'/oauth2/v2.0/authorize?'+p;}
-function loginPopup(){return new Promise((res,rej)=>{const p=window.open(getMsalAuthUrl(),'mslogin','width=500,height=650');if(!p){rej(new Error('Permite popups'));return;}const t=setInterval(()=>{try{if(p.closed){clearInterval(t);rej(new Error('Ventana cerrada'));return;}if(p.location.hash&&p.location.hash.includes('access_token')){clearInterval(t);p.close();res(new URLSearchParams(p.location.hash.substring(1)).get('access_token'));}}catch(e){}},300);setTimeout(()=>{clearInterval(t);try{p.close()}catch(e){};rej(new Error('Tiempo agotado'))},120000);});}
-async function graphReq(method,path,body,ct){const r=await fetch('https://graph.microsoft.com/v1.0'+path,{method,headers:{'Authorization':'Bearer '+msalToken,...(ct?{'Content-Type':ct}:{})},body:body||undefined});if(!r.ok)throw new Error(await r.text());return r.json();}
-async function doLoginOneDrive(){if(!onedriveOK()){alert('⚠️ Configura Client ID y Tenant ID en el código (opcional).');return;}try{msalToken=await loginPopup();const me=await graphReq('GET','/me');msalUserName=me.displayName||me.userPrincipalName;renderOneDrive();}catch(e){alert('❌ OneDrive: '+e.message);}}
-function doLogoutOneDrive(){msalToken=null;msalUserName='';renderOneDrive();}
-async function buscarFichaEnOneDrive(codigo){
- const cont=document.getElementById('oneDriveFichaResultado');if(!cont)return;
- if(!msalToken){cont.innerHTML='<div class="alert blue">☁️ Conecta OneDrive (arriba) para ver el PDF original — o arrástralo en 📥 Validar ficha.</div>';return;}
- cont.innerHTML='<div class="loading">🔎 Buscando en OneDrive...</div>';
- try{
-  let archs=[];
-  try{const r=await graphReq('GET',`/me/drive/root:/${encodeURIComponent(ONEDRIVE_FICHAS_FOLDER)}:/search(q='${encodeURIComponent(codigo)}')`);archs=(r.value||[]).filter(f=>f.file);}catch(e){}
-  if(!archs.length){const r=await graphReq('GET',`/me/drive/root/search(q='${encodeURIComponent(codigo)}')`);archs=(r.value||[]).filter(f=>f.file);}
-  if(!archs.length){cont.innerHTML='<div class="alert amber">Sin resultados para "'+codigo+'" en OneDrive.</div>';return;}
-  cont.innerHTML=archs.map(f=>`<div style="border:1px solid #E2E8F0;border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;gap:10px;align-items:center"><div style="min-width:0"><div style="font-size:12px;font-weight:700">📄 ${f.name}</div><div style="font-size:10px;color:#94A3B8">Modificado: ${new Date(f.lastModifiedDateTime).toLocaleDateString('es-PE')}</div></div><a href="${f.webUrl}" target="_blank" style="padding:7px 12px;background:#0078D4;color:white;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;text-decoration:none">👁 Ver</a></div>`).join('');
- }catch(e){cont.innerHTML='<div class="alert red">❌ '+e.message+'</div>';}}
-
-/* ═══ 12. INGRESOS (compartidos vía base) ═══ */
-let ingWB=null,ingRows=[],ingMap=CFG.ingMapeo||{};
-const CAMPOS_ING=[
- {k:'loteSAP',lbl:'Lote inspección SAP (100000…)',re:/^lote$/i},
- {k:'codigo',lbl:'Código SAP / Material',re:/codigo|material/i},
- {k:'desc',lbl:'Descripción',re:/descrip/i},
- {k:'mues',lbl:'Cant. muestra (MUES)',re:/mues/i},
- {k:'cant',lbl:'Cant. lote (CANT)',re:/^cant/i},
- {k:'alm',lbl:'Almacén',re:/almac/i},
- {k:'proveedor',lbl:'Proveedor',re:/proveedor/i},
- {k:'file',lbl:'File',re:/file/i},
- {k:'docComp',lbl:'Doc. compras',re:/compras/i},
- {k:'fIng',lbl:'Fecha de ingreso',re:/ingreso/i},
- {k:'fCont',lbl:'Fecha de contenedor',re:/contenedor/i}];
-function val(r,f){ if(r['@'+f]!==undefined)return r['@'+f]; const i=ingMap[f]; const v=Object.values(r); return i!==undefined&&v[i]!==undefined?v[i]:''; }
-async function initIngresos(){
- // intenta cargar la bandeja compartida desde la base
- if(!ingRows.length){ try{ await cargarIngresosDeBase(true); return; }catch(e){} }
- renderIngresos();}
-async function cargarIngresosDeBase(silencioso){
- const rows=await apiGet('Ingresos');
- const objs=rowsToObjects('Ingresos',rows).filter(o=>o['Código SAP']);
- if(!objs.length){ if(!silencioso)alert('La base aún no tiene ingresos guardados. Importa el Excel primero.'); return; }
- ingRows=objs.map(o=>({'@loteSAP':o['Lote SAP']||'','@codigo':o['Código SAP']||'','@desc':o['Descripción']||'','@mues':o['Cant Muestra']||'','@cant':o['Cant Lote']||'','@alm':o['Almacén']||'','@proveedor':o['Proveedor']||'','@file':o['File']||'','@docComp':o['Doc Compras']||'','@fIng':o['Fecha Ingreso']||'','@fCont':o['Fecha Contenedor']||''}));
- document.getElementById('ingMapeo').innerHTML=`<div class="alert green">✅ ${ingRows.length} ingresos cargados desde la base (bandeja compartida).</div>`;
- renderIngresos();}
-function cargarArchivoIngresos(file){
- if(!file)return;
- const r=new FileReader();
- r.onload=()=>{
-  try{
-   ingWB=XLSX.read(r.result,{type:'array'});
-   const sel=ingWB.SheetNames.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('');
-   document.getElementById('ingHojas').innerHTML=`<div class="field"><label>Hoja de ingresos detectada (${ingWB.SheetNames.length} hojas — ej. MUESTREO PT)</label>
-    <div style="display:flex;gap:8px"><select id="ingHojaSel" onchange="cargarHojaIngresos(this.value)" style="flex:1">${sel}</select></div></div>`;
-   const pt=ingWB.SheetNames.find(n=>/MUESTREO\s*PT/i.test(n));
-   cargarHojaIngresos(pt||ingWB.SheetNames[0]);
-  }catch(e){document.getElementById('ingResumen').innerHTML='<div class="alert red">❌ No se pudo leer: '+esc(e.message)+'</div>';}
- };
- r.readAsArrayBuffer(file);}
-function cargarHojaIngresos(nombre){
- const ws=ingWB.Sheets[nombre];
- const rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:false});
- if(!rows.length)return;
- let hIdx=0,maxC=0;
- rows.slice(0,10).forEach((r,i)=>{const c=r.filter(x=>String(x||'').trim()).length;if(c>maxC){maxC=c;hIdx=i;}});
- const head=rows[hIdx].map(h=>String(h||'').trim());
- ingRows=rows.slice(hIdx+1).filter(r=>r.some(x=>String(x||'').trim())).map(r=>{
-  const o={};head.forEach((h,i)=>o[h]=r[i]);return o;});
- renderMapeoIngresos(head);}
-function renderMapeoIngresos(head){
- const cont=document.getElementById('ingMapeo');
- const opts=campo=>head.map((h,i)=>`<option value="${i}" ${ingMap[campo]===i?'selected':(!ingMap[campo]&&CAMPOS_ING.find(c=>c.k===campo).re.test(h)?'selected':'')}>${esc(h)||('(col '+(i+1)+')')}</option>`).join('');
- cont.innerHTML=`<div class="card" style="background:#FAFCFE"><div class="section-title">🔗 Mapeo de columnas — verifica y guarda</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-  ${CAMPOS_ING.map(c=>`<div class="field" style="margin-bottom:0"><label style="font-size:11px">${c.lbl}</label>
-   <select onchange="ingMap['${c.k}']=parseInt(this.value);CFG.ingMapeo=ingMap;saveCfgAll();renderIngresos()" style="padding:7px;font-size:12px">${opts(c.k)}</select></div>`).join('')}
-  </div>
-  <button class="btn btn-primary" style="margin-top:10px" onclick="guardarSnapshotIngresos()">💾 Guardar en base (compartir con todos)</button></div>`;
- CFG.ingMapeo=ingMap;saveCfgAll();
- renderIngresos();}
-async function renderIngresos(){
- const cont=document.getElementById('ingTabla'),res=document.getElementById('ingResumen');
- if(!ingRows.length){res.innerHTML='';cont.innerHTML='';return;}
- let muestreos=[];
- try{muestreos=rowsToObjects('Muestreos',await apiGet('Muestreos'));}catch(e){}
- const conEstado=ingRows.map((r,i)=>{
-  const lote=String(val(r,'loteSAP')||'').trim();
-  const cod=String(val(r,'codigo')||'').trim().toUpperCase();
-  const ms=lote?muestreos.filter(m=>String(m['N° Lote Inspección SAP']||'')===lote):muestreos.filter(m=>String(m['Código SAP']||'').toUpperCase()===cod);
-  let est='Pendiente',idm='';
-  if(ms.length){idm=ms[0]['ID Muestreo'];const d=ms[0]['Decisión Final']||'';
-   est=d.includes('Bloqueado')?'Bloqueado':d?(d==='Tolerado'?'Tolerado':'Liberado'):'Muestreado (pendiente decisión)';}
-  return{r,i,est,idm,cod,lote};});
- const pend=conEstado.filter(x=>x.est==='Pendiente').length,mue=conEstado.filter(x=>x.est.startsWith('Muestreado')).length,lib=conEstado.filter(x=>x.est==='Liberado'||x.est==='Tolerado').length,blo=conEstado.filter(x=>x.est==='Bloqueado').length;
- res.innerHTML=`<div class="grid3" style="margin:10px 0">
-  <div class="kpi" style="background:#FFF7ED"><div class="n" style="color:#92400E">${pend}</div><div class="l" style="color:#92400E">Por muestrear</div></div>
-  <div class="kpi" style="background:#F0FDF4"><div class="n" style="color:#166534">${mue}</div><div class="l" style="color:#166534">Muestreados</div></div>
-  <div class="kpi" style="background:#F8FAFC"><div class="n" style="color:#1a3a5c">${lib}</div><div class="l" style="color:#475569">Liberados/Tolerados</div></div></div>
-  ${blo?`<div class="alert red">🔴 ${blo} lote(s) bloqueado(s) — pendiente reproceso</div>`:''}
-  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
-   <button class="mini-btn" onclick="ingFiltro='';renderIngresos()">Todos (${conEstado.length})</button>
-   <button class="mini-btn" onclick="ingFiltro='Pendiente';renderIngresos()">🟡 Por muestrear</button>
-   <button class="mini-btn" onclick="ingFiltro='Muestreado';renderIngresos()">⏳ Muestreados</button></div>`;
- window.ingFiltro=window.ingFiltro||'';
- const rows=conEstado.filter(x=>!ingFiltro||x.est.startsWith(ingFiltro)).slice(0,60);
- cont.innerHTML=`<div style="overflow-x:auto"><table class="dt"><tr><th>Lote SAP</th><th>Código</th><th>Descripción</th><th>Mues/Cant</th><th>Alm</th><th>File</th><th>Proveedor</th><th>Estado</th><th></th></tr>
- ${rows.map(x=>`<tr>
-  <td style="font-family:monospace">${esc(x.lote)}</td>
-  <td style="font-family:monospace;font-weight:700">${esc(x.cod)}</td>
-  <td style="max-width:170px">${esc(String(val(x.r,'desc')||'').slice(0,38))}</td>
-  <td><b>${esc(String(val(x.r,'mues')||'—'))}</b>/${esc(String(val(x.r,'cant')||'—'))}${!String(val(x.r,'mues')||'').trim()?' <span class="badge estet">falta muestra</span>':''}</td>
-  <td>${esc(String(val(r=>0,'')==='X'?'':val(x.r,'alm')||''))}</td>
-  <td>${esc(String(val(x.r,'file')||''))}</td>
-  <td>${esc(String(val(x.r,'proveedor')||''))}</td>
-  <td><span class="badge ${x.est==='Pendiente'?'estet':x.est==='Bloqueado'?'func':'ok'}">${x.est}${x.idm?' · '+x.idm:''}</span></td>
-  <td>${x.est==='Pendiente'?`<button class="mini-btn" onclick="muestrearDesdeIngreso(${x.i})">📋 Muestrear</button>`:''}</td>
- </tr>`).join('')}</table></div>
- ${ingRows.length>60?'<p style="font-size:11px;color:#94A3B8">Mostrando 60 primeras filas — usa los filtros.</p>':''}`;}
-function muestrearDesdeIngreso(i){
- const r=ingRows[i];const set=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.value=v;};
- set('mLotInsp',String(val(r,'loteSAP')||'').trim());
- set('mFile',String(val(r,'file')||'').trim());
- set('mDocComp',String(val(r,'docComp')||'').trim());
- set('mProveedor',String(val(r,'proveedor')||'').trim());
- const cod=String(val(r,'codigo')||'').trim().toUpperCase();
- if(cod){document.getElementById('mCodigo').value=cod;
-  const m=MAESTRO.find(x=>x['Código SAP']===cod);
-  if(m){document.getElementById('mDesc').value=m['Descripción']||'';
-   const cand=m['Línea']||lineaDesdeDesc(m['Descripción']);if(CFG.lineas.includes(cand))document.getElementById('mLinea').value=cand;}
- }
- const alm=String(val(r,'alm')||'').replace(/^0+/,'').trim();
- if(alm&&CFG.almCod.includes(alm))document.getElementById('mAlmCod').value=alm;
- set('mCantLote',String(val(r,'cant')||'').replace(/[^\d]/g,''));
- set('mCantM1',String(val(r,'mues')||'').replace(/[^\d]/g,''));
- switchTab('B');resetearPlantillas();cargarFichaReferencia();calcularAQL();
- alert('✅ Ingreso cargado — revisa y pulsa 🚀 Iniciar muestreo + QR.');}
-async function guardarSnapshotIngresos(){
- if(!ingRows.length)return;
- try{
-  const existentes=new Set();
-  try{ rowsToObjects('Ingresos',await apiGet('Ingresos')).forEach(o=>existentes.add((o['Lote SAP']||'')+'|'+(o['Código SAP']||'')+'|'+(o['Cant Lote']||''))); }catch(e){}
-  const filas=[],dups=[];
-  ingRows.forEach(r=>{
-   const key=(String(val(r,'loteSAP')||'').trim())+'|'+(String(val(r,'codigo')||'').trim().toUpperCase())+'|'+(String(val(r,'cant')||'').trim());
-   if(existentes.has(key)){dups.push(key);return;}
-   existentes.add(key);
-   filas.push([String(val(r,'fIng')||''),'',''.valueOf(),String(val(r,'codigo')||'').toUpperCase(),String(val(r,'desc')||''),String(val(r,'cant')||''),String(val(r,'docComp')||''),String(val(r,'file')||''),String(val(r,'alm')||''),String(val(r,'proveedor')||''),String(val(r,'mues')||''),String(val(r,'loteSAP')||''),'','',''.valueOf()]);
-  });
-  // reordenar según HEADERS.Ingresos: [FechaIngreso,DocMaterial,Codigo,Desc,CantLote,DocCompras,File,Almacen,Proveedor,CantMuestra,LoteSAP,Estado,ID,FechaContenedor]
-  const ordenadas=filas.map(()=>0).length?[]:[];
-  ingRows.forEach(r=>{
-   const key=(String(val(r,'loteSAP')||'').trim())+'|'+(String(val(r,'codigo')||'').trim().toUpperCase())+'|'+(String(val(r,'cant')||'').trim());
-   if(existentes.has(key)&&filas.length&&false){}
-  });
-  const filasFinal=[];
-  const seen=new Set();
-  ingRows.forEach(r=>{
-   const key=(String(val(r,'loteSAP')||'').trim())+'|'+(String(val(r,'codigo')||'').trim().toUpperCase())+'|'+(String(val(r,'cant')||'').trim());
-   if(seen.has(key))return; seen.add(key);
-   if(dups.includes(key))return;
-   filasFinal.push([
-    String(val(r,'fIng')||''),'',String(val(r,'codigo')||'').toUpperCase(),String(val(r,'desc')||''),
-    String(val(r,'cant')||''),String(val(r,'docComp')||''),String(val(r,'file')||''),String(val(r,'alm')||''),
-    String(val(r,'proveedor')||''),String(val(r,'mues')||''),String(val(r,'loteSAP')||''),'','',''.valueOf()]);
-  });
-  if(!filasFinal.length){alert('Todo ya estaba en la base — nada nuevo por guardar ('+dups.length+' duplicados omitidos).');return;}
-  await apiPost({accion:'guardarFilas',hoja:'Ingresos',filas:filasFinal});
-  alert('✅ '+filasFinal.length+' ingresos nuevos guardados en la base ('+dups.length+' duplicados omitidos).');
- }catch(e){alert('❌ '+e.message);}}
-
-/* ═══ 13. MÓDULO D — PDF ═══ */
-pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-const GAP=7,UNIDAD=/\d(?:[.,]\d+)?\s*(mm|cm|m\b|v\b|kv|w\b|kw|hz|l\b|lt|kg|g\b|kpa|mpa|°c|°f|a\b|ma|btu|ohm|Ω|min|m3|m²|mm2)/i;
-const DICC=[{n:'Dimensiones',p:/dimension|tama[ñn]o|^medidas|^largo|^ancho|^alto$|^profundidad/i},{n:'Voltaje',p:/voltaje|volt|tensión|tension|alimentaci/i},{n:'Frecuencia',p:/frecuenc/i},{n:'Potencia',p:/potencia|power|watt|qn/i},{n:'Consumo de corriente',p:/consumo|corriente|current|amper/i},{n:'Longitud de cable',p:/cable|cord[oó]n|flexible/i},{n:'Capacidad',p:/capacidad|volumen|litros/i},{n:'Peso',p:/^peso|weight|masa/i},{n:'Presión',p:/presi[óo]n/i},{n:'Caudal',p:/caudal|flujo|flow/i},{n:'Temperatura',p:/temperatura/i},{n:'Material',p:/^material|construcci/i},{n:'Modelo',p:/^modelo|^model$/i},{n:'Marca / Fabricante',p:/marca|brand|fabricante/i},{n:'Norma / Certificación',p:/norma|certificaci|standard|iec|iso/i},{n:'Encendido',p:/encendido|ignici|piezo/i},{n:'Seguridad (termocupla)',p:/termocupla|termopar|safety/i},{n:'Inyectores',p:/inyector|nozzle/i},{n:'Quemadores',p:/quemador|burner/i},{n:'Horno (rango temperatura)',p:/temperature range|oven burner|horno/i},{n:'Parrilla / Bandeja',p:/grate|tray|rack|grid|baking/i},{n:'Enchufe',p:/plug|enchufe/i},{n:'Manguera de gas',p:/gas hose|manguera/i},{n:'Rotiserie / Espiedo',p:/rotiss|spiedo|spit/i},{n:'Esparcidores / Tapas',p:/cap\b|esparcid/i},{n:'Accesorios',p:/accesor|accessor/i},{n:'Empaque',p:/carton|embalaje|packaging/i},{n:'Manual de instrucciones',p:/instruction|manual/i},{n:'Etiqueta (rating)',p:/rating label|etiqueta/i}];
-const ES_META=/^(edition|edición|date|fecha|responsible|responsable|code sap|código sap|cod supply|supplier name|supplier|made in|pictures?|images?|imagen(es)?|fotos?|datasheet|product sheet|brand|improvements|logo|page)\b/i;
-function esc(s){return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
-function num(s){const m=String(s).replace(',','.').match(/-?\d+(\.\d+)?/);return m?parseFloat(m[0]):null;}
-function normCampo(t){t=String(t).trim().replace(/[:\s\-–]+$/,'');if(t.length<3||t.length>50)return null;if(/^\d/.test(t))return null;if(UNIDAD.test(t)&&t.split(/\s+/).length<=2)return null;if(ES_META.test(t))return null;return t;}
-async function reconstruirFilas(buf){
- const doc=await pdfjsLib.getDocument({data:buf}).promise;const filas=[];
- for(let p=1;p<=doc.numPages;p++){
-  const pg=await doc.getPage(p),tc=await pg.getTextContent();
-  const its=tc.items.filter(i=>i.str&&i.str.trim()).map(i=>({t:i.str,x:i.transform[4],y:i.transform[5],w:i.width||0,h:i.height||8}));
-  its.sort((a,b)=>b.y-a.y||a.x-b.x);
-  let lin=null;const lineas=[];
-  for(const it of its){if(!lin||Math.abs(lin.y-it.y)>Math.max(2.5,lin.h*0.6)){lin={y:it.y,h:it.h,its:[]};lineas.push(lin);}lin.its.push(it);}
-  for(const L of lineas){L.its.sort((a,b)=>a.x-b.x);const cel=[];let cur=null;
-   for(const c of L.its){if(cur&&(c.x-cur.x1)<GAP){cur.txt+=' '+c.t;cur.x1=c.x+c.w;}else{cur={txt:c.t,x1:c.x+c.w};cel.push(cur.txt);}}
-   const lim=cel.map(s=>s.trim()).filter(Boolean);if(lim.length)filas.push(lim);}}
- return filas;}
-let fichaTexto='',camposFicha=[],camposPrev=[],labelES={},valorES={};
-function extraerCampos(filas){
- const out=[];
- const push=(c,v)=>{v=String(v).trim().replace(/^[:\-–\s]+/,'').replace(/\s{2,}/g,' ');if(!c||!v||v.length>70)return;
-  const ex=out.find(e=>e.campo.toLowerCase()===c.toLowerCase());
-  if(ex){if(UNIDAD.test(v)&&!UNIDAD.test(ex.ficha))ex.ficha=v;return;}
-  out.push({campo:c,ficha:v,medido:''});};
- for(const cel of filas)for(let i=0;i<cel.length;i++){
-  const c=cel[i];const inl=c.match(/^([^:]{3,45}):[ \t]*(.{1,70})$/);
-  if(inl){const cp=normCampo(inl[1]);if(cp){push(cp,inl[2]);continue;}}
-  const cp=normCampo(c);if(cp&&i+1<cel.length&&!normCampo(cel[i+1])){push(cp,cel[i+1]);i++;}}
- return out;}
-const dropZone=document.getElementById('dropZone');
-['dragover','dragenter'].forEach(ev=>dropZone.addEventListener(ev,e=>{e.preventDefault();dropZone.style.background='#EBF4FF';}));
-dropZone.addEventListener('dragleave',()=>dropZone.style.background='#F8FBFF');
-dropZone.addEventListener('drop',e=>{e.preventDefault();dropZone.style.background='#F8FBFF';if(e.dataTransfer.files[0])procesarFichaArrastrada(e.dataTransfer.files[0]);});
-async function procesarFichaArrastrada(file){
- if(!file)return;if(file.type!=='application/pdf'){alert('⚠️ Arrastra un PDF.');return;}
- document.getElementById('fichaCargadaInfo').innerHTML='<div class="loading">📄 Leyendo PDF y detectando campos técnicos...</div>';
- const buf=await file.arrayBuffer();
- const mc=file.name.toUpperCase().match(/(\d{4,}[A-Z0-9]*)/);if(mc)document.getElementById('vCodigo').value=mc[1];
- const rv=file.name.toUpperCase().match(/REV\W*(\d+)/);if(rv)document.getElementById('vRevision').value=rv[1];
- try{
-  const filas=await reconstruirFilas(buf);
-  fichaTexto=filas.map(f=>f.join(' | ')).join('\n');
-  camposFicha=extraerCampos(filas);
-  await detectarVariaciones();
-  renderTablaExtraccion();
-  traducirCamposAsync().then(()=>renderTablaExtraccion());
- }catch(e){console.warn('Extracción:',e);}
- document.getElementById('fichaCargadaInfo').innerHTML=`<div class="alert green">✅ <strong>${esc(file.name)}</strong> cargada — ${camposFicha.filter(c=>!ES_META.test(c.campo)).length} campos técnicos detectados.</div>`;
- document.getElementById('pdfPreviewCont').innerHTML=`<iframe src="${URL.createObjectURL(file)}" style="width:100%;height:460px;border:1px solid #E2E8F0;border-radius:10px"></iframe>`;
- document.getElementById('bloqueValidacion').style.display='block';
- cargarHistorialValidaciones();}
-function togglePreview(){const p=document.getElementById('pdfPreviewCont');p.style.display=p.style.display==='none'?'block':'none';}
-function paresFicha(){
- const out=[];fichaTexto.split('\n').forEach(l=>{const c=l.split(' | ');
-  if(c.length>=2){const lab=c[0].trim(),val=c.slice(1).join(' ').trim();if(lab&&val&&!ES_META.test(lab))out.push([lab,val]);}});
- return out;}
-async function traducirBatch(arr){
- const texts=arr.map(s=>String(s).replace(/\n/g,' '));
- if(!texts.length)return[];
- const q=texts.join('\n');
- try{
-  const r=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=es&dt=t&q='+encodeURIComponent(q));
-  const j=await r.json();const out=(j[0]||[]).map(p=>p[0]).join('');
-  const lines=out.split('\n').map(s=>s.trim());
-  if(lines.length===texts.length)return lines;
- }catch(e){}
- const res=[];
- for(const t of texts){try{const r=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=es&dt=t&q='+encodeURIComponent(t));const j=await r.json();res.push((j[0]||[]).map(p=>p[0]).join(''));}catch(e){res.push(t);}}
- return res;}
-async function traducirFichaAutomatico(){
- const cont=document.getElementById('traduccionCont');
- if(!fichaTexto){cont.innerHTML='<div class="alert amber">Primero arrastra la ficha PDF.</div>';return;}
- cont.innerHTML='<div class="loading">🌐 Traduciendo dentro de la app...</div>';
- const pares=paresFicha();
- if(!pares.length){cont.innerHTML='<div class="alert amber">No se detectaron filas etiqueta–valor.</div>';return;}
- const labs=await traducirBatch(pares.map(p=>p[0]));
- const vals=await traducirBatch(pares.map(p=>p[1]));
- pares.forEach((p,i)=>{labelES[p[0]]=labs[i];valorES[p[1]]=vals[i];});
- cont.innerHTML=`<div style="overflow-x:auto"><table class="dt"><tr><th style="width:38%">Campo (español)</th><th>Valor (español)</th></tr>
- ${pares.map((p,i)=>`<tr><td><b>${esc(labs[i])}</b><div class="en">${esc(p[0])}</div></td><td>${esc(vals[i])}<div class="en">${esc(p[1])}</div></td></tr>`).join('')}</table></div>`;}
-function campoES(lab){for(const d of DICC)if(d.p.test(lab))return d.n;return labelES[lab]||lab;}
-async function traducirCamposAsync(){
- const labs=camposFicha.filter(c=>!ES_META.test(c.campo)&&!labelES[c.campo]&&!DICC.some(d=>d.p.test(c.campo))).map(c=>c.campo);
- const vals=camposFicha.filter(c=>/[a-z]{4}/i.test(c.ficha)&&!valorES[c.ficha]).map(c=>c.ficha);
- if(labs.length){const t=await traducirBatch(labs);labs.forEach((l,i)=>labelES[l]=t[i]);}
- if(vals.length){const t=await traducirBatch(vals);vals.forEach((v,i)=>valorES[v]=t[i]);}}
-function resTexto(c){
- if(!c.medido)return'Pendiente';
- const a=num(c.ficha),b=num(c.medido);
- if(a!==null&&b!==null){const tol=Math.max(Math.abs(a)*0.02,0.5);return Math.abs(a-b)<=tol?'Conforme':'Difiere';}
- return String(c.medido).trim().toLowerCase()===String(c.ficha).trim().toLowerCase()?'Conforme':'Difiere';}
-function badgeRes(c){const r=resTexto(c);if(r==='Pendiente')return'<span style="color:#94A3B8">—</span>';return r==='Conforme'?'<span class="badge ok">✓ Conforme</span>':'<span class="badge func">⚠ Difiere</span>';}
-function renderTablaExtraccion(){
- const cont=document.getElementById('tablaExtraccion');
- const vis=camposFicha.filter(c=>!ES_META.test(c.campo));
- if(!vis.length){cont.innerHTML='<p style="font-size:12px;color:#94A3B8">No se detectaron campos automáticamente — agrégalos a mano.</p>';return;}
- cont.innerHTML=`<div style="overflow-x:auto"><table class="dt"><tr><th style="width:30%">Campo (español)</th><th>Valor ficha (auto)</th><th>Valor medido (planta)</th><th>Resultado</th><th></th></tr>
- ${vis.map(c=>{const i=camposFicha.indexOf(c);const es=campoES(c.campo);const ve=valorES[c.ficha]||'';
-  return`<tr><td><b>${esc(es)}</b>${es!==c.campo?`<div class="en">${esc(c.campo)}</div>`:''}</td>
-  <td>${esc(c.ficha)}${ve&&ve!==c.ficha?`<div class="en">${esc(ve)}</div>`:''}</td>
-  <td><input value="${esc(c.medido)}" placeholder="mide y escribe" onchange="camposFicha[${i}].medido=this.value;renderTablaExtraccion()" style="width:100%;border:1px solid #CBD5E1;border-radius:6px;padding:4px 6px"></td>
-  <td>${badgeRes(c)}</td><td style="cursor:pointer;color:#DC2626" onclick="camposFicha.splice(${i},1);renderTablaExtraccion()">✕</td></tr>`;}).join('')}</table></div>
- ${camposPrev.length?`<div class="alert amber" style="margin-top:10px">🔁 vs. extracción anterior: ${resVariaciones()}</div>`:''}`;}
-function resVariaciones(){const d=[];camposFicha.forEach(c=>{const p=camposPrev.find(x=>x.campo.toLowerCase()===c.campo.toLowerCase());if(p&&p.valor.trim()!==c.ficha.trim())d.push(`${c.campo}: ${p.valor} → ${c.ficha}`);});return d.length?d.join(' · '):'sin cambios';}
-async function detectarVariaciones(){
- camposPrev=[];const cod=document.getElementById('vCodigo').value.trim();if(!cod)return;
- try{const regs=rowsToObjects('Ficha_Campos',await apiGet('Ficha_Campos',cod));const ult={};
-  regs.forEach(r=>{const k=String(r['Campo']||'').toLowerCase(),f=new Date(r['Fecha Extracción']||0);if(!ult[k]||f>ult[k].f)ult[k]={f,valor:String(r['Valor']||'')};});
-  camposPrev=Object.keys(ult).map(k=>({campo:k,valor:ult[k].valor}));}catch(e){}}
-function addCampoManual(){camposFicha.push({campo:'Nuevo campo',ficha:'',medido:''});renderTablaExtraccion();}
-async function guardarValidacionFicha(){
- const cod=document.getElementById('vCodigo').value.trim(),rev=document.getElementById('vRevision').value.trim(),por=document.getElementById('vValidadoPor').value,res=document.getElementById('vResultado').value;
- if(!cod||!por||!res){alert('⚠️ Completa código, validado por y resultado.');return;}
- try{
-  await apiPost({accion:'guardarFilas',hoja:'Validaciones_Fichas',filas:[[cod,rev,por,res,document.getElementById('vCambios').value,document.getElementById('vObservaciones').value,new Date().toISOString().split('T')[0]]]});
-  const cf=camposFicha.filter(c=>c.campo&&c.ficha&&!ES_META.test(c.campo)).map(c=>[cod,rev||'',c.campo,c.ficha,new Date().toISOString()]);
-  if(cf.length)await apiPost({accion:'guardarFilas',hoja:'Ficha_Campos',filas:cf});
-  document.getElementById('validacionMsg').innerHTML='<div class="alert green">✅ Validación guardada.</div>';
-  cargarHistorialValidaciones();
- }catch(e){document.getElementById('validacionMsg').innerHTML='<div class="alert red">❌ '+e.message+'</div>';}}
-async function cargarHistorialValidaciones(){
- const cod=document.getElementById('vCodigo').value.trim(),cont=document.getElementById('historialValidaciones');
- if(!cod)return;
- try{const rows=rowsToObjects('Validaciones_Fichas',await apiGet('Validaciones_Fichas',cod)).filter(r=>r['Código SAP']===cod);
-  cont.innerHTML=rows.length?rows.map(r=>`<div style="border:1px solid #E2E8F0;border-radius:10px;padding:8px 12px;margin-bottom:6px;font-size:12px"><strong>${r['Fecha']}</strong> · ${r['Revisión']||'—'} · ${r['Validado Por']} · <span class="badge ${r['Resultado']==='Conforme'?'ok':r['Resultado']==='No conforme'?'func':'estet'}">${r['Resultado']}</span>${r['Cambios']?'<div style="color:#92400E">🔁 '+esc(r['Cambios'])+'</div>':''}</div>`).join(''):'<p style="font-size:12px;color:#94A3B8">Sin validaciones previas.</p>';
- }catch(e){cont.innerHTML='<div class="alert red">❌ '+e.message+'</div>';}}
-function irAMuestreoDesdeValidacion(){
- const cod=document.getElementById('vCodigo').value.trim();if(!cod){alert('⚠️ Primero carga la ficha.');return;}
- elegirMaestro('mCodigo',cod);switchTab('B');}
-
-/* ═══ 14. WIZARD ═══ */
-const STEPS=['Contexto, material y ficha','Fase Visual','Fase Dimensional','Fase Funcional','Series y 2.ª muestra','Cierre y firma'];
-let curB=0,idMuestreoActivo=null;
-function buildProgress(){document.getElementById('progressBar').innerHTML=STEPS.map((_,i)=>`<div class="step-dot ${i<curB?'done':i===curB?'active':''}"></div>`).join('');}
-function updateNav(){
- document.getElementById('stepIco').textContent=curB+1;
- document.getElementById('stepLbl').textContent=`Paso ${curB+1} de ${STEPS.length}`;
- document.getElementById('stepTtl').textContent=STEPS[curB];
- document.querySelectorAll('.step-page').forEach((p,i)=>p.classList.toggle('active',i===curB));
- document.getElementById('btnBack').style.display=curB>0?'block':'none';
- document.getElementById('btnNext').style.display=curB<STEPS.length-1?'block':'none';
- buildProgress();window.scrollTo({top:0,behavior:'smooth'});}
-function nextStepB(){
- if(!validateStepB(curB))return;
- if(curB===3)renderResumenHallazgos();
- if(curB<STEPS.length-1){curB++;updateNav();}}
-function prevStepB(){if(curB>0){curB--;updateNav();}}
-function validateStepB(s){
- if(s===0){const req=['mLotInsp','mFile','mFecha','mCodigo','mLote','mLinea','mCantLote','mCantM1','mAlmFis','mAlmCod','mProveedor'];
-  for(const id of req){const el=document.getElementById(id);if(!el.value||!el.value.trim()){alert('⚠️ Completa los campos obligatorios antes de continuar.');el.focus();return false;}}}
- if(s===5){if(!sigData){alert('⚠️ Firma el documento antes de guardar.');return false;}if(!sesion.nombre){alert('⚠️ Elige tu nombre en "Trabajas como" (encabezado).');return false;}}
- return true;}
-
-/* ═══ 15. QR ═══ */
-function filaMuestreo(estado){
- const g=id=>{const el=document.getElementById(id);return el?el.value:'';};
- return ['',g('mFecha'),g('mFile'),g('mLotInsp'),g('mDocComp'),g('mDocMat'),g('mAlmFis'),g('mAlmCod'),g('mProveedor'),g('mCodigo'),g('mDesc'),g('mLote'),g('mLinea'),g('mCantLote'),g('mSeveridad'),g('mCantM1'),g('mHoraInicioR1'),g('mHoraFinR1'),g('mCantM2')?'Sí':'No',g('mCantM2'),g('mHoraInicioR2'),g('mHoraFinR2'),g('mPersiste'),estado,'','','','','','',g('mVideoLink'),g('mObsGenerales'),sigData||'',sesion.nombre,''];}
-async function iniciarEnServidor(){
- if(!validateStepB(0))return;
- try{
-  const r=await apiPost({accion:'iniciarMuestreo',muestreo:filaMuestreo('En proceso'),correos:CFG.correos});
-  idMuestreoActivo=r.id;
-  const base=location.origin+location.pathname;
-  const url=base+'?m='+r.id;
-  document.getElementById('qrTitulo').textContent='🚀 Muestreo '+r.id+' en servidor';
-  document.getElementById('qrInfo').textContent=(document.getElementById('mCodigo').value)+' · '+(document.getElementById('mDesc').value||'')+' · Muestra: '+(document.getElementById('mCantM1').value)+' u';
-  document.getElementById('qrLinkBox').innerHTML=`<a href="${url}" target="_blank" style="color:#1E40AF;font-weight:700">Abrir en modo campo →</a>`;
-  if(window.QRCode)QRCode.toCanvas(document.getElementById('qrCanvas'),url,{width:220,margin:1},()=>{});
-  document.getElementById('qrModal').style.display='flex';
-  alert('✅ '+r.id+' creado con estado "En proceso". Escanea el QR con el celular del equipo.');
- }catch(e){alert('❌ '+e.message);}}
-async function traerAvance(){
- if(!idMuestreoActivo){alert('Primero pulsa 🚀 Iniciar muestreo + QR.');return;}
- try{
-  const av=await apiPost({accion:'getAvance',id:idMuestreoActivo});
-  let cambios=0;
-  const evs=(av.evidencias||[]).map(e=>rowsToObjects('Muestreo_Evidencias',[e])[0]).filter(Boolean);
-  const evsPorRef={};evs.forEach(e=>{(evsPorRef[e['Ref']]=evsPorRef[e['Ref']]||[]).push(e['Link Drive']);});
-  (av.checklist||[]).forEach(r=>{
-   const o=rowsToObjects('Muestreo_Checklist',[r])[0];
-   const idx=CFG.checklist.findIndex(c=>c[0]===o['Grupo']&&c[1]===o['Ítem']);
-   if(idx>=0){const prev=visual[idx];
-    visual[idx]={item:o['Ítem'],res:o['Resultado'],obs:o['Observación']||'',hIdx:prev?prev.hIdx:-1};cambios++;}
-  });
-  (av.hallazgos||[]).forEach(r=>{
-   const o=rowsToObjects('Muestreo_Hallazgos',[r])[0];
-   if(o&&o['Ref']&&!hallazgos.some(h=>h.ref===o['Ref'])){
-    hallazgos.push({fase:o['Fase'],ref:o['Ref'],componente:o['Componente'],cod:o['Código Defecto SAP'],defecto:o['Defecto'],desc:o['Descripción'],cant:o['Cantidad'],fotos:evsPorRef[o['Ref']]||[],vid:''});
-    cambios++;}
-  });
-  (av.medidas||[]).forEach(r=>{
-   const o=rowsToObjects('Muestreo_Medidas',[r])[0];
-   const m=medidas.find(x=>x.campo===o['Campo']);
-   if(m&&o['Valor Medido']){m.medido=o['Valor Medido'];cambios++;}
-   const f=funcionales.find(x=>x.prueba===o['Campo']);
-   if(f&&(o['Valor Medido']||o['Resultado']==='No conforme'||o['Resultado']==='Conforme')){
-    if(o['Valor Medido'])f.medido=o['Valor Medido'];
-    if(o['Resultado']==='No conforme')f.ok='NC';else if(o['Resultado']==='Conforme')f.ok='C';cambios++;}
-  });
-  if((av.series||[]).length&&!series.length){
-   av.series.forEach(s=>series.push({serie:s[1],res:s[2]==='Conforme'?'C':'NC'}));cambios++;}
-  renderVisual();renderDim();renderFunc();renderSeries();renderResumenHallazgos();evaluarSegundaMuestra();
-  document.getElementById('evLinksBox').innerHTML=evs.length?`<div class="alert green" style="margin-top:10px">📷 ${evs.length} evidencia(s) subida(s) desde el móvil:<div style="max-height:120px;overflow:auto;margin-top:6px">${evs.map(e=>`<div style="font-size:11px">${esc(e['Fase'])} · ${esc(e['Ref']||'—')} — <a href="${esc(e['Link Drive'])}" target="_blank">ver foto</a></div>`).join('')}</div></div>`:'';
-  alert(cambios?('✅ Avance traído: '+cambios+' dato(s) actualizados.'):'Sin cambios nuevos desde el móvil.');
- }catch(e){alert('❌ '+e.message);}}
-
-/* ═══ 16. FASES ═══ */
-let visual=[],hallazgos=[],medidas=[],funcionales=[],series=[];
-function fichaEsperada(item){
- const map=[
-  [/Bandeja/i,/tray|bandeja|pan\b/i],[/Parrilla|rejilla/i,/grate|grid|rack|parrilla/i],[/Espiedo|rotiserie/i,/rotiss|spiedo|spit/i],
-  [/Enchufe|clavija/i,/plug|enchufe/i],[/Inyectores/i,/nozzle|inyector|boquilla/i],
-  [/Quemadores/i,/burner|quemador/i],[/Esparcidores|tapas/i,/cap\b|esparcid/i],[/Acoplamiento/i,/coupling|acoplam/i],[/Tornillería/i,/screw|tornillo/i],
-  [/Accesorios/i,/accesor/i],[/Manual/i,/instruction|manual/i],[/Rating|Etiqueta/i,/rating|etiqueta/i],[/Empaque|caja/i,/carton|embalaje/i]];
- for(const[re1,re2]of map){if(re1.test(item)){
-  const hit=(fichaRefSpecs||[]).find(s=>re2.test(String(s['Campo']||'')+' '+String(s['Sección']||'')));
-  const hitF=camposFicha.find(c=>re2.test(c.campo));
-  return hit?hit['Valor']:(hitF?hitF.ficha:'');}}
- return '';}
-function renderVisual(){
- const cont=document.getElementById('visualCont');
- const grupos=[...new Set(CFG.checklist.map(r=>r[0]))];
- cont.innerHTML=grupos.map(g=>{
-  return`<div style="margin-bottom:14px"><div style="font-size:11px;font-weight:800;color:#1E40AF;margin-bottom:4px">${g}</div>
-  ${CFG.checklist.map((r,idx)=>{if(r[0]!==g)return'';
-   const v=visual[idx]||(visual[idx]={item:r[1],res:'',obs:'',hIdx:-1});
-   const esp=fichaEsperada(v.item);
-   return`<div style="padding:8px 0;border-bottom:1px solid #F1F5F9">
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-     <span style="flex:1;font-size:13px;min-width:150px">${v.item}${esp?`<div class="en">Esperado según ficha: ${esc(esp)}</div>`:''}</span>
-     <div class="seg" style="display:flex;gap:4px">
-      <button class="${v.res==='C'?'onC':''}" onclick="setVis(${idx},'C')" style="padding:6px 10px;border-radius:8px;border:1.5px solid #E2E8F0;background:${v.res==='C'?'#F0FDF4':'white'};font-size:11px;font-weight:700;cursor:pointer;color:${v.res==='C'?'#166534':'#64748B'}">✓ C</button>
-      <button class="${v.res==='NC'?'onNC':''}" onclick="setVis(${idx},'NC')" style="padding:6px 10px;border-radius:8px;border:1.5px solid #E2E8F0;background:${v.res==='NC'?'#FEF2F2':'white'};font-size:11px;font-weight:700;cursor:pointer;color:${v.res==='NC'?'#991B1B':'#64748B'}">✗ NC</button>
-      <button onclick="setVis(${idx},'NA')" style="padding:6px 10px;border-radius:8px;border:1.5px solid #E2E8F0;background:${v.res==='NA'?'#F1F5F9':'white'};font-size:11px;font-weight:700;cursor:pointer;color:#475569">N/A</button>
-     </div>
-     <input placeholder="Detalle" value="${esc(v.obs)}" onchange="visual[${idx}].obs=this.value" style="flex:1;min-width:130px;border:1px solid #CBD5E1;border-radius:6px;padding:4px 6px;font-size:12px">
-    </div>
-    ${v.res==='NC'&&v.hIdx>=0&&hallazgos[v.hIdx]?inlineHall(v.hIdx):''}
-   </div>`;}).join('')}</div>`;
- }).join('');
- renderManuales();renderResumenHallazgos();evaluarSegundaMuestra();}
-function setVis(idx,res){
- visual[idx].res=res;
- const ref='VIS-'+idx;
- if(res==='NC'){
-  if(visual[idx].hIdx<0||!hallazgos[visual[idx].hIdx]){
-   hallazgos.push({fase:'Visual',ref,componente:visual[idx].item,cod:'',defecto:'',desc:visual[idx].obs||'',cant:'',fotos:[],vid:''});
-   visual[idx].hIdx=hallazgos.length-1;}
-  if(visual[idx].obs&&!hallazgos[visual[idx].hIdx].desc)hallazgos[visual[idx].hIdx].desc=visual[idx].obs;
- }else{
-  const ix=hallazgos.findIndex(h=>h.ref===ref);
-  if(ix>=0)hallazgos.splice(ix,1);
-  visual[idx].hIdx=-1;}
- renderVisual();}
-function inlineHall(hi){
- if(hi<0||!hallazgos[hi])return'';
- const h=hallazgos[hi];
- return`<div class="inline-h">
-  <div style="font-size:11px;font-weight:800;color:#991B1B;margin-bottom:6px">⚠️ HALLAZGO — ${esc(h.fase)}: ${esc(h.componente||'')}</div>
-  <div class="grid2">
-   <div class="field"><label>Código defecto SAP</label><select onchange="hallazgos[${hi}].cod=this.value;hallazgos[${hi}].defecto=this.options[this.selectedIndex].text">
-    <option value="">— elegir —</option>${CFG.defectos.map(d=>`<option value="${d[1]}" ${h.cod===d[1]?'selected':''}>${d[0]} · ${d[1]} ${d[2]}</option>`).join('')}</select></div>
-   <div class="field"><label>Cant. unidades afectadas</label><input type="number" min="0" value="${h.cant}" onchange="hallazgos[${hi}].cant=this.value"></div>
-  </div>
-  <div class="field"><label>Descripción</label><textarea rows="2" onchange="hallazgos[${hi}].desc=this.value" style="resize:vertical">${esc(h.desc)}</textarea></div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-   ${h.fotos.map((f,k)=>String(f).startsWith('http')?`<a href="${f}" target="_blank" class="foto-slot" style="border-style:solid">🖼</a>`:`<div class="foto-slot" onclick="tomarFoto(${hi},${k})"><img src="${f}"></div>`).join('')}
-   ${h.fotos.length<3?`<div class="foto-slot" onclick="tomarFoto(${hi},${h.fotos.length})">📷</div>`:''}
-   <input type="url" placeholder="Link de video (opcional)" value="${esc(h.vid)}" onchange="hallazgos[${hi}].vid=this.value" style="flex:1;min-width:140px;border:1px solid #CBD5E1;border-radius:6px;padding:5px 8px;font-size:12px">
-  </div></div>`;}
-function tomarFoto(hi,k){
- fotoTarget=hi;fotoIdx=k!==undefined?k:hallazgos[hi].fotos.length;
- document.getElementById('hiddenFileGallery').click();}
-let fotoTarget=null,fotoIdx=null;
-function comprimirImagen(file,cb){
- const r=new FileReader();
- r.onload=()=>{const img=new Image();img.onload=()=>{
-  const c=document.createElement('canvas');const mx=1000;const sc=Math.min(1,mx/img.width);
-  c.width=img.width*sc;c.height=img.height*sc;c.getContext('2d').drawImage(img,0,0,c.width,c.height);
-  cb(c.toDataURL('image/jpeg',0.7));};img.src=r.result;};
- r.readAsDataURL(file);}
-async function subirEvidenciaFoto(dataUrl,idM,fase,ref){
- try{const r=await apiPost({accion:'subirEvidencia',id:idM||'SIN-ID',fase,ref,dataUrl,por:sesion.nombre});return r.link;}
- catch(e){console.warn('Subida:',e);return dataUrl;}}
-function renderManuales(){
- ['Visual','Dimensional','Funcional'].forEach(f=>{
-  const c=document.getElementById('man'+f);if(!c)return;
-  const mans=hallazgos.map((h,i)=>({h,i})).filter(x=>x.h.fase===f&&x.h.manual);
-  c.innerHTML=`<button class="btn-add" onclick="addManual('${f}')">+ Hallazgo adicional de fase ${f}</button>`+
-   mans.map(({h,i})=>`<div style="margin-top:6px">${inlineHall(i)}</div>`).join('');});}
-function addManual(f){
- hallazgos.push({fase:f,ref:'MAN-'+hallazgos.length,manual:true,componente:'',cod:'',defecto:'',desc:'',cant:'',fotos:[],vid:''});
- renderManuales();}
-function renderResumenHallazgos(){
- const cont=document.getElementById('resumenHallazgosR1');if(!cont)return;
- cont.innerHTML=hallazgos.length?hallazgos.map(h=>`<div style="font-size:12px;padding:6px 0;border-bottom:1px solid #F1F5F9"><span class="badge ${h.fase==='Funcional'||h.fase==='Dimensional'?'func':'estet'}">${h.fase}</span> ${esc(h.componente||'')} ${h.cod?'· <span style="font-family:monospace">'+h.cod+'</span>':''} ${h.cant?'· '+h.cant+' u':''}</div>`).join(''):'<p style="font-size:12px;color:#94A3B8">Sin hallazgos registrados.</p>';}
-function resetearPlantillas(){medidas=[];funcionales=[];renderDim();renderFunc();}
-function plantilla(linea,fase){return CFG.plantillas.filter(r=>r[0]===linea&&r[1]===fase);}
-let fichaRefSpecs=[],fichaRefActual=null;
-function matchFicha(campo){
- const key=campo.toLowerCase().split(' ')[0];
- const c=camposFicha.find(f=>!ES_META.test(f.campo)&&f.campo.toLowerCase().includes(key)&&key.length>3);
- if(c)return c.ficha;
- const s=(fichaRefSpecs||[]).find(s=>String(s['Campo']||'').toLowerCase().includes(key));
- return s?s['Valor']:'';}
-function renderDim(){
- const linea=document.getElementById('mLinea').value,cont=document.getElementById('dimCont');
- if(!linea){cont.innerHTML='<p style="font-size:12px;color:#94A3B8">Selecciona la línea en el paso 1.</p>';return;}
- if(!medidas.length)plantilla(linea,'Dimensional').forEach((r,i)=>medidas.push({campo:r[2],unidad:r[3],herr:r[4],ficha:matchFicha(r[2]),medido:'',hIdx:-1,ref:'DIM-'+i}));
- cont.innerHTML=`<table class="dt"><tr><th>Campo</th><th>Valor ficha</th><th>Medido</th><th>Und</th><th>Herramienta</th><th>Res.</th></tr>
- ${medidas.map((m,i)=>{const dif=m.medido&&resTexto({ficha:m.ficha,medido:m.medido})==='Difiere';
-  if(dif&&m.hIdx<0){hallazgos.push({fase:'Dimensional',ref:m.ref,componente:m.campo,cod:'0020',defecto:'FUERA DE TOLERANCIA',desc:'Ficha: '+m.ficha+' · Medido: '+m.medido,cant:'',fotos:[],vid:''});m.hIdx=hallazgos.length-1;}
-  if(!dif&&m.hIdx>=0){const ix=hallazgos.findIndex(h=>h.ref===m.ref);if(ix>=0)hallazgos.splice(ix,1);m.hIdx=-1;}
-  return`<tr><td style="font-weight:600">${esc(m.campo)}</td><td>${esc(m.ficha)||'—'}</td>
-  <td><input value="${esc(m.medido)}" onchange="medidas[${i}].medido=this.value;renderDim()" style="width:90px;border:1px solid #CBD5E1;border-radius:6px;padding:4px 6px"></td>
-  <td>${m.unidad}</td><td style="font-size:11px">${esc(m.herr)}</td>
-  <td>${m.medido?resBadge(m.ficha,m.medido):'<span style="color:#94A3B8">—</span>'}</td></tr>
-  ${dif&&m.hIdx>=0?`<tr><td colspan="6">${inlineHall(m.hIdx)}</td></tr>`:''}`;}).join('')}</table>
- <button class="btn-add" style="margin-top:8px" onclick="medidas.push({campo:'Nuevo campo',unidad:'—',herr:'Flexómetro',ficha:'',medido:'',hIdx:-1,ref:'DIM-'+medidas.length});renderDim()">+ Campo adicional</button>`;
- renderManuales();evaluarSegundaMuestra();}
-function resBadge(f,m){
- const a=num(f),b=num(m);
- if(a!==null&&b!==null){const tol=Math.max(Math.abs(a)*0.02,0.5);return Math.abs(a-b)<=tol?'<span class="badge ok">✓</span>':'<span class="badge func">⚠</span>';}
- return String(m).toLowerCase()===String(f).toLowerCase()?'<span class="badge ok">✓</span>':'<span class="badge func">⚠</span>';}
-function renderFunc(){
- const linea=document.getElementById('mLinea').value,cont=document.getElementById('funcCont');
- if(!linea){cont.innerHTML='<p style="font-size:12px;color:#94A3B8">Selecciona la línea en el paso 1.</p>';return;}
- if(!funcionales.length)plantilla(linea,'Funcional').forEach((r,i)=>funcionales.push({prueba:r[2],unidad:r[3],herr:r[4],proc:r[5],ficha:matchFicha(r[2]),medido:'',ok:'',hIdx:-1,destr:false,ref:'FUN-'+i}));
- if(document.getElementById('chkDestructiva').checked){
-  SEED_DESTRUCTIVA.forEach(r=>{if(!funcionales.find(x=>x.prueba===r[1]))funcionales.push({prueba:r[1],unidad:r[2],herr:r[3],proc:r[4],ficha:'',medido:'',ok:'',hIdx:-1,destr:true,ref:'FUN-D'+r[1]});});
- }else{for(let i=funcionales.length-1;i>=0;i--)if(funcionales[i].destr){const ix=hallazgos.findIndex(h=>h.ref===funcionales[i].ref);if(ix>=0)hallazgos.splice(ix,1);funcionales.splice(i,1);}}
- cont.innerHTML=`<table class="dt"><tr><th>Prueba</th><th>Especificación</th><th>Medido / Resultado</th><th>Herramienta</th><th>OK</th></tr>
- ${funcionales.map((m,i)=>{const nc=m.ok==='NC';
-  if(nc&&m.hIdx<0){hallazgos.push({fase:'Funcional',ref:m.ref,componente:m.prueba,cod:'',defecto:'',desc:'',cant:'',fotos:[],vid:''});m.hIdx=hallazgos.length-1;}
-  if(!nc&&m.hIdx>=0){const ix=hallazgos.findIndex(h=>h.ref===m.ref);if(ix>=0)hallazgos.splice(ix,1);m.hIdx=-1;}
-  return`<tr><td style="font-weight:600">${esc(m.prueba)}${m.destr?' <span class="badge func">DESTR</span>':''}${m.proc?`<div class="en">${esc(m.proc)}</div>`:''}</td>
-  <td>${esc(m.ficha)||'—'}${m.unidad&&m.unidad!=='—'?' '+m.unidad:''}</td>
-  <td><input value="${esc(m.medido)}" onchange="funcionales[${i}].medido=this.value;renderFunc()" style="width:100px;border:1px solid #CBD5E1;border-radius:6px;padding:4px 6px"></td>
-  <td style="font-size:11px">${esc(m.herr)}</td>
-  <td><select onchange="funcionales[${i}].ok=this.value;renderFunc()" style="font-size:11px;padding:3px;border:1px solid #CBD5E1;border-radius:6px"><option value=""></option><option value="C" ${m.ok==='C'?'selected':''}>✓</option><option value="NC" ${nc?'selected':''}>✗ NC</option><option value="NA" ${m.ok==='NA'?'selected':''}>N/A</option></select></td></tr>
-  ${nc&&m.hIdx>=0?`<tr><td colspan="5">${inlineHall(m.hIdx)}</td></tr>`:''}`;}).join('')}</table>`;
- renderManuales();evaluarSegundaMuestra();}
-function addSerie(v){v=(v||'').trim();if(!v)return;series.push({serie:v,res:'C'});renderSeries();}
-function renderSeries(){
- document.getElementById('seriesList').innerHTML=series.length?series.map((s,i)=>`<div class="check-row"><span style="flex:1;font-family:monospace">U${i+1}: ${esc(s.serie)}</span>
-  <div class="seg" style="display:flex;gap:4px"><button onclick="series[${i}].res='C';renderSeries()" style="padding:6px 10px;border-radius:8px;border:1.5px solid #E2E8F0;background:${s.res==='C'?'#F0FDF4':'white'};font-weight:700;cursor:pointer">✓</button><button onclick="series[${i}].res='NC';renderSeries()" style="padding:6px 10px;border-radius:8px;border:1.5px solid #E2E8F0;background:${s.res==='NC'?'#FEF2F2':'white'};font-weight:700;cursor:pointer">✗</button></div>
-  <span style="cursor:pointer;color:#DC2626" onclick="series.splice(${i},1);renderSeries()">✕</span></div>`).join(''):'<p style="font-size:12px;color:#94A3B8">Sin series escaneadas.</p>';}
-function evaluarSegundaMuestra(){
- const hay=hallazgos.length>0||series.some(s=>s.res==='NC');
- document.getElementById('bloqueRonda2').style.display=hay?'block':'none';
- document.getElementById('sinSegundaMuestra').style.display=hay?'none':'block';
- if(hay&&!document.getElementById('mCantM2').value)document.getElementById('mCantM2').value=document.getElementById('mCantM1').value;}
-let personalR1=[],personalR2=[];
-function fillLineas(id){const sel=document.getElementById(id);if(!sel)return;const cur=sel.value;
- sel.innerHTML='<option value="">Seleccionar...</option>'+CFG.lineas.map(l=>`<option>${l}</option>`).join('');
- if(cur&&CFG.lineas.includes(cur))sel.value=cur;}
-function renderPersonalSelects(){
- ['personalR1Sel','personalR2Sel','vValidadoPor'].forEach(id=>{
-  const sel=document.getElementById(id);if(!sel)return;
-  sel.innerHTML='<option value="">Seleccionar...</option>'+CFG.personal.map(p=>`<option>${p}</option>`).join('');});
- renderPersonalChips();}
-function renderPersonalChips(){
- [1,2].forEach(r=>{
-  const cont=document.getElementById('personalR'+r+'Chips');if(!cont)return;
-  const lista=r===1?personalR1:personalR2;
-  cont.innerHTML=lista.map((p,i)=>`<span class="chip">${p}<span class="rm" onclick="quitarPersonal(${r},${i})">×</span></span>`).join('')||'<span style="font-size:11px;color:#94A3B8">Sin personal asignado.</span>';});}
-function agregarPersonal(r){const sel=document.getElementById('personalR'+r+'Sel');if(!sel.value)return;(r===1?personalR1:personalR2).push(sel.value);sel.value='';renderPersonalChips();}
-function quitarPersonal(r,i){(r===1?personalR1:personalR2).splice(i,1);renderPersonalChips();}
-function promptNuevoProveedor(){
- const v=(prompt('Proveedor nuevo — formato: RUC y razón social','')||'').trim();
- if(!v)return;addProveedorString(v);renderProvUI();
- const m=document.getElementById('mProveedor');if(m)m.value=v;}
-function addProveedorString(v){
- const m=v.match(/^(\d{11})\s+(.+)/);
- const p=m?{ruc:m[1],nombre:m[2]}:{ruc:'',nombre:v};
- if(!CFG.proveedores.find(x=>(x.nombre||x)===p.nombre))CFG.proveedores.push(p);
- saveCfgAll();}
-async function cargarFichaReferencia(){
- const cod=document.getElementById('mCodigo').value.trim(),cont=document.getElementById('fichaRefMini');if(!cod)return;
- cont.innerHTML='<div class="loading">🔎 Buscando ficha e historial...</div>';
- try{
-  const[mae,specs]=await Promise.all([apiGet('Maestro_Codigos',cod),apiGet('Especificaciones',cod)]);
-  if(!mae.length){cont.innerHTML='<div class="alert amber">Ficha no encontrada en el maestro — puedes continuar sin referencia.</div>';fichaRefSpecs=[];return;}
-  fichaRefActual=mae[0];fichaRefSpecs=specs;
-  const ms=rowsToObjects('Muestreos',await apiGet('Muestreos',cod));
-  let hist='';
-  if(ms.length){const decs=ms.map(m=>m['Decisión Final']||'Pendiente').join(', ');
-   hist=`<div class="alert amber" style="margin:8px 0 0">🔁 <strong>${ms.length}</strong> inspección(es) previa(s) — decisiones: ${esc(decs)}.</div>`;}
-  else hist='<div class="alert blue" style="margin:8px 0 0">🆕 Primera inspección de este código.</div>';
-  cont.innerHTML=`<div class="ficha-header" style="margin:10px 0 0"><div class="code">${fichaRefActual['Código SAP']}</div><div class="desc">${fichaRefActual['Descripción']||''}</div>
-   <div class="meta">Proveedor: ${fichaRefActual['Proveedor']||'—'} · EAM: ${fichaRefActual['EAM']||'—'} · Edición: ${fichaRefActual['Edición Vigente']||'—'}</div></div>${hist}`;
-  if(fichaRefActual['Proveedor']&&!document.getElementById('mProveedor').value)document.getElementById('mProveedor').value=fichaRefActual['Proveedor'];
-  resetearPlantillas();
- }catch(e){cont.innerHTML='<div class="alert red">❌ '+e.message+'</div>';}}
-/* Firma */
-let sigData=null,sigCanvas=document.getElementById('sigInspector'),sigCtx=sigCanvas.getContext('2d'),drawing=false;
-function sigPos(e){const r=sigCanvas.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return[t.clientX-r.left,t.clientY-r.top];}
-function sigStart(e){drawing=true;const[x,y]=sigPos(e);sigCtx.beginPath();sigCtx.moveTo(x,y);}
-function sigMove(e){if(!drawing)return;e.preventDefault();const[x,y]=sigPos(e);sigCtx.lineWidth=2.2;sigCtx.lineCap='round';sigCtx.strokeStyle='#1a2332';sigCtx.lineTo(x,y);sigCtx.stroke();}
-function sigEnd(){drawing=false;sigData=sigCanvas.toDataURL();document.getElementById('sigStatus').textContent='✅ Firmado';document.getElementById('sigStatus').classList.add('signed');}
-['mousedown','touchstart'].forEach(ev=>sigCanvas.addEventListener(ev,sigStart));
-['mousemove','touchmove'].forEach(ev=>sigCanvas.addEventListener(ev,sigMove));
-['mouseup','mouseleave','touchend'].forEach(ev=>sigCanvas.addEventListener(ev,sigEnd));
-function clearSig(){sigCtx.clearRect(0,0,sigCanvas.width,sigCanvas.height);sigData=null;const s=document.getElementById('sigStatus');s.textContent='Sin firma aún';s.classList.remove('signed');}
-
-/* ═══ 17. GUARDAR ═══ */
-async function guardarMuestreo(){
- if(!validateStepB(5))return;
- if(!document.getElementById('mHoraFinR1').value&&relojT0)document.getElementById('mHoraFinR1').value=new Date().toTimeString().slice(0,5);
- try{
-  const fotosGuardadas=[];
-  for(let i=0;i<hallazgos.length;i++){const links=[];
-   for(let k=0;k<hallazgos[i].fotos.length;k++){
-    let f=hallazgos[i].fotos[k];
-    if(f&&!String(f).startsWith('http')){
-     f=await subirEvidenciaFoto(f,idMuestreoActivo,hallazgos[i].fase,hallazgos[i].ref||'');}
-    links.push(f||'(sin foto)');}
-   fotosGuardadas.push(links.join(' | ')+(hallazgos[i].vid?' | video: '+hallazgos[i].vid:''));}
-  const m=filaMuestreo('Pendiente de decisión');
-  if(idMuestreoActivo)m[0]=idMuestreoActivo;
-  const data={
-   muestreo:m,
-   personal:[...personalR1.map(p=>['',1,p]),...personalR2.map(p=>['',2,p])],
-   hallazgos:hallazgos.map((h,i)=>['',1,h.fase,h.ref||'',h.componente,h.cod||'',h.defecto||'',h.desc||'',h.cant||'',fotosGuardadas[i]||'']),
-   medidas:medidas.filter(x=>x.medido).map(x=>['','Dimensional',x.campo,x.ficha,x.medido,x.unidad,x.herr,resBadge(x.ficha,x.medido).includes('✓')?'Conforme':'Difiere'])
-    .concat(funcionales.filter(x=>x.medido||x.ok).map(x=>['','Funcional',x.prueba,x.ficha,x.medido,x.unidad,x.herr,x.ok==='C'?'Conforme':x.ok==='NC'?'No conforme':'N/A'])),
-   series:series.map(s=>['',s.serie,s.res==='C'?'Conforme':'No conforme']),
-   checklist:visual.filter(v=>v.res).map(v=>{const ci=visual.indexOf(v);return['',CFG.checklist[ci]?CFG.checklist[ci][0]:'',v.item,v.res,v.obs||''];})};
-  const r=await apiPost({accion:'guardarMuestreo',data,correos:CFG.correos});
-  const idM=r.id||'MST';
-  const sugerencia=(hallazgos.length===0)?'Reducido':'Reforzado';
-  document.getElementById('successMsg').innerHTML=`<div class="alert green" style="margin-top:10px">✅ <strong>${idM}</strong> guardado — estado: <strong>Pendiente de decisión</strong>.<br>Sugerencia próxima inspección: severidad <strong>${sugerencia}</strong><br>
-  <button class="btn btn-primary" style="margin-top:8px" onclick="document.getElementById('guiaQA32Cont').innerHTML=renderGuiaQA32()">🧾 Ver guía de transcripción QA32</button>
-  <button class="btn" style="background:#059669;color:white;margin-top:8px" onclick="generarPDFMuestreo('${idM}')">📄 PDF del muestreo</button></div>`;
-  alert('✅ Muestreo '+idM+' guardado. La decisión la registra la jefatura en ⚖️.');
- }catch(e){alert('❌ '+e.message);}}
-function codigoConforme(grupoFase){
- const g=grupoFase==='Visual'?'AP-EMB':grupoFase==='Funcional'?'FUNC':'DIM';
- const d=CFG.defectos.find(x=>x[0]===g&&x[3]==='Conforme');
- return d?d[1]:'0010';}
-function hallDeRef(ref){return hallazgos.find(h=>h.ref===ref);}
-function renderGuiaQA32(){
- const g=id=>{const el=document.getElementById(id);return el?el.value:'';};
- const N=parseInt(g('mCantM1'))||0;
- const unidades=n=>Array.from({length:n},(_,i)=>i+1);
- const visRows=CFG.checklist.map((c,idx)=>{
-  const v=visual[idx];if(!v||!v.res)return'';
-  const h=hallDeRef('VIS-'+idx);
-  const cod=h&&h.cod?h.cod:(v.res==='NC'?'(asignar)':codigoConforme('Visual'));
-  const lista=unidades(N).map(u=>`U${u}:${v.res==='NC'&&u===1?cod:(v.res==='NC'?codigoConforme('Visual'):cod)}`).join(' · ');
-  return`<tr><td>${esc(c[1])}</td><td style="font-family:monospace;font-size:11px">${lista}</td><td>${v.res==='NC'?'<span class="badge func">NC</span>':'<span class="badge ok">C</span>'}</td></tr>`;}).join('');
- const dimRows=medidas.filter(m=>m.medido).map(m=>`<tr><td>${esc(m.campo)}</td><td>Todas las ${N} u: <b>${esc(m.medido)} ${m.unidad}</b></td><td>${resBadge(m.ficha,m.medido).includes('✓')?'<span class="badge ok">Conforme</span>':'<span class="badge func">Difiere de ficha</span>'}</td></tr>`).join('');
- const funRows=funcionales.filter(f=>f.medido||f.ok).map(f=>{
-  const h=hallDeRef(f.ref);
-  return`<tr><td>${esc(f.prueba)}</td><td>${f.medido?('Todas las '+N+' u: <b>'+esc(f.medido)+' '+(f.unidad||'')+'</b>'):(f.ok==='NC'?'NC en '+((h&&h.cant)?h.cant+' u':'algunas u'):'Conforme')} ${f.herr?'('+esc(f.herr)+')':''}</td><td>${f.ok==='NC'?'<span class="badge func">NC</span>':'<span class="badge ok">C</span>'}</td></tr>`;}).join('');
- const serieRows=series.map((s,i)=>`U${i+1}: ${esc(s.serie)} (${s.res==='C'?'conforme':'NC'})`).join(' · ');
- const sinNC=!hallazgos.length;
- const cierre=sinNC?'✅ Todo conforme → Valora ACEPTADO en QA32, cierra características con candado y propone LIBERACIÓN a jefatura.'
-  :hallazgos.some(h=>h.fase==='Funcional')?'🔴 Hay hallazgos FUNCIONALES → si persisten en 2da muestra: valora RECHAZADO, BLOQUEA el lote en SAP y físicamente, registra N° de reproceso y solución en ⚖️.'
-  :'⚠️ Solo hallazgos estéticos/empaque → si son tolerables: ACEPTADO + registra TOLERADO en ⚖️ con justificación (quién, cuándo, por qué).';
- return`<div class="card" style="border:2px solid #1a3a5c;margin-top:10px"><div class="section-title">🧾 Guía de transcripción QA32 — Lote ${esc(g('mLotInsp'))} · ${esc(g('mCodigo'))} · ${N} unidades</div>
- <p style="font-size:11px;color:#64748B;margin-bottom:10px">Resultados pre-escritos en el orden que pide QA32 (valores individuales por muestra).</p>
- <div style="font-size:12px;font-weight:800;color:#1E40AF;margin:8px 0 4px">Operación 0010 — VISUAL</div>
- <table class="dt"><tr><th>Característica</th><th>Valores por unidad</th><th></th></tr>${visRows||''}</table>
- <div style="font-size:12px;font-weight:800;color:#1E40AF;margin:12px 0 4px">Operación 0030 — DIMENSIONAL</div>
- <table class="dt"><tr><th>Característica</th><th>Valor(es)</th><th></th></tr>${dimRows||'<tr><td colspan="3" style="color:#94A3B8">sin mediciones</td></tr>'}</table>
- <div style="font-size:12px;font-weight:800;color:#1E40AF;margin:12px 0 4px">Operación 0020 — FUNCIONAL</div>
- <table class="dt"><tr><th>Característica</th><th>Valor(es)</th><th></th></tr>${funRows||'<tr><td colspan="3" style="color:#94A3B8">sin pruebas</td></tr>'}</table>
- <div style="font-size:12px;font-weight:800;color:#1E40AF;margin:12px 0 4px">Series (${series.length})</div>
- <div style="font-size:11px;font-family:monospace;background:#F8FAFC;border-radius:8px;padding:8px">${serieRows||'—'}</div>
- ${hallazgos.length?`<div class="alert amber" style="margin-top:10px"><strong>Defectos para catálogo SAP (Crear defecto):</strong><br>${hallazgos.map(h=>`${esc(h.fase)}: ${esc(h.cod||'(asignar)')} ${esc(h.defecto)} — ${esc(h.cant||'')} u · ${esc(h.componente||'')}`).join('<br>')}</div>`:''}
- <div class="alert ${sinNC?'green':'red'}" style="margin-top:10px"><strong>Cierre:</strong> ${cierre}</div></div>`;}
-async function generarPDFMuestreo(id){
- const g=id2=>{const el=document.getElementById(id2);return el?el.value:'';};
- const el=document.createElement('div');
- el.innerHTML=`<div style="font-family:Segoe UI,sans-serif">
- <div style="border:2px solid #1a3a5c;padding:10px;margin-bottom:10px"><table style="width:100%;font-size:11px"><tr>
- <td style="border-right:1px solid #ccc"><b style="font-size:15px">GRUPO SOLE</b><br>Sistema de Gestión de Calidad</td>
- <td style="border-right:1px solid #ccc"><b>Registro de Muestreo ${id}</b><br>F-QC-001 · Rev. 03</td>
- <td>Fecha: ${g('mFecha')}<br>Centro: M310</td></tr></table></div>
- <p style="font-size:11px">File: ${g('mFile')} · Lote SAP: ${g('mLotInsp')} · Doc. compras: ${g('mDocComp')} · Almacén: ${g('mAlmFis')} (${g('mAlmCod')}) · Proveedor: ${g('mProveedor')}<br>
- Código: <b>${g('mCodigo')}</b> — ${g('mDesc')}<br>Muestra: ${g('mCantM1')}/${g('mCantLote')} u (${g('mSeveridad')}) · ${g('mHoraInicioR1')}–${g('mHoraFinR1')}</p>
- <p style="font-size:11px"><b>Visual:</b> ${visual.filter(v=>v.res).map(v=>`${v.item}: ${v.res}${v.obs?' ('+v.obs+')':''}`).join(' · ')||'—'}</p>
- <p style="font-size:11px"><b>Dimensional:</b> ${medidas.filter(m=>m.medido).map(m=>`${m.campo}: ${m.medido}${m.unidad} (ficha ${m.ficha||'—'})`).join(' · ')||'—'}</p>
- <p style="font-size:11px"><b>Funcional:</b> ${funcionales.filter(f=>f.medido||f.ok).map(f=>`${f.prueba}: ${f.medido||f.ok}`).join(' · ')||'—'}</p>
- <p style="font-size:11px"><b>Hallazgos (${hallazgos.length}):</b> ${hallazgos.map(h=>`[${h.fase}] ${h.componente} · ${h.cod||''} · ${h.cant||''} u`).join(' · ')||'Sin hallazgos'}</p>
- <p style="font-size:11px"><b>Series (${series.length}):</b> ${series.map(s=>s.serie).join(' · ')||'—'}</p>
- <p style="font-size:11px"><b>Personal R1:</b> ${personalR1.join(', ')||'—'}</p>
- <p style="font-size:12px"><b>Estado: PENDIENTE DE DECISIÓN</b></p>
- ${sigData?`<p style="font-size:10px">Firma (${sesion.nombre}):</p><img src="${sigData}" style="height:60px">`:''}</div>`;
- html2pdf().from(el).set({margin:10,filename:'Muestreo_'+(g('mLotInsp')||id)+'.pdf',html2pdf:{scale:2}}).save();}
-
-/* ═══ 18. MÓDULO E ═══ */
-async function cargarPendientes(){
- const q=document.getElementById('decBusqueda').value.trim(),cont=document.getElementById('pendientesCont');
- cont.innerHTML='<div class="loading">🔎 Buscando...</div>';
- try{
-  const ms=rowsToObjects('Muestreos',await apiGet('Muestreos',q));
-  const pend=ms.filter(m=>m['Estado']==='Pendiente de decisión');
-  if(!pend.length){cont.innerHTML='<div class="alert green">✅ No hay muestreos pendientes de decisión.</div>';return;}
-  cont.innerHTML=pend.map(m=>{const id=m['ID Muestreo'];
-   return`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-    <span style="font-weight:800;font-size:13px;color:#1a3a5c">${esc(id)} · ${esc(m['Código SAP']||'')} · Lote SAP ${esc(m['N° Lote Inspección SAP']||'—')} · ${esc(m['Fecha']||'')}</span>
-    <span class="badge estet">⏳ Pendiente</span></div>
-    <div style="font-size:11px;color:#64748B;margin-bottom:8px">File ${esc(m['File']||'—')} · ${esc(m['Almacén Físico']||'')} (${esc(m['Código Almacén']||'')}) · Proveedor ${esc(m['Proveedor']||'—')} · Muestra ${esc(m['Cant Muestra 1']||'—')} u</div>
-    <div class="grid2">
-     <div class="field"><label>Decisión</label><select id="decSel_${id}"><option value="">Seleccionar...</option><option value="Liberado">✅ Liberado</option><option value="Tolerado">⚠️ Tolerado</option><option value="Bloqueado - Retroceso">🔴 Bloqueado — Retroceso</option></select></div>
-     <div class="field"><label>Decidido por</label><select id="decPor_${id}"><option value="">Seleccionar...</option>${CFG.personal.map(p=>`<option>${p}</option>`).join('')}</select></div>
-     <div class="field"><label>Fecha decisión</label><input type="date" id="decFec_${id}" value="${new Date().toISOString().split('T')[0]}"></div>
-     <div class="field" style="justify-content:flex-end"><button class="btn btn-primary" style="margin-top:20px" onclick="registrarDecision('${id}')">💾 Guardar decisión</button></div>
-    </div>
-    <div class="field"><label>Justificación (obligatoria si Tolerado o Bloqueado)</label><textarea id="decJust_${id}" rows="2" style="resize:vertical"></textarea></div>
-    <div class="grid2">
-     <div class="field"><label>N° Reporte Reproceso (si bloqueado)</label><input type="text" id="decRep_${id}" placeholder="REP-000045"></div>
-     <div class="field"><label>Solución aplicada (si bloqueado)</label><input type="text" id="decSol_${id}"></div>
-    </div></div>`;}).join('');
- }catch(e){cont.innerHTML='<div class="alert red">❌ '+e.message+'</div>';}}
-async function registrarDecision(id){
- const dec=document.getElementById('decSel_'+id).value,por=document.getElementById('decPor_'+id).value,fec=document.getElementById('decFec_'+id).value,just=document.getElementById('decJust_'+id).value;
- if(!dec||!por||!fec){alert('⚠️ Completa decisión, responsable y fecha.');return;}
- if((dec==='Tolerado'||dec.includes('Bloqueado'))&&!just.trim()){alert('⚠️ La justificación es obligatoria para Tolerado/Bloqueado.');return;}
- if(sesion.rol!=='Jefatura'){alert('⚠️ Solo el rol Jefatura puede registrar decisiones (cámbialo en ⚙️ Config).');return;}
- try{
-  await apiPost({accion:'actualizarFila',hoja:'Muestreos',colId:'ID Muestreo',valorId:id,correos:CFG.correos,actualizaciones:{'Decisión Final':dec,'Justificación Tolerancia':just,'Decidido Por':por,'Fecha Decisión':fec,'Estado':'Decidido: '+dec,'N° Reproceso':(document.getElementById('decRep_'+id)||{}).value||'','Solución Aplicada':(document.getElementById('decSol_'+id)||{}).value||''}});
-  alert('✅ Decisión registrada: '+dec);cargarPendientes();
- }catch(e){alert('❌ '+e.message);}}
-
-/* ═══ 19. REPORTES ═══ */
-async function cargarResumenDia(){
- const f=document.getElementById('resumenFecha').value,cont=document.getElementById('resumenContenido'),kcont=document.getElementById('kpisContenido');
- if(!f)return;
- cont.innerHTML='<div class="loading">🔎 Cargando...</div>';
- try{
-  const ms=rowsToObjects('Muestreos',await apiGet('Muestreos'));
-  const delDia=ms.filter(m=>m['Fecha']===f);
-  const hall=rowsToObjects('Muestreo_Hallazgos',await apiGet('Muestreo_Hallazgos'));
-  if(!delDia.length){cont.innerHTML='<div class="loading">Sin muestreos en esta fecha.</div>';kcont.innerHTML='';return;}
-  const lib=delDia.filter(m=>m['Decisión Final']==='Liberado').length,tol=delDia.filter(m=>m['Decisión Final']==='Tolerado').length,blo=delDia.filter(m=>(m['Decisión Final']||'').includes('Bloqueado')).length,pend=delDia.filter(m=>!m['Decisión Final']).length;
-  const pct=Math.round(lib/Math.max(1,delDia.filter(m=>m['Decisión Final']).length)*100);
-  kcont.innerHTML=`<div class="card"><div class="section-title">Indicadores del ${f}</div>
-   <div class="grid3">
-    <div class="kpi" style="background:#F0FDF4"><div class="n" style="color:#166534">${pct}%</div><div class="l" style="color:#166534">Conformidad</div></div>
-    <div class="kpi" style="background:#F8FAFC"><div class="n" style="color:#1a3a5c">${delDia.length}</div><div class="l" style="color:#475569">Lotes muestreados</div></div>
-    <div class="kpi" style="background:#FFF7ED"><div class="n" style="color:#92400E">${pend}</div><div class="l" style="color:#92400E">Pendientes decisión</div></div>
-   </div>
-   <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap">
-    <span class="badge ok">✅ ${lib}</span><span class="badge estet">⚠️ ${tol}</span><span class="badge func">🔴 ${blo}</span></div>
-   <div style="display:flex;gap:14px;margin-top:12px;flex-wrap:wrap">
-    <div style="flex:1;min-width:170px"><canvas id="chDec" height="170"></canvas></div>
-    <div style="flex:1;min-width:170px"><canvas id="chFas" height="170"></canvas></div></div></div>`;
-  const hDia=hall.filter(h=>delDia.find(m=>m['ID Muestreo']===h['ID Muestreo']));
-  const porFase={};hDia.forEach(h=>porFase[h['Fase']]=(porFase[h['Fase']]||0)+1);
-  if(window.Chart){
-   if(window._c1)window._c1.destroy();if(window._c2)window._c2.destroy();
-   window._c1=new Chart(document.getElementById('chDec'),{type:'doughnut',data:{labels:['Liberado','Tolerado','Bloqueado','Pendiente'],datasets:[{data:[lib,tol,blo,pend],backgroundColor:['#10B981','#F59E0B','#DC2626','#94A3B8']}]},options:{plugins:{legend:{position:'bottom'}}}});
-   window._c2=new Chart(document.getElementById('chFas'),{type:'bar',data:{labels:Object.keys(porFase),datasets:[{label:'Hallazgos',data:Object.values(porFase),backgroundColor:'#1a3a5c'}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});}
-  cont.innerHTML=delDia.map(m=>{
-   const hs=hDia.filter(h=>h['ID Muestreo']===m['ID Muestreo']);
-   const cls=(m['Decisión Final']||'').includes('Bloqueado')?'func':m['Decisión Final']==='Tolerado'?'estet':m['Decisión Final']==='Liberado'?'ok':'gray';
-   return`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><strong style="font-size:13px">${esc(m['ID Muestreo'])} · ${esc(m['Código SAP'])} — ${esc(m['Descripción']||'')}</strong><span class="badge ${cls}">${m['Decisión Final']||'⏳ Pendiente'}</span></div>
-   <div style="font-size:11px;color:#64748B">Lote SAP ${esc(m['N° Lote Inspección SAP']||'—')} · ${esc(m['Almacén Físico']||'')} (${esc(m['Código Almacén']||'')}) · Proveedor ${esc(m['Proveedor']||'—')} · Muestra ${esc(m['Cant Muestra 1'])}/${esc(m['Cant Lote'])} u</div>
-   ${hs.length?`<div style="margin-top:6px">${hs.map(h=>`<span class="badge ${h['Fase']==='Funcional'||h['Fase']==='Dimensional'?'func':'estet'}" style="margin:2px 4px 2px 0">${h['Fase']}: ${esc(h['Defecto']||h['Código Defecto SAP'])}</span>`).join('')}</div>`:'<div style="margin-top:6px;font-size:11px;color:#94A3B8">Sin hallazgos</div>'}</div>`;
-  }).join('');
- }catch(e){cont.innerHTML='<div class="alert red">❌ '+e.message+'</div>';}}
-async function cargarRecurrencia(){
- const cont=document.getElementById('recurrenciaProveedor');
- try{
-  const ms=rowsToObjects('Muestreos',await apiGet('Muestreos'));
-  const hall=rowsToObjects('Muestreo_Hallazgos',await apiGet('Muestreo_Hallazgos'));
-  const porCod={};
-  ms.forEach(m=>{const k=m['Código SAP']||'—';porCod[k]=porCod[k]||{n:0,def:0,blo:0};porCod[k].n++;if((m['Decisión Final']||'').includes('Bloqueado'))porCod[k].blo++;});
-  hall.forEach(h=>{const m=ms.find(x=>x['ID Muestreo']===h['ID Muestreo']);if(m&&porCod[m['Código SAP']||'—'])porCod[m['Código SAP']||'—'].def++;});
-  const rows=Object.keys(porCod).map(k=>{const d=porCod[k];
-   const prov=(MAESTRO.find(x=>x['Código SAP']===k)||{})['Proveedor']||'—';
-   const sem=d.blo>0?'🔴':d.def>0?'🟡':'🟢';
-   return`<tr><td style="font-family:monospace;font-weight:700">${k}</td><td>${prov}</td><td>${d.n}</td><td>${d.def}</td><td>${d.blo}</td><td style="font-size:15px">${sem}</td></tr>`;}).join('');
-  cont.innerHTML=`<table class="dt"><tr><th>Código</th><th>Proveedor</th><th>Muestreos</th><th>Defectos</th><th>Bloqueos</th><th></th></tr>${rows||'<tr><td colspan="6" style="color:#94A3B8">Sin datos aún.</td></tr>'}</table>`;
- }catch(e){cont.innerHTML='<div class="alert red">❌ '+e.message+'</div>';}}
-async function generarPDFResumen(){
- const f=document.getElementById('resumenFecha').value;
- try{
-  const ms=rowsToObjects('Muestreos',await apiGet('Muestreos')).filter(m=>m['Fecha']===f);
-  const el=document.createElement('div');
-  el.innerHTML=`<div style="font-family:Segoe UI"><div style="border:2px solid #1a3a5c;padding:10px;margin-bottom:10px"><b style="font-size:15px">GRUPO SOLE</b> · Reporte diario de Calidad · ${f}<br><span style="font-size:10px">F-QC-002 · Generado ${new Date().toLocaleString('es-PE')} por ${sesion.nombre}</span></div>
-  <table style="width:100%;border-collapse:collapse;font-size:10px" border="1" cellpadding="4">
-  <tr style="background:#1a3a5c;color:white"><th>ID</th><th>Código</th><th>Lote SAP</th><th>Almacén</th><th>Proveedor</th><th>Muestra</th><th>Decisión</th></tr>
-  ${ms.map(m=>`<tr><td>${m['ID Muestreo']}</td><td>${m['Código SAP']}</td><td>${m['N° Lote Inspección SAP']||''}</td><td>${m['Almacén Físico']||''} ${m['Código Almacén']||''}</td><td>${m['Proveedor']||''}</td><td>${m['Cant Muestra 1']}/${m['Cant Lote']}</td><td><b>${m['Decisión Final']||'PENDIENTE'}</b></td></tr>`).join('')}
-  </table><p style="font-size:10px;margin-top:8px">Los muestreos PENDIENTE esperan decisión de jefatura (módulo ⚖️).</p></div>`;
-  html2pdf().from(el).set({margin:10,filename:'Reporte_Calidad_'+f+'.pdf'}).save();
- }catch(e){alert('❌ '+e.message);}}
-
-/* ═══ 20. CONFIG ═══ */
-function renderCfgAll(){
- renderPersonalCfg();renderProvUI();renderDefectosCfg();renderAlmacenCfg();renderPlantillaCfg();
- const c=document.getElementById('cfgCorreos');if(c)c.value=CFG.correos||'';
- const rs=document.getElementById('rolSel');if(rs)rs.value=sesion.rol;}
-function renderPersonalCfg(){
- const el=document.getElementById('personalCfgChips');if(!el)return;
- el.innerHTML=CFG.personal.map((p,i)=>`<span class="chip">${p}<span class="rm" onclick="CFG.personal.splice(${i},1);saveCfgAll();renderPersonalCfg();renderPersonalSelects();renderSesion()">×</span></span>`).join('')||'<span style="font-size:11px;color:#94A3B8">Sin personal.</span>';}
-function addPersonalALista(){
- const inp=document.getElementById('newPersonalInput'),v=inp.value.trim();if(!v)return;
- if(!CFG.personal.includes(v))CFG.personal.push(v);
- saveCfgAll();inp.value='';renderPersonalCfg();renderPersonalSelects();renderSesion();}
-function renderProvUI(){
- const ch=document.getElementById('provChips');if(!ch)return;
- ch.innerHTML=CFG.proveedores.map((p,i)=>`<span class="chip">${(p.ruc?p.ruc+' · ':'')+(p.nombre||p)}<span class="rm" onclick="CFG.proveedores.splice(${i},1);saveCfgAll();renderProvUI()">×</span></span>`).join('')||'<span style="font-size:11px;color:#94A3B8">Sin proveedores.</span>';
- const dl=document.getElementById('dlProv');if(dl)dl.innerHTML=CFG.proveedores.map(p=>`<option value="${esc((p.ruc?p.ruc+' ':'')+(p.nombre||p))}">`).join('');}
-function addProveedorManual(){
- const inp=document.getElementById('newProvInput'),v=inp.value.trim();if(!v)return;
- addProveedorString(v);saveCfgAll();inp.value='';renderProvUI();}
-function cargarArchivoProveedores(file){
- if(!file)return;
- const r=new FileReader();
- r.onload=()=>{
-  try{
-   const wb=XLSX.read(r.result,{type:'array'});
-   const sel=wb.SheetNames.map((n,i)=>`<option value="${i}">${esc(n)}</option>`).join('');
-   document.getElementById('provPreview').innerHTML=`<div class="field"><label>Elige la hoja de proveedores (${wb.SheetNames.length} hojas)</label>
-    <select id="provHojaSel" onchange="cargarHojaProveedores(${JSON.stringify(wb.SheetNames).replace(/"/g,'&quot;')},this.value)">${sel}</select></div>
-    <div id="provHojaPrev"></div>`;
-   window._provWb=wb;
-   cargarHojaProveedores(wb.SheetNames,0);
-  }catch(e){document.getElementById('provPreview').innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}
- };
- r.readAsArrayBuffer(file);}
-function cargarHojaProveedores(names,idx){
- const wb=window._provWb;if(!wb)return;
- const rows=XLSX.utils.sheet_to_json(wb.Sheets[names[idx]],{header:1,raw:false,defval:''});
- let hIdx=0;rows.slice(0,5).some((r,i)=>{if(r.filter(x=>String(x).trim()).length>=2){hIdx=i;return true;}return false;});
- const head=rows[hIdx].map(h=>String(h).trim().toUpperCase());
- const find=(...keys)=>head.findIndex(h=>keys.some(k=>h.includes(k)));
- const iN=find('PROVEEDOR','RAZON','RAZÓN','NOMBRE'),iR=find('RUC'),iC=find('CONTACTO','CORREO','TELEF'),iRu=find('RUBRO','CATEGORIA','CATEGORÍA');
- let out=rows.slice(hIdx+1).filter(r=>String(r[iN]||'').trim()).map(r=>({ruc:iR>=0?String(r[iR]).trim():'',nombre:String(r[iN]).trim(),contacto:iC>=0?String(r[iC]).trim():'',rubro:iRu>=0?String(r[iRu]).trim():''}));
- if(!out.length)out=rows.slice(hIdx).filter(r=>String(r[0]||'').trim()).map(r=>({ruc:String(r[0]).match(/^\d{11}$/)?String(r[0]).trim():'',nombre:String(r[0]).trim(),contacto:'',rubro:''}));
- document.getElementById('provHojaPrev').innerHTML=`<div class="alert green">✅ ${out.length} proveedores en la hoja "${esc(names[idx])}". <button class="mini-btn" onclick="guardarProveedores(${JSON.stringify(out).replace(/"/g,'&quot;')})">💾 Cargarlos</button></div>`;
- window._provOut=out;}
-async function guardarProveedores(out){
- if(!out||!out.length)return;
- out.forEach(p=>{if(!CFG.proveedores.find(x=>(x.nombre||x)===p.nombre))CFG.proveedores.push(p);});
- saveCfgAll();renderProvUI();
- try{await apiPost({accion:'guardarFilas',hoja:'Maestro_Proveedores',filas:out.map(p=>[p.ruc||'',p.nombre||'',p.contacto||'',p.rubro||'',''])});}catch(e){console.warn(e);}
- alert('✅ '+out.length+' proveedores cargados.');}
-let eamRows=null;
-function cargarArchivoMaestro(file){
- if(!file)return;
- const r=new FileReader();
- r.onload=()=>{
-  try{
-   const wb=XLSX.read(r.result,{type:'array'});
-   const sel=wb.SheetNames.map((n,i)=>`<option value="${i}">${esc(n)}</option>`).join('');
-   document.getElementById('eamPreview').innerHTML=`<div class="field"><label>Elige la hoja del maestro (${wb.SheetNames.length} hojas)</label>
-    <select onchange="procesarHojaMaestro(${JSON.stringify(wb.SheetNames).replace(/"/g,'&quot;')},this.value)">${sel}</select></div>
-    <div id="eamHojaPrev"></div>`;
-   window._eamWb=wb;
-   procesarHojaMaestro(wb.SheetNames,0);
-  }catch(e){document.getElementById('eamPreview').innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}
- };
- r.readAsArrayBuffer(file);}
-function procesarHojaMaestro(names,idx){
- const wb=window._eamWb;if(!wb)return;
- const rows=XLSX.utils.sheet_to_json(wb.Sheets[names[idx]],{header:1,raw:false,defval:''});
- let hIdx=0;rows.slice(0,5).some((r,i)=>{if(r.filter(x=>String(x).trim()).length>=3){hIdx=i;return true;}return false;});
- const head=rows[hIdx].map(h=>String(h).trim().toUpperCase());
- const find=(...keys)=>head.findIndex(h=>keys.some(k=>h.includes(k)));
- const ix={cod:find('MATERIAL','CÓDIGO','CODIGO'),desc:find('DENOMIN','DESCRIP','TEXTO BREVE'),eam:find('ANTIGUO','EAM'),ean:find('EAN'),pb:find('PESO BRUTO'),pn:find('PESO NETO'),vol:find('VOLUMEN'),gr:find('GRUPO ART'),cen:find('CENTRO'),prov:find('PROVEEDOR')};
- if(ix.cod<0||ix.desc<0){document.getElementById('eamHojaPrev').innerHTML='<div class="alert red">❌ No se detectaron columnas Material y Descripción/Texto breve.</div>';return;}
- const vistos={};
- eamRows=rows.slice(hIdx+1).filter(r=>String(r[ix.cod]||'').trim()).map(r=>({
-  ['Código SAP']:String(r[ix.cod]).trim(),['Descripción']:String(r[ix.desc]).trim(),
-  ['EAM']:ix.eam>=0?String(r[ix.eam]).trim():'',['EAN']:ix.ean>=0?String(r[ix.ean]).trim():'',
-  ['Peso Bruto']:ix.pb>=0?String(r[ix.pb]).trim():'',['Peso Neto']:ix.pn>=0?String(r[ix.pn]).trim():'',
-  ['Volumen']:ix.vol>=0?String(r[ix.vol]).trim():'',['Grupo Artículos']:ix.gr>=0?String(r[ix.gr]).trim():'',
-  ['Centro']:ix.cen>=0?String(r[ix.cen]).trim():'M310',['Proveedor']:ix.prov>=0?String(r[ix.prov]).trim():'',
-  ['Línea']:lineaDesdeDesc(String(r[ix.desc]).trim()),['Edición Vigente']:'',['Fecha Edición']:'',['Unidad']:'UN'}))
- .filter(m=>{const k=m['Código SAP'];if(vistos[k])return false;vistos[k]=1;return true;});
- document.getElementById('eamHojaPrev').innerHTML=`<div class="alert green">✅ ${eamRows.length} materiales únicos (duplicados por almacén eliminados) en "${esc(names[idx])}". <button class="mini-btn" onclick="guardarEAM()">💾 Guardar en Maestro_Codigos</button></div>
- <table class="dt"><tr><th>Código</th><th>Descripción</th><th>EAM</th><th>Línea (auto)</th></tr>${eamRows.slice(0,5).map(x=>`<tr><td>${x['Código SAP']}</td><td>${esc(x['Descripción'])}</td><td>${x['EAM']}</td><td>${x['Línea']}</td></tr>`).join('')}${eamRows.length>5?`<tr><td colspan="4" style="color:#94A3B8">...y ${eamRows.length-5} más</td></tr>`:''}</table>`;}
-async function guardarEAM(){
- if(!eamRows||!eamRows.length)return;
- try{
-  await apiPost({accion:'guardarFilas',hoja:'Maestro_Codigos',filas:eamRows.map(x=>HEADERS['Maestro_Codigos'].map(h=>x[h]||''))});
-  alert('✅ '+eamRows.length+' materiales guardados.');loadMaestro();
- }catch(e){alert('❌ '+e.message);}}
-function renderDefectosCfg(){
- const el=document.getElementById('defectosCfg');if(!el)return;
- const gs=[...new Set(CFG.defectos.map(d=>d[0]))];
- el.innerHTML=gs.map(g=>`<div style="margin-bottom:8px"><div style="font-size:11px;font-weight:800;color:#1E40AF">${g}</div>${CFG.defectos.filter(d=>d[0]===g).map(d=>{const i=CFG.defectos.indexOf(d);return`<div style="display:flex;gap:8px;align-items:center;padding:3px 0;font-size:12px"><span style="font-family:monospace;color:${d[3]==='Conforme'?'#166534':'#991B1B'}">${d[1]}</span> ${d[2]} <span style="flex:1"></span><span style="cursor:pointer;color:#DC2626" onclick="CFG.defectos.splice(${i},1);saveCfgAll();renderDefectosCfg()">✕</span></div>`;}).join('')}</div>`).join('');}
-function addDefecto(){
- const g=document.getElementById('defGrupoNew').value,c=document.getElementById('defCodNew').value.trim(),t=document.getElementById('defTxtNew').value.trim();
- if(!c||!t)return;CFG.defectos.push([g,c,t,'Defecto']);saveCfgAll();renderDefectosCfg();
- document.getElementById('defCodNew').value='';document.getElementById('defTxtNew').value='';}
-function renderAlmacenCfg(){
- const el=document.getElementById('almacenCfg');if(!el)return;
- el.innerHTML=`<div style="font-size:12px"><b>Almacenes físicos:</b> ${CFG.almFis.map((a,i)=>`<span class="chip">${a}<span class="rm" onclick="CFG.almFis.splice(${i},1);saveCfgAll();renderAlmacenCfg();fillAlmacenes()">×</span></span>`).join('')}</div>
- <div style="font-size:12px;margin-top:6px"><b>Códigos:</b> ${CFG.almCod.map((a,i)=>`<span class="chip">${a}<span class="rm" onclick="CFG.almCod.splice(${i},1);saveCfgAll();renderAlmacenCfg();fillAlmacenes()">×</span></span>`).join('')}</div>`;}
-function addAlmacen(){
- const v=document.getElementById('almNew').value.trim().toUpperCase();if(!v)return;
- if(/^\d{4}$/.test(v)){if(!CFG.almCod.includes(v))CFG.almCod.push(v);}else{if(!CFG.almFis.includes(v))CFG.almFis.push(v);}
- saveCfgAll();renderAlmacenCfg();fillAlmacenes();document.getElementById('almNew').value='';}
-function fillAlmacenes(){
- const f=document.getElementById('mAlmFis'),c=document.getElementById('mAlmCod');
- if(f)f.innerHTML='<option value="">Seleccionar...</option>'+CFG.almFis.map(a=>`<option>${a}</option>`).join('');
- if(c)c.innerHTML='<option value="">Seleccionar...</option>'+CFG.almCod.map(a=>`<option>${a}</option>`).join('');}
-function renderPlantillaCfg(){
- fillLineas('cfgLinea');
- const sel=document.getElementById('cfgLinea');if(!sel||!sel.value)return;
- const l=sel.value;
- const rows=CFG.plantillas.filter(r=>r[0]===l);
- document.getElementById('plantillaCfg').innerHTML=`<table class="dt"><tr><th>Fase</th><th>Campo</th><th>Und</th><th>Herramienta</th><th></th></tr>
- ${rows.map(r=>{const i=CFG.plantillas.indexOf(r);return`<tr><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td style="font-size:11px">${r[4]}</td><td style="cursor:pointer;color:#DC2626" onclick="CFG.plantillas.splice(${i},1);saveCfgAll();renderPlantillaCfg()">✕</td></tr>`;}).join('')}</table>
- <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
-  <select id="cfgPFase" style="padding:8px;border:1px solid #CBD5E1;border-radius:8px;font-size:12px"><option>Dimensional</option><option>Funcional</option></select>
-  <input id="cfgPCampo" placeholder="Campo" style="flex:1;min-width:100px;padding:8px;border:1px solid #CBD5E1;border-radius:8px;font-size:12px">
-  <input id="cfgPUnd" placeholder="Und" style="width:60px;padding:8px;border:1px solid #CBD5E1;border-radius:8px;font-size:12px">
-  <input id="cfgPHerr" placeholder="Herramienta" style="flex:1;min-width:100px;padding:8px;border:1px solid #CBD5E1;border-radius:8px;font-size:12px">
-  <button class="btn" style="background:#2563EB;color:white;padding:8px 12px" onclick="cfgAddCampo()">+</button>
- </div>`;}
-function cfgAddCampo(){
- const l=document.getElementById('cfgLinea').value,f=document.getElementById('cfgPFase').value,c=document.getElementById('cfgPCampo').value.trim();
- if(!l||!c)return;
- CFG.plantillas.push([l,f,c,document.getElementById('cfgPUnd').value||'—',document.getElementById('cfgPHerr').value||'—','']);
- saveCfgAll();renderPlantillaCfg();}
-
-/* ═══ 21. MODO MÓVIL (QR) ═══ */
-let mob=null;
-function mobFotoChange(input){
- const f=input.files[0];if(!f||!mobFotoTarget)return;
- comprimirImagen(f,async d=>{
-  const t=mobFotoTarget;
-  if(t.tab==='V')mob.checklist[t.i].foto=d;
-  if(t.tab==='D')mob.medidas[t.i].foto=d;
-  if(t.tab==='F')mob.pruebas[t.i].foto=d;
-  try{
-   const link=await subirEvidenciaFoto(d,mob.id,t.tab==='V'?'Visual':t.tab==='D'?'Dimensional':'Funcional',t.tab+'-'+t.i);
-   if(link&&String(link).startsWith('http'))console.log('Evidencia subida:',link);
-  }catch(err){console.warn(err);}
-  renderMob();
- });
- input.value='';}
-let mobFotoTarget=null;
-function mobFoto(tab,i){mobFotoTarget={tab,i};const el=document.getElementById('mobFoto');if(el)el.click();}
-async function mobSync(){
- const msg=document.getElementById('mobSyncMsg');if(msg)msg.innerHTML='<div class="loading">Sincronizando...</div>';
- try{
-  const hall=[];
-  mob.checklist.forEach((c,i)=>{
-   if(c.res==='NC'){
-    const d=CFG.defectos.find(x=>x[1]===c.cod);
-    hall.push(['',1,'Visual','VIS-'+i,c.item,c.cod||'',d?d[2]:'',c.obs||'','','']);}});
-  const cl=mob.checklist.filter(c=>c.res).map(c=>['',c.grupo,c.item,c.res,c.obs||'']);
-  const med=mob.medidas.filter(x=>x.medido).map(x=>['','Dimensional',x.campo,'',x.medido,x.unidad,x.herr,''])
-   .concat(mob.pruebas.filter(x=>x.medido||x.ok).map(x=>['','Funcional',x.prueba,'',x.medido,x.unidad,x.herr,x.ok==='C'?'Conforme':x.ok==='NC'?'No conforme':'N/A']));
-  await apiPost({accion:'sincronizarAvance',id:mob.id,checklist:cl,medidas:med,series:mob.series.map(s=>['',s.serie,s.res==='C'?'Conforme':'No conforme']),hallazgos:hall});
-  if(msg)msg.innerHTML='<div class="alert green" style="margin-top:8px">✅ Sincronizado — la laptop ya puede traer este avance.</div>';
- }catch(e){if(msg)msg.innerHTML='<div class="alert red" style="margin-top:8px">❌ '+e.message+'</div>';}}
-function mobSyncBtn(){return`<button class="btn btn-primary" style="margin-top:10px" onclick="mobSync()">📤 Sincronizar</button><div id="mobSyncMsg" style="margin-top:8px"></div>`;}
-function renderMob(){
- const m=mob.m;
- document.body.innerHTML=`<div class="mob">
- <div class="mob-head"><div style="font-weight:800;font-size:14px">${esc(mob.id)}</div>
-  <div style="font-size:12px;opacity:.85">${esc(m['Código SAP']||'')} — ${esc(m['Descripción']||'')}</div>
-  <div style="font-size:11px;opacity:.7;margin-top:2px">Muestra: ${esc(m['Cant Muestra 1']||'—')} u · Almacén ${esc(m['Código Almacén']||'—')} · ${esc(m['Proveedor']||'—')}</div></div>
- <div class="mob-tabs">
-  <button class="${mob.tab==='V'?'on':''}" onclick="mob.tab='V';renderMob()">👁 Visual</button>
-  <button class="${mob.tab==='D'?'on':''}" onclick="mob.tab='D';renderMob()">📐 Dimens.</button>
-  <button class="${mob.tab==='F'?'on':''}" onclick="mob.tab='F';renderMob()">⚙️ Funcional</button>
-  <button class="${mob.tab==='S'?'on':''}" onclick="mob.tab='S';renderMob()">🏷 Series</button>
-  <button class="${mob.tab==='X'?'on':''}" onclick="mob.tab='X';renderMob()">✅ Sync</button>
- </div><div id="mobBody"></div>
- <input type="file" accept="image/*" capture="environment" id="mobFoto" style="display:none" onchange="mobFotoChange(this)">
- </div>`;
- const b=document.getElementById('mobBody');
- if(mob.tab==='V'){
-  b.innerHTML=mob.checklist.map((c,i)=>`<div class="mob-item">
-   <div style="font-size:10px;color:#1E40AF;font-weight:800">${esc(c.grupo)}</div>
-   <div style="font-size:13px;margin:3px 0 6px">${esc(c.item)}</div>
-   <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-    <div style="display:flex;gap:4px">
-     <button onclick="mob.checklist[${i}].res='C';renderMob()" style="padding:8px 12px;border-radius:8px;border:1.5px solid #E2E8F0;background:${c.res==='C'?'#F0FDF4':'white'};font-weight:700;font-size:11px;cursor:pointer">✓ C</button>
-     <button onclick="mob.checklist[${i}].res='NC';renderMob()" style="padding:8px 12px;border-radius:8px;border:1.5px solid #E2E8F0;background:${c.res==='NC'?'#FEF2F2':'white'};font-weight:700;font-size:11px;cursor:pointer">✗ NC</button>
-     <button onclick="mob.checklist[${i}].res='NA';renderMob()" style="padding:8px 12px;border-radius:8px;border:1.5px solid #E2E8F0;background:white;font-weight:700;font-size:11px;cursor:pointer">N/A</button></div>
-    <div class="foto-slot mob-foto" onclick="mobFoto('V',${i})">${c.foto?`<img src="${c.foto}">`:'📷'}</div>
-   </div>
-   ${c.res==='NC'?`<div style="margin-top:6px">
-    <select onchange="mob.checklist[${i}].cod=this.value" style="width:100%;padding:7px;border:1px solid #CBD5E1;border-radius:8px;font-size:12px">
-     <option value="">Código defecto SAP...</option>${CFG.defectos.map(d=>`<option value="${d[1]}" ${c.cod===d[1]?'selected':''}>${d[0]} ${d[1]} ${d[2]}</option>`).join('')}</select>
-    <input placeholder="Detalle (sucioso, roto...)" value="${esc(c.obs||'')}" onchange="mob.checklist[${i}].obs=this.value" style="width:100%;margin-top:6px;padding:7px;border:1px solid #CBD5E1;border-radius:8px;font-size:12px"></div>`:''}
-  </div>`).join('')+mobSyncBtn();}
- if(mob.tab==='D'){
-  b.innerHTML=mob.medidas.map((x,i)=>`<div class="mob-item">
-   <div style="font-size:13px;font-weight:700">${esc(x.campo)} <span style="font-weight:400;color:#94A3B8">(${esc(x.unidad)})</span></div>
-   <div style="display:flex;gap:6px;margin-top:6px;align-items:center">
-    <input value="${esc(x.medido)}" placeholder="medido" onchange="mob.medidas[${i}].medido=this.value" style="flex:1;padding:8px;border:1px solid #CBD5E1;border-radius:8px;font-size:13px">
-    <div class="foto-slot" onclick="mobFoto('D',${i})">${x.foto?`<img src="${x.foto}">`:'📷'}</div></div></div>`).join('')+mobSyncBtn();}
- if(mob.tab==='F'){
-  b.innerHTML=mob.pruebas.map((x,i)=>`<div class="mob-item">
-   <div style="font-size:13px;font-weight:700">${esc(x.prueba)}</div>
-   <div class="en">${esc(x.herr||'')}</div>
-   <div style="display:flex;gap:6px;margin-top:6px;align-items:center">
-    <select onchange="mob.pruebas[${i}].ok=this.value" style="padding:8px;border:1px solid #CBD5E1;border-radius:8px;font-size:12px">
-     <option value=""></option><option value="C" ${x.ok==='C'?'selected':''}>✓</option><option value="NC" ${x.ok==='NC'?'selected':''}>✗</option><option value="NA" ${x.ok==='NA'?'selected':''}>N/A</option></select>
-    <input value="${esc(x.medido)}" placeholder="valor medido" onchange="mob.pruebas[${i}].medido=this.value" style="flex:1;padding:8px;border:1px solid #CBD5E1;border-radius:8px;font-size:13px">
-    <div class="foto-slot" onclick="mobFoto('F',${i})">${x.foto?`<img src="${x.foto}">`:'📷'}</div></div></div>`).join('')+mobSyncBtn();}
- if(mob.tab==='S'){
-  b.innerHTML=`<div class="mob-item"><input type="text" placeholder="Escanea serie + Enter" style="width:100%;padding:12px;border:1.5px solid #CBD5E1;border-radius:10px;font-family:monospace" onkeydown="var v=this.value.trim();if(event.key==='Enter'&&v){mob.series.push({serie:v,res:'C'});renderMob();}"></div>`+
-   mob.series.map((s,i)=>`<div class="mob-item" style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:monospace;font-size:12px">${esc(s.serie)}</span>
-   <div style="display:flex;gap:4px"><button onclick="mob.series[${i}].res='C';renderMob()" style="padding:6px 10px;border-radius:8px;border:1.5px solid #E2E8F0;background:${s.res==='C'?'#F0FDF4':'white'};font-weight:700;cursor:pointer">✓</button><button onclick="mob.series[${i}].res='NC';renderMob()" style="padding:6px 10px;border-radius:8px;border:1.5px solid #E2E8F0;background:${s.res==='NC'?'#FEF2F2':'white'};font-weight:700;cursor:pointer">✗</button></div></div>`).join('')+mobSyncBtn();}
- if(mob.tab==='X'){
-  b.innerHTML=`<div class="mob-item"><div class="section-title">✅ Sincronizar al servidor</div>
-  <p style="font-size:12px;color:#64748B;margin-bottom:10px">Sube todo lo registrado: resultados de las 3 fases, series y fotos (las fotos ya subieron al momento de tomarlas).</p>
-  <button class="btn btn-primary" onclick="mobSync()">📤 Sincronizar ahora</button>
-  <div id="mobSyncMsg" style="margin-top:10px"></div></div>`;}}
-async function mobileInit(id){
- loadCfg();
- try{
-  const rows=await apiGet('Muestreos',id);
-  const objs=rowsToObjects('Muestreos',rows);
-  const m=objs.find(x=>x['ID Muestreo']===id)||objs[0];
-  if(!m){document.body.innerHTML='<div class="mob"><div class="alert red">No se encontró el muestreo '+id+'</div></div>';return;}
-  mob={id,m,tab:'V',checklist:CFG.checklist.map(c=>({grupo:c[0],item:c[1],res:'',obs:'',foto:'',cod:''})),
-   medidas:plantilla(m['Línea']||'','Dimensional').map(r=>({campo:r[2],unidad:r[3],herr:r[4],medido:'',foto:''})),
-   pruebas:plantilla(m['Línea']||'','Funcional').map(r=>({prueba:r[2],unidad:r[3],herr:r[4],ok:'',medido:'',foto:''})),
-   series:[]};
-  try{
-   const av=await apiPost({accion:'getAvance',id});
-   (av.checklist||[]).forEach(r=>{const o=rowsToObjects('Muestreo_Checklist',[r])[0];
-    const c=mob.checklist.find(x=>x.grupo===o['Grupo']&&x.item===o['Ítem']);if(c){c.res=o['Resultado'];c.obs=o['Observación']||'';}});
-   (av.medidas||[]).forEach(r=>{const o=rowsToObjects('Muestreo_Medidas',[r])[0];
-    const mm=mob.medidas.find(x=>x.campo===o['Campo']);if(mm)mm.medido=o['Valor Medido']||'';});
-   (av.series||[]).forEach(r=>mob.series.push({serie:r[1],res:r[2]==='Conforme'?'C':'NC'}));
-  }catch(e){}
-  renderMob();
- }catch(e){document.body.innerHTML='<div class="mob"><div class="alert red">❌ '+e.message+'</div></div>';}}
-
-/* ═══ 22. INIT ═══ */
-if(QS.get('m')){
- loadCfg();
- mobileInit(QS.get('m'));
-}else{
- async function init(){
-  loadCfg();await loadMaestro();renderOneDrive();renderSesion();
-  fillAlmacenes();fillLineas('mLinea');renderPersonalSelects();renderProvUI();
-  renderVisual();renderDim();renderFunc();renderSeries();renderManuales();
-  document.getElementById('mFecha').value=new Date().toISOString().split('T')[0];
-  updateNav();}
- init();
-}
-</script>
-</body>
-</html>
+const SEED
