@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a2332;min-height:100vh;padding-bottom:40px}
-.app{max-width:900px;margin:0 auto;padding:12px}
+.app{max-width:880px;margin:0 auto;padding:12px}
 .header{background:#1a3a5c;color:white;border-radius:14px;margin-bottom:14px;box-shadow:0 4px 12px rgba(26,58,92,.25);overflow:hidden}
 .header table{width:100%;border-collapse:collapse;font-size:11px}
 .header td{padding:12px 16px;border-right:1px solid rgba(255,255,255,.2);vertical-align:top}
@@ -15,23 +15,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4F8;color:#1a233
 .header .t1{font-size:17px;font-weight:800}.header .t2{opacity:.75;font-size:10px}
 .hdr-status{padding:8px 16px;background:rgba(0,0,0,.18);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .tabs{display:flex;gap:5px;margin-bottom:14px;flex-wrap:wrap}
-.tab-btn{flex:1;min-width:90px;padding:11px 6px;border-radius:12px;border:1.5px solid #E2E8F0;background:white;color:#475569;font-weight:700;font-size:11.5px;cursor:pointer;font-family:inherit}
+.tab-btn{flex:1;min-width:92px;padding:11px 6px;border-radius:12px;border:1.5px solid #E2E8F0;background:white;color:#475569;font-weight:700;font-size:11.5px;cursor:pointer;font-family:inherit}
 .tab-btn.active{background:#1a3a5c;color:white;border-color:#1a3a5c}
 .tab-page{display:none}.tab-page.active{display:block}
-.hero{background:linear-gradient(135deg,#1a3a5c 0%,#2563a8 55%,#378ADD 100%);color:white;border-radius:16px;padding:24px;margin-bottom:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;box-shadow:0 6px 18px rgba(26,58,92,.3)}
-.hero h1{font-size:21px;font-weight:800;margin:6px 0}
-.hero p{font-size:12.5px;opacity:.92;max-width:540px;line-height:1.55}
+.hero{background:linear-gradient(135deg,#1a3a5c 0%,#2563a8 55%,#378ADD 100%);color:white;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 6px 18px rgba(26,58,92,.3)}
+.hero h1{font-size:20px;font-weight:800;margin:6px 0}
+.hero p{font-size:12.5px;opacity:.92;max-width:620px;line-height:1.55}
 .hero-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.12em;opacity:.8;font-weight:700}
 .hero-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .hero-actions button{padding:12px 15px;border:none;border-radius:10px;font-weight:700;font-size:12.5px;cursor:pointer;font-family:inherit;background:white;color:#1a3a5c}
 .hero-actions button.alt{background:rgba(255,255,255,.16);color:white;border:1px solid rgba(255,255,255,.35)}
-.hero-imgs{display:flex;gap:8px;flex-wrap:wrap}
-.hero-imgs img{width:112px;height:112px;object-fit:cover;border-radius:12px;border:2px solid rgba(255,255,255,.45)}
-.hero-tile{width:112px;height:112px;border-radius:12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:32px}
-.hero-tile small{font-size:9px;opacity:.85;margin-top:4px}
-.auto-box{border:1.5px solid #86EFAC;background:#F0FDF4;border-radius:10px;padding:10px;margin-top:10px;font-size:12px}
-.ing-pick{display:inline-block;margin:4px 6px 0 0;padding:8px 10px;background:white;border:1.5px solid #CBD5E1;border-radius:10px;font-size:11.5px;cursor:pointer;font-weight:700;color:#1a3a5c}
-.ing-pick:hover{border-color:#378ADD;background:#F8FBFF}
 .card{background:white;border:1px solid #E2E8F0;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
 .section-title{font-size:11px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
 .field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
@@ -132,26 +125,25 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
     <button class="tab-btn" id="tabBtnF" onclick="switchTab('F')">⚙️ Config</button>
   </div>
 
-  <!-- ═══ H: PORTADA ═══ -->
   <div class="tab-page active" id="tabH">
     <div class="hero">
-      <div style="flex:1;min-width:280px">
-        <div class="hero-kicker">Grupo Sole · Sistema de Gestión de Calidad · Centro M310</div>
-        <h1>👋 Bienvenido al Portal de Inspecciones de Calidad</h1>
-        <p>Aquí controlas el ciclo completo: los <strong>ingresos del día</strong>, el <strong>muestreo por fases</strong> (visual · dimensional · funcional), la <strong>decisión de lote</strong> de la jefatura y los <strong>reportes</strong>. Todo conectado a SAP: el lote de inspección, file, proveedor y cantidad de muestra se cargan solos.</p>
-        <div class="hero-actions">
-          <button onclick="irMuestrearPendiente()">📋 Muestrear un ingreso pendiente</button>
-          <button class="alt" onclick="switchTab('I')">📦 Ingresos del día</button>
-          <button class="alt" onclick="switchTab('C')">📊 Reportes</button>
-        </div>
+      <div class="hero-kicker">GRUPO SOLE · SISTEMA DE GESTIÓN DE CALIDAD · CENTRO M310</div>
+      <h1>👋 Bienvenido al Portal de Inspecciones de Calidad</h1>
+      <p>Aquí controlas el ciclo completo: los <b>ingresos del día</b>, el <b>muestreo por fases</b> (visual · dimensional · funcional), la <b>decisión de lote</b> de la jefatura y los <b>reportes</b>. Todo conectado a SAP: lote de inspección, file, proveedor y cantidad de muestra se cargan solos.</p>
+      <div class="hero-actions">
+        <button onclick="switchTab('I')">📦 Ingresos del día</button>
+        <button class="alt" onclick="switchTab('B')">📋 Ir a muestrear</button>
+        <button class="alt" onclick="switchTab('C')">📊 Reportes</button>
       </div>
-      <div class="hero-imgs" id="heroImgs"></div>
     </div>
-    <div class="grid3" id="homeKpis"></div>
-    <div class="card">
+    <div class="grid3">
+      <div class="card kpi" style="margin-bottom:0;background:#FFF7ED" id="homeKpiPend"><div class="n" style="color:#92400E">—</div><div class="l" style="color:#92400E">Por muestrear</div></div>
+      <div class="card kpi" style="margin-bottom:0;background:#F0FDF4" id="homeKpiMues"><div class="n" style="color:#166534">—</div><div class="l" style="color:#166534">Ya muestreados</div></div>
+      <div class="card kpi" style="margin-bottom:0;background:#F1F5F9" id="homeKpiDec"><div class="n" style="color:#1a3a5c">—</div><div class="l" style="color:#475569">Esperan decisión</div></div>
+    </div>
+    <div class="card" style="margin-top:12px">
       <div class="section-title">🟡 Próximos a muestrear (ingresos pendientes en la base)</div>
-      <p style="font-size:11px;color:#94A3B8;margin-bottom:8px">Vienen del CONTROL DE MERCADERIA. Un clic precarga todo el muestreo: lote SAP, file, muestra, almacén y proveedor.</p>
-      <div id="homePendientes"><div class="loading">Cargando ingresos...</div></div>
+      <div id="homePendientes"><div class="loading">Cargando...</div></div>
     </div>
     <div class="card">
       <div class="section-title">⏳ Esperando decisión de jefatura</div>
@@ -159,7 +151,6 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
     </div>
   </div>
 
-  <!-- ═══ A: CONSULTA ═══ -->
   <div class="tab-page" id="tabA">
     <div class="card">
       <div class="section-title">Buscar material (código SAP, EAM, EAN o descripción)</div>
@@ -174,17 +165,13 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
     <div id="fichaResultado"></div>
   </div>
 
-  <!-- ═══ I: INGRESOS ═══ -->
   <div class="tab-page" id="tabI">
     <div class="card">
-      <div class="section-title">📦 Ingresos — 3 pasos y listo</div>
-      <div class="alert blue" style="margin-bottom:10px">
-        <strong>① Importa</strong> el CONTROL DE MERCADERIA → <strong>② verifica</strong> el mapeo (se recuerda para siempre) → <strong>③ 💾 Guardar en base</strong>.<br>
-        Luego la bandeja queda <strong>compartida</strong>: todos la ven aquí, los estados los deduce la app y cada fila pendiente se muestrea con un clic.
-      </div>
+      <div class="section-title">📦 Ingresos — CONTROL DE MERCADERIA (estados deducidos por la app)</div>
+      <p style="font-size:12px;color:#64748B;margin-bottom:10px">Quien importa guarda en la base (anti-duplicados por Lote SAP) y <strong>todos</strong> ven la misma bandeja. Nadie escribe estados: los deduce la app.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-        <button class="btn" style="flex:1;min-width:170px;background:#F1F5F9;color:#475569" onclick="document.getElementById('ingFile').click()">📄 ① Importar .xlsx / .csv</button>
-        <button class="btn" style="flex:1;min-width:170px;background:#EBF4FF;color:#1E40AF" onclick="cargarIngresosDeBase()">⬇ Ver bandeja de la base</button>
+        <button class="btn" style="flex:1;min-width:170px;background:#F1F5F9;color:#475569" onclick="document.getElementById('ingFile').click()">📄 Importar .xlsx / .csv</button>
+        <button class="btn" style="flex:1;min-width:170px;background:#EBF4FF;color:#1E40AF" onclick="cargarIngresosDeBase()">⬇ Cargar desde base</button>
       </div>
       <input type="file" id="ingFile" accept=".xlsx,.xls,.csv" style="display:none" onchange="cargarArchivoIngresos(this.files[0])">
       <div id="ingHojas"></div>
@@ -194,7 +181,6 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
     </div>
   </div>
 
-  <!-- ═══ D: VALIDAR FICHA ═══ -->
   <div class="tab-page" id="tabD">
     <div class="card">
       <div class="section-title">📥 Paso 1 — Trae la ficha desde OneDrive</div>
@@ -242,7 +228,6 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
       <div id="historialValidaciones"><p style="font-size:12px;color:#94A3B8">Arrastra una ficha o escribe un código.</p></div>
     </div>
   </div>
-
   <!-- ═══ B: MUESTREO ═══ -->
   <div class="tab-page" id="tabB">
     <div class="progress-bar" id="progressBar"></div>
@@ -253,12 +238,12 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
 
     <div class="step-page active" id="step0">
       <div class="card">
-        <div class="section-title">🏭 Datos de SAP y almacén — se autollenan solos</div>
-        <div class="alert blue" style="margin-bottom:10px">✍️ Escribe o escanea el <strong>Código SAP</strong> abajo: la app busca el ingreso pendiente en la base y llena lote SAP, file, doc. compras, proveedor, cant. lote, muestra y almacén automáticamente.</div>
+        <div class="section-title">🏭 Datos de SAP y almacén (autollenados desde Ingresos)</div>
         <div class="grid2">
           <div class="field"><label>N° Lote inspección SAP ⚠️</label><input type="text" id="mLotInsp" placeholder="Se llena solo desde Ingresos"></div>
           <div class="field"><label>File de importación ⚠️</label><input type="text" id="mFile" placeholder="Se llena solo"></div>
           <div class="field"><label>Doc. compras</label><input type="text" id="mDocComp" placeholder="Se llena solo"></div>
+          <div class="field"><label>Doc. material</label><input type="text" id="mDocMat" placeholder="5000307562"></div>
           <div class="field"><label>Almacén físico ⚠️</label><select id="mAlmFis"></select></div>
           <div class="field"><label>Código de almacén ⚠️</label><select id="mAlmCod"></select></div>
           <div class="field"><label>Proveedor ⚠️</label>
@@ -293,7 +278,7 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
           <button class="mini-btn" style="margin-bottom:12px" onclick="promptNuevaLinea()">＋ Nueva línea</button>
         </div>
         <div class="grid2"><div class="field"><label>Lote ⚠️</label><input type="text" id="mLote" placeholder="L-2026-XXX"></div></div>
-        <div id="fichaRefMini"><p style="font-size:12px;color:#94A3B8">Al escribir el código: ficha vigente + historial + autollenado del ingreso pendiente aparecen aquí.</p></div>
+        <div id="fichaRefMini"><p style="font-size:12px;color:#94A3B8">Al escribir el código: ficha + historial + autollenado del ingreso pendiente.</p></div>
       </div>
       <div class="card">
         <div class="section-title">🔢 Plan de muestreo AQL — ISO 2859-1</div>
@@ -319,7 +304,7 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
     <div class="step-page" id="step1">
       <div class="card">
         <div class="section-title">👁 Fase Visual</div>
-        <p style="font-size:12px;color:#64748B;margin-bottom:8px">✓ C / ✗ NC / N/A. Si marcas <strong>NC</strong> se abre el hallazgo al instante (código defecto SAP, cantidad, fotos, video).</p>
+        <p style="font-size:12px;color:#64748B;margin-bottom:8px">✓ C / ✗ NC / N/A. Si marcas <strong>NC</strong> se abre el hallazgo al instante.</p>
         <div id="visualCont"></div>
         <div id="manVisual" style="margin-top:10px"></div>
       </div>
@@ -402,7 +387,6 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
     </div>
   </div>
 
-  <!-- ═══ E: DECISIÓN ═══ -->
   <div class="tab-page" id="tabE">
     <div class="card">
       <div class="section-title">⚖️ Registrar decisión de lote (Jefatura)</div>
@@ -414,7 +398,6 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
     <div id="pendientesCont"><div class="loading">Busca para ver pendientes.</div></div>
   </div>
 
-  <!-- ═══ C: REPORTES ═══ -->
   <div class="tab-page" id="tabC">
     <div class="card">
       <div class="section-title">📊 Resumen del día</div>
@@ -431,10 +414,9 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
     </div>
   </div>
 
-  <!-- ═══ F: CONFIG ═══ -->
   <div class="tab-page" id="tabF">
     <div class="card">
-      <div class="section-title">🗂 Maestro de códigos SAP — carga Excel/CSV + alta en elacto</div>
+      <div class="section-title">🗂 Maestro de códigos SAP — carga Excel/CSV + alta en el acto</div>
       <p style="font-size:12px;color:#64748B">Detecta: Material, Texto breve, Nº antiguo/EAM, EAN, Peso, Volumen, Centro, Proveedor. Duplicados por almacén se limpian solos.</p>
       <input type="file" id="eamFile" accept=".csv,.txt,.xls,.xlsx" style="display:none" onchange="cargarArchivoMaestro(this.files[0])">
       <button class="btn-add" style="margin:10px 0" onclick="document.getElementById('eamFile').click()">📄 Seleccionar archivo del maestro</button>
@@ -442,7 +424,7 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
       <div style="margin-top:8px"><button class="mini-btn" onclick="promptNuevoMaterial()">＋ Crear material nuevo ahora</button></div>
     </div>
     <div class="card">
-      <div class="section-title">🚚 Maestro de proveedores — carga por hojas + alta en elacto</div>
+      <div class="section-title">🚚 Maestro de proveedores — carga por hojas + alta en el acto</div>
       <input type="file" id="provFile" accept=".csv,.txt,.xls,.xlsx" style="display:none" onchange="cargarArchivoProveedores(this.files[0])">
       <button class="btn-add" style="margin:10px 0" onclick="document.getElementById('provFile').click()">📄 Seleccionar Excel de proveedores (ej. hoja PROV)</button>
       <div id="provPreview"></div>
@@ -488,12 +470,6 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
       <div id="plantillaCfg"></div>
     </div>
     <div class="card">
-      <div class="section-title">🖼 Imágenes de la portada (opcional)</div>
-      <p style="font-size:12px;color:#64748B">Sube fotos de la empresa o productos a tu repositorio (carpeta <code>img/</code>) y pega las URLs separadas por coma. Sin URLs, la portada usa íconos de producto.</p>
-      <div class="field"><label>URLs de imágenes (separadas por coma)</label>
-        <input type="text" id="cfgHeroImgs" placeholder="img/producto1.jpg, img/planta.jpg" oninput="CFG.heroImgs=this.value.split(',').map(s=>s.trim()).filter(Boolean);saveCfgAll();renderHeroImgs()"></div>
-    </div>
-    <div class="card">
       <div class="section-title">🔔 Correo de jefatura (avisos automáticos)</div>
       <div class="field"><label>Correo(s) separados por coma</label><input type="text" id="cfgCorreos" placeholder="jefa@gruposole.pe" oninput="saveCfgAll()"></div>
     </div>
@@ -502,14 +478,13 @@ table.dt td{border-bottom:1px solid #F1F5F9;padding:6px;vertical-align:top}
 
 <div class="foot" id="footVer"></div>
 
-<!-- Modal QR -->
 <div class="modal-ov" id="qrModal">
   <div class="modal-in">
     <h3 style="font-size:15px;color:#1a3a5c;margin-bottom:6px" id="qrTitulo">🚀 Muestreo en servidor</h3>
     <div id="qrInfo" style="font-size:12px;color:#64748B;margin-bottom:10px"></div>
     <canvas id="qrCanvas" style="margin:0 auto 10px;display:block"></canvas>
     <div id="qrLinkBox" style="font-size:11px;word-break:break-all;margin-bottom:10px"></div>
-    <p style="font-size:11px;color:#94A3B8;margin-bottom:12px">El equipo escanea con la cámara del celular: se abre la app en modo campo para tomar fotos y registrar resultados. Luego "Traer avance del móvil".</p>
+    <p style="font-size:11px;color:#94A3B8;margin-bottom:12px">El equipo escanea con la cámara del celular: se abre la app en modo campo. Luego "Traer avance del móvil".</p>
     <button class="btn" style="width:100%;background:#F1F5F9;color:#475569" onclick="document.getElementById('qrModal').style.display='none'">Cerrar</button>
   </div>
 </div>
@@ -528,7 +503,7 @@ const REDIRECT_URI=window.location.origin+window.location.pathname;
 const MSAL_SCOPES=['Files.ReadWrite','User.Read'];
 const ONEDRIVE_FICHAS_FOLDER='Repositorio de Fichas Técnicas';
 const QS=new URLSearchParams(location.search);
-document.getElementById('footVer').textContent='Portal de Calidad '+APP_VERSION+' · Portada · Autollenado desde Ingresos · QR móvil · Guía QA32 espejo';
+document.getElementById('footVer').textContent='Portal de Calidad '+APP_VERSION+' · Portada · Autollenado · QR móvil · Guía QA32 espejo';
 let msalToken=null,msalUserName='';
 
 /* ═══ 2. HEADERS ═══ */
@@ -558,8 +533,10 @@ async function apiPost(payload){
  const res=await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(payload)});
  const j=await res.json();if(j.status!=='ok')throw new Error(j.message||'Error al guardar');return j;}
 function rowsToObjects(sheet,rows){const h=HEADERS[sheet];return (rows||[]).map(r=>{const o={};h.forEach((k,i)=>o[k]=r[i]);return o;});}
+function esc(s){return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function num(s){const m=String(s).replace(',','.').match(/-?\d+(\.\d+)?/);return m?parseFloat(m[0]):null;}
 
-/* ═══ 4. SEEDS + CFG ═══ */
+/* ═══ 4. CFG + SEEDS ═══ */
 const SEED_DEFECTOS=[
  ['AP-EMB','0010','APARIENCIA CONFORME','Conforme'],['AP-EMB','0080','CAJA CON ZUNCHO SOLICITADO','Conforme'],
  ['AP-EMB','0020','MANCHAS','Defecto'],['AP-EMB','0030','GOLPE','Defecto'],['AP-EMB','0040','ROTO','Defecto'],['AP-EMB','0050','MOJADO','Defecto'],['AP-EMB','0060','COLOR DIFERENTE','Defecto'],['AP-EMB','0070','MAL SELLADO','Defecto'],['AP-EMB','0100','CAJA CON ZUNCHO NO SOLICITADO','Defecto'],['AP-EMB','0110','CON DEFORMACIONES','Defecto'],['AP-EMB','0120','CON MARCAS DE ZUNCHO','Defecto'],['AP-EMB','0130','RESIDUO DE PEGAMENTO','Defecto'],['AP-EMB','0140','EMBALAJE NO CORRESPONDE AL PRODUCTO','Defecto'],['AP-EMB','1140','ROTULADO CAJA INCORRECTO','Defecto'],
@@ -568,4 +545,716 @@ const SEED_DEFECTOS=[
  ['FUNC','0010','FUNCIONA CONFORME','Conforme'],['FUNC','0020','NO ENCIENDE','Defecto'],['FUNC','0030','FALLA DE FUNCIONAMIENTO','Defecto'],['FUNC','0040','FUERA DE ESPECIFICACIÓN','Defecto'],
  ['DIM','0010','DIMENSIONES CONFORMES','Conforme'],['DIM','0020','FUERA DE TOLERANCIA','Defecto']];
 const G_EMB='A. EMPAQUE Y EMBALAJE',G_MAR='B. MARCAS Y TRAZABILIDAD',G_INT='C. PRODUCTO INTERNO',G_ACC='D. ACCESORIOS Y COMPONENTES SEGÚN FICHA';
-const SEED
+const SEED_CHECKLIST=[
+ [G_EMB,'Estado de caja (golpes/humedad/roturas)'],[G_EMB,'Arte impreso de caja vigente'],[G_EMB,'Encintado correcto'],[G_EMB,'Zunchado / esquinado según file'],[G_EMB,'Tecnopor completo'],[G_EMB,'Bolsa interna limpia'],[G_EMB,'Rotulado de caja correcto'],
+ [G_MAR,'Rating label legible y adherida'],[G_MAR,'Etiqueta de eficiencia energética'],[G_MAR,'Certificaciones según ficha'],[G_MAR,'N° de serie / código EAM legible'],[G_MAR,'N° de serie coincide con caja'],[G_MAR,'Manual en español incluido'],[G_MAR,'Logo SOLE según arte'],[G_MAR,'Código de barras escaneable (Zebra)'],
+ [G_INT,'Sin grasa / polvo / suciedad'],[G_INT,'Sin rayaduras'],[G_INT,'Sin óxidos o manchas'],[G_INT,'Sin golpes / hendiduras'],[G_INT,'Pintura / esmalte sin desconche'],[G_INT,'Componentes internos completos'],
+ [G_ACC,'Bandeja de horneado presente y sin daños'],[G_ACC,'Parrilla / rejilla presente y sin daños'],[G_ACC,'Soporte de espiedo (rotiserie) presente'],[G_ACC,'Enchufe / clavija tipo según ficha (chuko / VDE)'],[G_ACC,'Inyectores instalados según ficha (LPG/NG)'],[G_ACC,'Medidas de inyectores según ficha'],[G_ACC,'Kit de inyectores adicional incluido'],[G_ACC,'Quemadores completos (cantidad y tipo)'],[G_ACC,'Esparcidores / tapas de quemador completos'],[G_ACC,'Acoplamiento GLP incluido'],[G_ACC,'Tornillería y piezas de fijación incluidas']];
+const LINEAS_DEFAULT=['Calentadores a gas / paso continuo','Termotanques eléctricos','Duchas / Rápiduchas eléctricas','Cocinas / Estufas (con horno)','Encimeras / Hornillas','Campanas extractoras','Aires acondicionados','Refrigeradores / Congeladores','Otra'];
+let CFG={personal:[],proveedores:[],defectos:null,checklist:null,plantillas:null,lineas:null,almFis:['ARGENTINA','MONTE AZUL'],almCod:['0121','0103','0176'],correos:'',ingMapeo:null};
+function loadCfg(){try{const s=localStorage.getItem('sole_cfg_v45');if(s)CFG=Object.assign(CFG,JSON.parse(s));}catch(e){}
+ if(!CFG.defectos)CFG.defectos=SEED_DEFECTOS.slice();
+ if(!CFG.checklist)CFG.checklist=SEED_CHECKLIST.slice();
+ if(!CFG.lineas)CFG.lineas=LINEAS_DEFAULT.slice();
+ saveCfgAll();}
+function saveCfgAll(){try{const c=document.getElementById('cfgCorreos');if(c)CFG.correos=c.value;localStorage.setItem('sole_cfg_v45',JSON.stringify(CFG))}catch(e){}}
+
+/* ═══ 5. SESIÓN + TABS ═══ */
+let sesion={nombre:'',rol:'Inspector'};
+try{const s=JSON.parse(localStorage.getItem('sole_sesion'));if(s)sesion=s;}catch(e){}
+function setSesion(n){sesion.nombre=n;localStorage.setItem('sole_sesion',JSON.stringify(sesion));renderSesion();}
+function setRol(r){sesion.rol=r;localStorage.setItem('sole_sesion',JSON.stringify(sesion));renderCfgAll();}
+function renderSesion(){
+ const sel=document.getElementById('sesSel');if(!sel)return;
+ if(!CFG.personal.length){sel.innerHTML='<option value="">— toca ＋ Persona —</option>';return;}
+ sel.innerHTML='<option value="">— elegir —</option>'+CFG.personal.map(p=>`<option ${p===sesion.nombre?'selected':''}>${p}</option>`).join('');
+ const rs=document.getElementById('rolSel');if(rs)rs.value=sesion.rol;}
+function promptAddPersonal(){
+ const n=(prompt('Nombre completo de la persona (queda guardado):','')||'').trim();
+ if(!n)return;
+ if(!CFG.personal.includes(n))CFG.personal.push(n);
+ saveCfgAll();renderPersonalSelects();renderSesion();renderPersonalCfg();
+ if(!sesion.nombre)setSesion(n);}
+function promptNuevaLinea(){
+ const n=(prompt('Nombre de la nueva línea de producto:','')||'').trim();
+ if(!n)return;
+ if(!CFG.lineas.includes(n))CFG.lineas.push(n);
+ saveCfgAll();fillLineas('mLinea');fillLineas('cfgLinea');
+ document.getElementById('mLinea').value=n;resetearPlantillas();}
+function promptNuevoProveedor(){
+ const v=(prompt('Proveedor nuevo — formato: RUC y razón social','')||'').trim();
+ if(!v)return;addProveedorString(v);renderProvUI();
+ const m=document.getElementById('mProveedor');if(m)m.value=v;}
+function addProveedorString(v){
+ const m=v.match(/^(\d{11})\s+(.+)/);
+ const p=m?{ruc:m[1],nombre:m[2]}:{ruc:'',nombre:v};
+ if(!CFG.proveedores.find(x=>(x.nombre||x)===p.nombre))CFG.proveedores.push(p);
+ saveCfgAll();}
+function switchTab(t){
+ ['H','A','I','D','B','E','C','F'].forEach(x=>{
+  const p=document.getElementById('tab'+x),b=document.getElementById('tabBtn'+x);
+  if(p)p.classList.toggle('active',t===x);if(b)b.classList.toggle('active',t===x);});
+ if(t==='B')iniciarReloj();
+ if(t==='I')initIngresos();
+ if(t==='E')cargarPendientes();
+ if(t==='H')renderHome();
+ if(t==='C'&&!window._resCargado){window._resCargado=true;document.getElementById('resumenFecha').value=new Date().toISOString().split('T')[0];cargarResumenDia();cargarRecurrencia();}
+ if(t==='F')renderCfgAll();}
+
+/* ═══ 6. PORTADA ═══ */
+async function renderHome(){
+ try{
+  const [ms,ing]=await Promise.all([apiGet('Muestreos'),apiGet('Ingresos')]);
+  const msO=rowsToObjects('Muestreos',ms);
+  const ingO=rowsToObjects('Ingresos',ing).filter(o=>o['Código SAP']);
+  const porLote={};msO.forEach(m=>{if(m['N° Lote Inspección SAP'])porLote[String(m['N° Lote Inspección SAP']).trim()]=m;});
+  const ingP=ingO.filter(o=>!porLote[String(o['Lote SAP']||'').trim()]);
+  const pend=msO.filter(m=>m['Estado']==='Pendiente de decisión');
+  const kp=(id,n)=>{const el=document.getElementById(id);if(el){const nn=el.querySelector('.n');if(nn)nn.textContent=n;}};
+  kp('homeKpiPend',ingP.length);kp('homeKpiMues',ingO.length-ingP.length);kp('homeKpiDec',pend.length);
+  const hp=document.getElementById('homePendientes');
+  if(hp)hp.innerHTML=ingP.length?ingP.slice(0,8).map(o=>`<div style="font-size:12px;padding:6px 0;border-bottom:1px solid #F1F5F9"><b style="font-family:monospace">${esc(o['Código SAP']||'')}</b> — ${esc(String(o['Descripción']||'').slice(0,42))} · ${esc(o['Cant Muestra']||'—')}/${esc(o['Cant Lote']||'—')} u · ALM ${esc(o['Almacén']||'—')} · ${esc(o['Proveedor']||'—')}</div>`).join('')+'<button class="mini-btn" style="margin-top:8px" onclick="switchTab(\'I\')">Ir a muestrear →</button>':'<p style="font-size:12px;color:#94A3B8">Sin ingresos pendientes — importa el CONTROL DE MERCADERIA en 📦 Ingresos.</p>';
+  const hd=document.getElementById('homeDecidir');
+  if(hd)hd.innerHTML=pend.length?pend.map(m=>`<div style="font-size:12px;padding:6px 0;border-bottom:1px solid #F1F5F9"><b>${esc(m['ID Muestreo'])}</b> · ${esc(m['Código SAP']||'')} · Lote SAP ${esc(m['N° Lote Inspección SAP']||'—')} · ${esc(m['Fecha']||'')} <button class="mini-btn" onclick="switchTab('E')">⚖️ decidir</button></div>`).join(''):'<p style="font-size:12px;color:#94A3B8">Nada esperando decisión. 👍</p>';
+ }catch(e){
+  const hp=document.getElementById('homePendientes');
+  if(hp)hp.innerHTML='<div class="alert amber">⚠️ '+esc(e.message)+' — verifica que el backend esté publicado.</div>';
+  const hd=document.getElementById('homeDecidir');if(hd)hd.innerHTML='';}
+}
+
+/* ═══ 7. RELOJ ═══ */
+let relojT0=null;
+function iniciarReloj(){
+ if(relojT0)return;
+ relojT0=new Date();
+ const hi=document.getElementById('mHoraInicioR1');
+ if(hi&&!hi.value)hi.value=relojT0.toTimeString().slice(0,5);
+ document.getElementById('relojBox').style.display='block';
+ setInterval(pintaReloj,1000);pintaReloj();}
+function pintaReloj(){
+ if(!relojT0)return;
+ const s=Math.floor((Date.now()-relojT0)/1000);
+ document.getElementById('relojBox').innerHTML='⏱ Inicio '+relojT0.toTimeString().slice(0,5)+' · transcurrido <b>'+String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')+'</b>';}
+/* ═══ 8. AUTOCOMPLETADO + CONSULTA ═══ */
+function attr(s){return String(s||'').replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function setVal(id,v){const el=document.getElementById(id);if(el&&v!=null&&v!=='')el.value=v;}
+let MAESTRO=[],INGRESOS=[];
+async function ensureMaestro(){if(window._maestroOK)return MAESTRO;try{MAESTRO=rowsToObjects('Maestro_Codigos',await apiGet('Maestro_Codigos'));window._maestroOK=true;}catch(e){MAESTRO=[];}return MAESTRO;}
+async function ensureIngresos(){if(window._ingOK)return INGRESOS;try{INGRESOS=rowsToObjects('Ingresos',await apiGet('Ingresos')).filter(o=>o['Código SAP']);window._ingOK=true;}catch(e){INGRESOS=[];}return INGRESOS;}
+async function autocompletar(inputId){
+ const inp=document.getElementById(inputId),lst=document.getElementById('al_'+inputId);
+ const q=(inp.value||'').trim().toUpperCase();
+ if(q.length<2){lst.style.display='none';return;}
+ await ensureMaestro();
+ const res=MAESTRO.filter(m=>(m['Código SAP']||'').toUpperCase().includes(q)||(m['EAM']||'').toUpperCase().includes(q)||(m['EAN']||'').toUpperCase().includes(q)||(m['Descripción']||'').toUpperCase().includes(q)).slice(0,8);
+ if(!res.length){lst.style.display='none';return;}
+ lst.innerHTML=res.map(m=>`<div class="autoc-item" onclick="elegirAutoc('${inputId}','${attr(m['Código SAP'])}')"><span class="c">${attr(m['Código SAP'])}</span><div class="d">${attr(m['Descripción'])}</div></div>`).join('')
+ +`<div class="autoc-new" onclick="elegirAutoc('${inputId}','${attr(q)}',true)">➕ Usar "${attr(q)}" como código nuevo</div>`;
+ lst.style.display='block';}
+function cerrarAutoc(id){const l=document.getElementById('al_'+id);if(l)l.style.display='none';}
+function elegirAutoc(inputId,code,nuevo){
+ document.getElementById(inputId).value=code;cerrarAutoc(inputId);
+ if(inputId==='mCodigo')cargarFichaReferencia();
+ if(inputId==='buscarCodigo')buscarFicha();}
+function detectarLinea(m){
+ const t=((m['Descripción']||'')+' '+(m['Grupo Artículos']||'')).toUpperCase();
+ if(/TERMOTANQUE/.test(t))return 'Termotanques eléctricos';
+ if(/CALENTADOR|PASO CONTINUO/.test(t))return 'Calentadores a gas / paso continuo';
+ if(/DUCHA|RAPIDUCHA/.test(t))return 'Duchas / Rápiduchas eléctricas';
+ if(/COCINA|ESTUFA|HORNO SOLE/.test(t))return 'Cocinas / Estufas (con horno)';
+ if(/ENCIMERA|HORNILLA|TOQUE/.test(t))return 'Encimeras / Hornillas';
+ if(/CAMPANA/.test(t))return 'Campanas extractoras';
+ if(/AIRE ACONDICIONADO|SPLIT|CLIMATIZAC/.test(t))return 'Aires acondicionados';
+ if(/REFRIGERADOR|CONGELADOR|FRIGOBAR|CAVA|VIN/.test(t))return 'Refrigeradores / Congeladores';
+ return null;}
+async function cargarFichaReferencia(){
+ const cod=(document.getElementById('mCodigo').value||'').trim().toUpperCase();
+ const box=document.getElementById('fichaRefMini');
+ if(!cod){box.innerHTML='<p style="font-size:12px;color:#94A3B8">Al escribir el código: ficha + historial + autollenado del ingreso pendiente.</p>';return;}
+ box.innerHTML='<div class="loading">🔎 Buscando ficha, historial e ingreso pendiente...</div>';
+ await ensureMaestro();await ensureIngresos();
+ let ms=[];try{ms=rowsToObjects('Muestreos',await apiGet('Muestreos'));}catch(e){}
+ const m=MAESTRO.find(x=>(x['Código SAP']||'').toUpperCase()===cod||String(x['EAM']||'')===cod||String(x['EAN']||'')===cod);
+ if(m){setVal('mDesc',m['Descripción']);
+  setVal('mRefPeso',[m['EAM']?('EAM '+m['EAM']):'',m['Peso Bruto']?('PB '+m['Peso Bruto']):'',m['Volumen']?('Vol '+m['Volumen']):''].filter(Boolean).join(' · '));
+  const gl=detectarLinea(m);if(gl&&CFG.lineas.includes(gl)){document.getElementById('mLinea').value=gl;resetearPlantillas();}}
+ const lotesHechos={};ms.forEach(x=>{if(x['N° Lote Inspección SAP'])lotesHechos[String(x['N° Lote Inspección SAP']).trim()]=x;});
+ const cand=INGRESOS.filter(o=>String(o['Código SAP']||'').toUpperCase()===cod&&!lotesHechos[String(o['Lote SAP']||'').trim()]);
+ window._candIngresos=cand;
+ const hist=ms.filter(x=>String(x['Código SAP']||'').toUpperCase()===cod).slice(-3).reverse();
+ let html='';
+ if(cand.length===1){html+='<div class="alert green" style="margin-bottom:6px">✅ Ingreso pendiente encontrado — <b>datos SAP autollenados solos</b>.</div>';aplicarIngresoIdx(0);}
+ else if(cand.length>1){html+='<div class="alert blue" style="margin-bottom:6px">Hay <b>'+cand.length+' ingresos pendientes</b> de este código — elige cuál muestreas:</div>'+cand.map((o,i)=>`<button class="mini-btn" style="margin:2px 4px 2px 0" onclick="aplicarIngresoIdx(${i})">📋 Lote ${attr(o['Lote SAP']||'(sin lote)')} · ${attr(o['Cant Muestra']||'?')}u · ALM ${attr(o['Almacén']||'?')}</button>`).join('');}
+ else html+='<div class="alert amber" style="margin-bottom:6px">Sin ingreso pendiente en la base para este código — llénalo manual o importa el CONTROL DE MERCADERIA.</div>';
+ if(hist.length)html+='<div style="font-size:11px;color:#64748B;margin-top:6px"><b>Historial:</b> '+hist.map(x=>`${attr(x['ID Muestreo'])} (${attr(x['Fecha']||'?')}) → ${attr(x['Estado']||'?')}${x['Decisión Final']?' · '+attr(x['Decisión Final']):''}`).join(' · ')+'</div>';
+ box.innerHTML=html;}
+function aplicarIngresoIdx(i){
+ const o=(window._candIngresos||[])[i];if(!o)return;
+ setVal('mLotInsp',o['Lote SAP']);setVal('mFile',o['File']);setVal('mDocComp',o['Doc Compras']);setVal('mDocMat',o['Doc Material']);
+ setVal('mProveedor',o['Proveedor']);setVal('mCantLote',o['Cant Lote']);setVal('mCantM1',o['Cant Muestra']);
+ const f=String(o['Fecha Ingreso']||'');setVal('mFecha',f.match(/^\d{4}-\d{2}-\d{2}/)?f.slice(0,10):'');
+ const al=String(o['Almacén']||'').trim();
+ ['mAlmFis','mAlmCod'].forEach(id=>{const s=document.getElementById(id);if(s)[...s.options].forEach(op=>{if(op.value===al)s.value=al;});});}
+async function buscarFicha(){
+ const cod=(document.getElementById('buscarCodigo').value||'').trim().toUpperCase();
+ const out=document.getElementById('fichaResultado');
+ if(!cod){out.innerHTML='';return;}
+ out.innerHTML='<div class="loading">Buscando...</div>';
+ await ensureMaestro();
+ const m=MAESTRO.find(x=>(x['Código SAP']||'').toUpperCase()===cod||String(x['EAM']||'')===cod||String(x['EAN']||'')===cod);
+ let ms=[],vals=[];
+ try{ms=rowsToObjects('Muestreos',await apiGet('Muestreos')).filter(x=>String(x['Código SAP']||'').toUpperCase()===cod);}catch(e){}
+ try{vals=rowsToObjects('Validaciones_Fichas',await apiGet('Validaciones_Fichas')).filter(x=>String(x['Código SAP']||'').toUpperCase()===cod);}catch(e){}
+ out.innerHTML=`<div class="card ficha-header"><div class="code">${attr(cod)}</div><div class="desc">${attr(m?m['Descripción']:'(no está en el maestro — créalo en ⚙️ Config)')}</div>
+ ${m?`<div class="meta">${m['EAM']?'EAM: '+attr(m['EAM'])+' · ':''}${m['EAN']?'EAN: '+attr(m['EAN'])+' · ':''}${m['Peso Bruto']?'Peso bruto: '+attr(m['Peso Bruto'])+' · ':''}Línea: ${attr(detectarLinea(m)||'—')}</div>`:''}</div>
+ <div class="card"><div class="section-title">🧾 Muestreos anteriores (${ms.length})</div>${ms.length?'<table class="dt"><tr><th>ID</th><th>Fecha</th><th>Lote SAP</th><th>Estado</th><th>Decisión</th></tr>'+ms.slice(-10).reverse().map(x=>`<tr><td>${attr(x['ID Muestreo'])}</td><td>${attr(x['Fecha'])}</td><td>${attr(x['N° Lote Inspección SAP'])}</td><td>${attr(x['Estado'])}</td><td>${attr(x['Decisión Final']||'—')}</td></tr>').join('')+'</table>':'<p style="font-size:12px;color:#94A3B8">Sin muestreos registrados.</p>'}</div>
+ <div class="card"><div class="section-title">📥 Validaciones de ficha (${vals.length})</div>${vals.length?'<table class="dt"><tr><th>Revisión</th><th>Validó</th><th>Resultado</th><th>Fecha</th></tr>'+vals.slice(-10).reverse().map(v=>`<tr><td>${attr(v['Revisión'])}</td><td>${attr(v['Validado Por'])}</td><td>${attr(v['Resultado'])}</td><td>${attr(String(v['Fecha']).slice(0,10))}</td></tr>').join('')+'</table>':'<p style="font-size:12px;color:#94A3B8">Sin validaciones registradas.</p>'}</div>`;}
+
+/* ═══ 9. INGRESOS ═══ */
+let ING_WB=null,ING_AOA=null,ING_SHEET='';
+const ING_FIELDS=['Fecha Ingreso','Doc Material','Código SAP','Descripción','Cant Lote','Doc Compras','File','Almacén','Proveedor','Cant Muestra','Lote SAP','Fecha Contenedor'];
+const ING_GUESS={'Fecha Ingreso':['fecha'],'Doc Material':['doc material','doc.mat','material doc'],'Código SAP':['codigo','código','material'],'Descripción':['descrip','texto'],'Cant Lote':['cant lote','cantidad','ctd'],'Doc Compras':['doc compras','compras'],'File':['file'],'Almacén':['almacen','almacén','alm'],'Proveedor':['proveedor','prov'],'Cant Muestra':['mues'],'Lote SAP':['lote'],'Fecha Contenedor':['contenedor']};
+function initIngresos(){if(!ING_AOA)cargarIngresosDeBase();}
+async function cargarIngresosDeBase(){
+ const t=document.getElementById('ingTabla');t.innerHTML='<div class="loading">Cargando bandeja compartida...</div>';
+ try{await ensureIngresos();window._ingOK=true;
+  let ms=[];try{ms=rowsToObjects('Muestreos',await apiGet('Muestreos'));}catch(e){}
+  const porLote={};ms.forEach(m=>{if(m['N° Lote Inspección SAP'])porLote[String(m['N° Lote Inspección SAP']).trim()]=m;});
+  window._ingRows=INGRESOS;
+  t.innerHTML='<div class="section-title">📬 Bandeja ('+INGRESOS.length+' ingresos)</div><table class="dt"><tr><th>Fecha</th><th>Código</th><th>Descripción</th><th>Lote SAP</th><th>Cant</th><th>Muestra</th><th>Almacén</th><th>Estado</th><th></th></tr>'+
+  INGRESOS.map((o,i)=>{const lote=String(o['Lote SAP']||'').trim();const m=porLote[lote];
+   const est=m?(m['Decisión Final']||m['Estado']||'Muestreado'):'🟡 Pendiente';
+   return `<tr><td>${attr(String(o['Fecha Ingreso']||'').slice(0,10))}</td><td style="font-family:monospace">${attr(o['Código SAP'])}</td><td>${attr(String(o['Descripción']||'').slice(0,30))}</td><td>${attr(lote)}</td><td>${attr(o['Cant Lote'])}</td><td>${attr(o['Cant Muestra'])}</td><td>${attr(o['Almacén'])}</td><td>${attr(est)}</td><td>${m?'':'<button class="mini-btn" onclick="muestrearDesdeIngreso('+i+')">📋 Muestrear</button>'}</td></tr>`;}).join('')+'</table>';
+ }catch(e){t.innerHTML='<div class="alert amber">⚠️ '+esc(e.message)+' — verifica el backend o importa abajo.</div>';}}
+function muestrearDesdeIngreso(i){
+ const o=(window._ingRows||[])[i];if(!o)return;
+ window._candIngresos=[o];aplicarIngresoIdx(0);
+ setVal('mCodigo',o['Código SAP']);setVal('mDesc',o['Descripción']);
+ switchTab('B');if(window.renderStepB)renderStepB(0);cargarFichaReferencia();}
+async function cargarArchivoIngresos(file){
+ if(!file)return;
+ const buf=await file.arrayBuffer();
+ try{ING_WB=XLSX.read(buf,{type:'array'});}catch(e){alert('No se pudo leer el archivo: '+e.message);return;}
+ document.getElementById('ingHojas').innerHTML='<div class="section-title">① Elige la hoja (ej. MUESTREO PT)</div><div style="display:flex;gap:6px;flex-wrap:wrap">'+ING_WB.SheetNames.map(n=>`<button class="mini-btn" onclick="elegirHojaIngresos('${attr(n)}')">${attr(n)}</button>`).join('')+'</div>';
+ document.getElementById('ingMapeo').innerHTML='';document.getElementById('ingResumen').innerHTML='';document.getElementById('ingTabla').innerHTML='';}
+function elegirHojaIngresos(n){
+ ING_SHEET=n;ING_AOA=XLSX.utils.sheet_to_json(ING_WB.Sheets[n],{header:1,defval:''});
+ let hr=ING_AOA.findIndex(r=>r.filter(c=>String(c).trim()).length>=4);if(hr<0)hr=0;
+ window._ingHR=hr;window._ingHeads=ING_AOA[hr].map((c,i)=>String(c).trim()||('Col'+(i+1)));
+ const saved=(CFG.ingMapeo||{})[n];
+ document.getElementById('ingMapeo').innerHTML='<div class="section-title">② Mapeo de columnas (se recuerda para la próxima)</div><div class="grid2">'+ING_FIELDS.map((f,i)=>{
+  let gi=-1;const keys=ING_GUESS[f]||[];window._ingHeads.forEach((h,hi)=>{if(gi<0&&keys.some(k=>h.toLowerCase().includes(k)))gi=hi;});
+  const val=saved&&saved[i]!=null?saved[i]:gi;
+  return `<div class="field"><label>${f}</label><select id="map_${i}"><option value="-1">—</option>${window._ingHeads.map((h,hi)=>`<option value="${hi}" ${String(val)===String(hi)?'selected':''}>${attr(h)}</option>`).join('')}</select></div>`;}).join('')+'</div><button class="btn btn-primary" onclick="aplicarMapeoIngresos()">👁 Ver vista previa</button>';}
+function aplicarMapeoIngresos(){
+ const hr=window._ingHR,mapa=ING_FIELDS.map((f,i)=>{const s=document.getElementById('map_'+i);return s?parseInt(s.value):-1;});
+ CFG.ingMapeo=CFG.ingMapeo||{};CFG.ingMapeo[ING_SHEET]=mapa;saveCfgAll();
+ const rows=ING_AOA.slice(hr+1).map(r=>{const o={};ING_FIELDS.forEach((f,i)=>{if(mapa[i]>=0)o[f]=String(r[mapa[i]]||'').trim();});return o;}).filter(o=>o['Código SAP']||o['Lote SAP']);
+ window._ingRowsNuevas=rows;
+ document.getElementById('ingResumen').innerHTML=`<div class="alert blue">📊 <b>${rows.length} filas</b> detectadas en "${esc(ING_SHEET)}". Los lotes ya existentes se omiten solos.</div><button class="btn btn-primary" onclick="guardarIngresosBase()">💾 Guardar en base</button>`;
+ document.getElementById('ingTabla').innerHTML='<table class="dt"><tr><th>Código</th><th>Descripción</th><th>Lote SAP</th><th>Cant</th><th>Muestra</th><th>Almacén</th><th>Proveedor</th></tr>'+rows.slice(0,15).map(o=>`<tr><td style="font-family:monospace">${attr(o['Código SAP'])}</td><td>${attr(String(o['Descripción']||'').slice(0,32))}</td><td>${attr(o['Lote SAP'])}</td><td>${attr(o['Cant Lote'])}</td><td>${attr(o['Cant Muestra'])}</td><td>${attr(o['Almacén'])}</td><td>${attr(String(o['Proveedor']||'').slice(0,24))}</td></tr>`).join('')+(rows.length>15?`<tr><td colspan="7" style="color:#94A3B8">… y ${rows.length-15} más</td></tr>`:'')+'</table>';}
+async function guardarIngresosBase(){
+ const rows=window._ingRowsNuevas||[];const box=document.getElementById('ingResumen');
+ if(!rows.length){box.innerHTML='<div class="alert red">No hay filas para guardar.</div>';return;}
+ box.innerHTML='<div class="loading">💾 Guardando en la base...</div>';
+ try{await ensureIngresos();
+  const exist=new Set(INGRESOS.map(o=>String(o['Lote SAP']||'').trim()+'|'+String(o['Código SAP']||'').trim()));
+  const nuevos=rows.filter(o=>!exist.has(String(o['Lote SAP']||'').trim()+'|'+String(o['Código SAP']||'').trim()));
+  if(nuevos.length)await apiPost({accion:'guardarFilas',hoja:'Ingresos',filas:nuevos.map(o=>[o['Fecha Ingreso']||'',o['Doc Material']||'',o['Código SAP']||'',o['Descripción']||'',o['Cant Lote']||'',o['Doc Compras']||'',o['File']||'',o['Almacén']||'',o['Proveedor']||'',o['Cant Muestra']||'',o['Lote SAP']||'','Pendiente','',o['Fecha Contenedor']||''])});
+  window._ingOK=false;ING_AOA=null;
+  box.innerHTML=`<div class="alert green">✅ Guardado: <b>${nuevos.length} nuevos</b>, ${rows.length-nuevos.length} duplicados omitidos.</div>`;
+  cargarIngresosDeBase();
+ }catch(e){box.innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}}
+
+/* ═══ 10. VALIDAR FICHA ═══ */
+let FICHA_PDF=null;
+const GLOSARIO={installation:'instalación',instructions:'instrucciones',user:'usuario',water:'agua',hot:'caliente',cold:'fría',pressure:'presión',voltage:'voltaje',power:'potencia',capacity:'capacidad',temperature:'temperatura',dimensions:'dimensiones',weight:'peso',net:'neto',gross:'bruto',model:'modelo',brand:'marca',safety:'seguridad',warning:'advertencia',caution:'precaución',danger:'peligro',important:'importante',note:'nota',specifications:'especificaciones',features:'características',operation:'operación',maintenance:'mantenimiento',cleaning:'limpieza',warranty:'garantía',service:'servicio',switch:'interruptor',knob:'perilla',burner:'quemador',oven:'horno',grill:'parrilla',tray:'bandeja',door:'puerta',glass:'vidrio',stainless:'acero',steel:'inoxidable',heating:'calentamiento',thermostat:'termostato',ignition:'encendido',flame:'llama',ventilation:'ventilación',filter:'filtro',remote:'control remoto',battery:'batería',cable:'cable',plug:'enchufe',connection:'conexión',inlet:'entrada',outlet:'salida',valve:'válvula',hose:'manguera',drain:'desagüe',mounting:'montaje',wall:'pared',screw:'tornillo',anchor:'anclaje',minimum:'mínimo',maximum:'máximo',clearance:'distancia libre',frequency:'frecuencia',current:'corriente',energy:'energía',efficiency:'eficiencia',class:'clase',volume:'volumen',freezer:'congelador',refrigerator:'refrigerador',defrost:'descongelación',compressor:'compresor',refrigerant:'refrigerante',type:'tipo',size:'tamaño',color:'color',material:'material',control:'control',display:'pantalla',timer:'temporizador',function:'función',mode:'modo',lock:'bloqueo',standard:'norma',serial:'serie',number:'número',date:'fecha',children:'niños',surface:'superficie',keep:'conservar',away:'lejos'};
+function initDropZone(){
+ const dz=document.getElementById('dropZone');if(!dz||dz.dataset.init)return;dz.dataset.init='1';
+ ['dragover','dragenter'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.style.background='#EBF4FF';}));
+ ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.style.background='#F8FBFF';}));
+ dz.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)procesarFichaArrastrada(f);});}
+async function procesarFichaArrastrada(file){
+ if(!file)return;
+ if(file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')){alert('Arrastra un archivo PDF.');return;}
+ const info=document.getElementById('fichaCargadaInfo');info.innerHTML='<div class="loading">📄 Leyendo PDF...</div>';
+ const buf=await file.arrayBuffer();let text='';
+ try{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+  for(let p=1;p<=Math.min(pdf.numPages,10);p++){const pg=await pdf.getPage(p);const tc=await pg.getTextContent();text+=tc.items.map(it=>it.str).join(' ')+'\n';}
+ }catch(e){text='';}
+ FICHA_PDF={url:URL.createObjectURL(file),text:text,nombre:file.name};
+ info.innerHTML=`<div class="alert green">✅ <b>${esc(file.name)}</b> cargada (${Math.round(file.size/1024)} KB). ${text?('Texto extraído: '+text.length+' caracteres.'):'PDF escaneado sin texto — llena los campos a mano.'}</div>`;
+ document.getElementById('bloqueValidacion').style.display='block';
+ if(text)detectarCamposTecnicos(text);
+ renderHistorialValidaciones('');}
+function detectarCamposTecnicos(text){
+ const t=text.replace(/\s+/g,' ');
+ const pat=[['Voltaje',/(\d{2,3})\s*V\b/i,'V'],['Potencia',/(\d{3,5})\s*W\b/i,'W'],['Corriente',/(\d+(?:\.\d+)?)\s*A\b/i,'A'],['Presión',/(\d+(?:\.\d+)?)\s*(?:MPa|psi|bar|kPa)/i,''],['Caudal',/(\d+(?:\.\d+)?)\s*(?:L\/min|GPM)/i,'L/min'],['Capacidad',/(\d+(?:\.\d+)?)\s*(?:L\b|Lt\b)/i,'L'],['Temperatura',/(\d{2,4})\s*°?\s*C/i,'°C'],['Dimensiones',/(\d{2,4})\s*[xX×]\s*(\d{2,4})\s*[xX×]?\s*(\d{2,4})?/,'mm'],['Peso',/(\d+(?:\.\d+)?)\s*kg/i,'kg'],['Frecuencia',/(\d{2})\s*Hz/i,'Hz']];
+ window._campos=[];
+ pat.forEach(p=>{const m=t.match(p[1]);if(m)window._campos.push({campo:p[0],valor:m[0],unidad:p[2]});});
+ renderCampos();}
+function renderCampos(){
+ const c=document.getElementById('tablaExtraccion');
+ if(!window._campos||!window._campos.length){c.innerHTML='<p style="font-size:12px;color:#94A3B8">No se detectaron campos automáticos — agrégalos a mano.</p>';return;}
+ c.innerHTML='<table class="dt"><tr><th>Campo</th><th>Valor detectado</th><th></th></tr>'+window._campos.map((f,i)=>`<tr><td><input value="${attr(f.campo)}" onchange="window._campos[${i}].campo=this.value" style="width:100%;border:none;background:transparent;font-weight:600"></td><td><input value="${attr(f.valor)}" onchange="window._campos[${i}].valor=this.value" style="width:100%;border:none;background:transparent"></td><td><button class="mini-btn" onclick="window._campos.splice(${i},1);renderCampos()">✕</button></td></tr>').join('')+'</table>';}
+function addCampoManual(){window._campos=window._campos||[];window._campos.push({campo:'',valor:''});renderCampos();}
+function traducirLinea(l){return l.replace(/[A-Za-zÁÉÍÓÚáéíóúÑñ']+/g,w=>{const k=w.toLowerCase();if(GLOSARIO[k])return GLOSARIO[k];const s=k.endsWith('s')?k.slice(0,-1):null;if(s&&GLOSARIO[s])return GLOSARIO[s];return w;});}
+function traducirFichaAutomatico(){
+ const c=document.getElementById('traduccionCont');
+ if(!FICHA_PDF||!FICHA_PDF.text){c.innerHTML='<div class="alert amber">No hay texto extraído (PDF escaneado) — usa los campos a mano.</div>';return;}
+ const lines=FICHA_PDF.text.split('\n').filter(l=>l.trim()).slice(0,120);
+ c.innerHTML='<div style="max-height:420px;overflow:auto;border:1px solid #E2E8F0;border-radius:10px;padding:12px">'+lines.map(l=>`<div style="font-size:13.5px;font-weight:600;line-height:1.5">${esc(traducirLinea(l))}</div><div class="en" style="margin-bottom:6px">${esc(l)}</div>`).join('')+'</div><p style="font-size:11px;color:#94A3B8;margin-top:6px">Traducción por glosario técnico interno — revisa términos clave antes de validar.</p>';}
+function togglePreview(){
+ const c=document.getElementById('pdfPreviewCont');
+ if(c.innerHTML){c.innerHTML='';return;}
+ if(!FICHA_PDF)return;
+ c.innerHTML=`<iframe src="${FICHA_PDF.url}" style="width:100%;height:520px;border:1px solid #E2E8F0;border-radius:10px;margin-top:10px"></iframe>`;}
+async function guardarValidacionFicha(){
+ const msg=document.getElementById('validacionMsg');
+ const cod=document.getElementById('vCodigo').value.trim(),res=document.getElementById('vResultado').value,val=document.getElementById('vValidadoPor').value;
+ if(!cod||!res||!val){msg.innerHTML='<div class="alert red">Completa Código SAP, Validado por y Resultado.</div>';return;}
+ msg.innerHTML='<div class="loading">Guardando...</div>';
+ try{await apiPost({accion:'guardarFilas',hoja:'Validaciones_Fichas',filas:[[cod,document.getElementById('vRevision').value,val,res,document.getElementById('vCambios').value,document.getElementById('vObservaciones').value,new Date().toISOString()]]});
+  msg.innerHTML='<div class="alert green">✅ Validación guardada para '+esc(cod)+'</div>';
+  renderHistorialValidaciones(cod);
+ }catch(e){msg.innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}}
+async function renderHistorialValidaciones(cod){
+ const c=document.getElementById('historialValidaciones');
+ const sel=document.getElementById('vValidadoPor');if(sel&&!sel.options.length)sel.innerHTML='<option value="">Seleccionar...</option>'+CFG.personal.map(p=>`<option>${esc(p)}</option>`).join('');
+ if(!cod){c.innerHTML='<p style="font-size:12px;color:#94A3B8">Arrastra una ficha o escribe un código.</p>';return;}
+ try{const vals=rowsToObjects('Validaciones_Fichas',await apiGet('Validaciones_Fichas')).filter(x=>String(x['Código SAP']||'').toUpperCase()===cod);
+  c.innerHTML=vals.length?'<table class="dt"><tr><th>Revisión</th><th>Validó</th><th>Resultado</th><th>Fecha</th></tr>'+vals.slice(-10).reverse().map(v=>`<tr><td>${attr(v['Revisión'])}</td><td>${attr(v['Validado Por'])}</td><td>${attr(v['Resultado'])}</td><td>${attr(String(v['Fecha']).slice(0,10))}</td></tr>').join('')+'</table>':'<p style="font-size:12px;color:#94A3B8">Primera validación de este código.</p>';
+ }catch(e){c.innerHTML='<p style="font-size:12px;color:#94A3B8">Historial no disponible.</p>';}}
+function irAMuestreoDesdeValidacion(){
+ const cod=document.getElementById('vCodigo').value.trim();
+ if(cod){setVal('mCodigo',cod);cargarFichaReferencia();}
+ switchTab('B');if(window.renderStepB)renderStepB(0);}
+/* ═══ 11. MUESTREO — NAVEGACIÓN ═══ */
+let stepB=0;
+const STEP_TITLES=[['1','Contexto, material y ficha'],['2','Fase Visual'],['3','Fase Dimensional'],['4','Fase Funcional'],['5','Series y 2ª muestra'],['6','Cierre y firma']];
+function v(id){const el=document.getElementById(id);return el?(el.value||'').trim():'';}
+function mstKey(){return (v('mCodigo')||'')+'|'+(v('mLotInsp')||'');}
+function renderStepB(n){
+ if(window._mstKey!==mstKey()){window._mstKey=mstKey();window._hallazgos=[];window._medidas=[];window._series=[];window._pR1=[];window._pR2=[];window._chk=null;window._srvId=null;window._hInicioR1='';}
+ stepB=Math.max(0,Math.min(5,n));
+ for(let i=0;i<6;i++){const p=document.getElementById('step'+i);if(p)p.classList.toggle('active',i===stepB);}
+ document.getElementById('progressBar').innerHTML=STEP_TITLES.map((_,i)=>`<div class="step-dot ${i<stepB?'done':i===stepB?'active':''}"></div>`).join('');
+ document.getElementById('stepIco').textContent=STEP_TITLES[stepB][0];
+ document.getElementById('stepLbl').textContent='Paso '+(stepB+1)+' de 6';
+ document.getElementById('stepTtl').textContent=STEP_TITLES[stepB][1];
+ document.getElementById('btnBack').style.display=stepB===0?'none':'block';
+ document.getElementById('btnNext').textContent=stepB===5?'✔ Último paso':'Siguiente ▶';
+ if(stepB===1)renderFase('visual','visualCont');
+ if(stepB===2)renderFase('dimensional','dimCont');
+ if(stepB===3)renderFase('funcional','funcCont');
+ if(stepB===4){renderSeries();renderResumenR1();}
+ if(stepB===5)initSig();}
+function nextStepB(){if(stepB<5)renderStepB(stepB+1);}
+function prevStepB(){renderStepB(stepB-1);}
+function fillLineas(id){const s=document.getElementById(id);if(!s)return;s.innerHTML='<option value="">—</option>'+CFG.lineas.map(l=>`<option>${esc(l)}</option>`).join('');}
+function fillAlmacenes(){
+ const f=document.getElementById('mAlmFis'),c=document.getElementById('mAlmCod');
+ if(f)f.innerHTML='<option value="">—</option>'+CFG.almFis.map(a=>`<option>${esc(a)}</option>`).join('');
+ if(c)c.innerHTML='<option value="">—</option>'+CFG.almCod.map(a=>`<option>${esc(a)}</option>`).join('');}
+function fillPersonalSel(){
+ const opts='<option value="">—</option>'+CFG.personal.map(p=>`<option>${esc(p)}</option>`).join('');
+ const s1=document.getElementById('personalR1Sel'),s2=document.getElementById('personalR2Sel');
+ if(s1)s1.innerHTML=opts;if(s2)s2.innerHTML=opts;
+ const vs=document.getElementById('vValidadoPor');
+ if(vs&&!vs.options.length)vs.innerHTML='<option value="">Seleccionar...</option>'+CFG.personal.map(p=>`<option>${esc(p)}</option>`).join('');}
+function renderPersonalSelects(){fillPersonalSel();fillLineas('mLinea');fillLineas('cfgLinea');fillAlmacenes();renderProvUI();}
+function renderProvUI(){
+ const dl=document.getElementById('dlProv');if(dl)dl.innerHTML=CFG.proveedores.map(p=>`<option value="${attr(p.nombre||p)}">`).join('');
+ const c=document.getElementById('provChips');if(c)c.innerHTML=CFG.proveedores.map((p,i)=>`<span class="chip">${esc((p.ruc?p.ruc+' · ':'')+(p.nombre||p))}<span class="rm" onclick="rmProv(${i})">✕</span></span>`).join('');}
+function rmProv(i){CFG.proveedores.splice(i,1);saveCfgAll();renderProvUI();}
+
+/* ═══ 12. AQL ISO 2859-1 ═══ */
+const AQL_N2=[[2,8,2,0],[9,15,3,0],[16,25,5,0],[26,50,8,1],[51,90,13,1],[91,150,20,2],[151,280,32,3],[281,500,50,5],[501,1200,80,7],[1201,3200,125,10],[3201,10000,200,14],[10001,35000,315,21]];
+function calcularAQL(){
+ const lote=parseInt(v('mCantLote'))||0;const sev=v('mSeveridad')||'Normal';
+ const box=document.getElementById('aqlSugerencia');
+ if(!lote){box.innerHTML='';return;}
+ let li=AQL_N2.findIndex(r=>lote>=r[0]&&lote<=r[1]);if(li<0)li=lote>35000?AQL_N2.length-1:0;
+ let idx=li+(sev==='Reducido'?-1:sev==='Reforzado'?1:0);idx=Math.max(0,Math.min(AQL_N2.length-1,idx));
+ const r=AQL_N2[idx];
+ box.innerHTML=`<div class="alert blue" style="margin:0">📐 ISO 2859-1 ${esc(sev)}: lote ${lote} → muestra <b>${r[2]}</b> u · acepta hasta <b>${r[3]}</b> defectos (rechaza con ${r[3]+1}).</div>`;
+ const m1=document.getElementById('mCantM1');if(m1&&!m1.value)m1.value=r[2];}
+function resetearPlantillas(){window._medidas=[];}
+
+/* ═══ 13. FASES ═══ */
+function getPlantillas(fase){const linea=v('mLinea');return (CFG.plantillas||[]).filter(p=>p[0]===linea&&p[1]===fase);}
+function renderFase(fase,contId){
+ const c=document.getElementById(contId);if(!c)return;
+ if(fase==='visual'){
+  if(!window._chk)window._chk=CFG.checklist.map(r=>({grupo:r[0],item:r[1],res:'',obs:''}));
+  let html='',g='';
+  window._chk.forEach((it,i)=>{
+   if(it.grupo!==g){g=it.grupo;html+='<div class="section-title" style="margin-top:10px">'+esc(g)+'</div>';}
+   html+=`<div class="check-row"><span style="flex:1;font-size:12.5px">${esc(it.item)}</span><select onchange="setChk(${i},this.value)" style="padding:6px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px"><option value="" ${!it.res?'selected':''}>—</option><option value="C" ${it.res==='C'?'selected':''}>✓ C</option><option value="NC" ${it.res==='NC'?'selected':''}>✗ NC</option><option value="NA" ${it.res==='NA'?'selected':''}>N/A</option></select></div>`;});
+  c.innerHTML=html;renderHallazgosEn('manVisual','Visual');return;}
+ if(!window._medidas)window._medidas=[];
+ const pls=getPlantillas(fase);const ms=window._medidas.filter(m=>m.fase===fase);
+ let html='';
+ if(!pls.length&&!ms.length)html+='<div class="alert amber">Sin plantilla para esta línea/fase: créala en ⚙️ Config → Plantillas, o agrega medidas manuales abajo.</div>';
+ else if(pls.length&&!ms.length)html+='<div class="alert blue">Plantilla con '+pls.length+' campos disponible — pulsa "Cargar plantilla".</div>';
+ if(ms.length)html+='<table class="dt"><tr><th>Campo</th><th>Ficha</th><th>Medido</th><th>Unidad</th><th>Herramienta</th></tr>'+ms.map(m=>{const gi=window._medidas.indexOf(m);return `<tr><td>${esc(m.campo)}</td><td>${esc(m.ficha)}</td><td><input value="${attr(m.valor)}" onchange="window._medidas[${gi}].valor=this.value" style="width:90px;border:none;background:transparent;font-weight:700"></td><td>${esc(m.unidad)}</td><td>${esc(m.herr)}</td></tr>`;}).join('')+'</table>';
+ html+=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">${pls.length&&!ms.length?`<button class="mini-btn" onclick="cargarPlantilla('${fase}')">📋 Cargar plantilla (${pls.length})</button>`:''}<button class="mini-btn" onclick="addMedidaManual('${fase}')">+ Medida manual</button></div>`;
+ c.innerHTML=html;
+ renderHallazgosEn(fase==='dimensional'?'manDimensional':'manFuncional',fase==='dimensional'?'Dimensional':'Funcional');}
+function cargarPlantilla(fase){
+ getPlantillas(fase).forEach(p=>{window._medidas.push({fase:fase,campo:p[2],ficha:'',unidad:p[3],herr:p[4],valor:'',res:''});});
+ renderFase(fase,fase==='dimensional'?'dimCont':'funcCont');}
+function addMedidaManual(fase){window._medidas.push({fase:fase,campo:'Nuevo campo',ficha:'',unidad:'',herr:'',valor:'',res:''});renderFase(fase,fase==='dimensional'?'dimCont':'funcCont');}
+function setChk(i,val){
+ window._chk[i].res=val;
+ if(val==='NC'){const ref=window._chk[i].grupo+' · '+window._chk[i].item;
+  if(!(window._hallazgos||[]).some(h=>h.ref===ref))addHallazgo('Visual',ref);}}
+function renderFunc(){renderFase('funcional','funcCont');}
+
+/* ═══ 14. HALLAZGOS ═══ */
+function gruposDefectos(){return [...new Set(CFG.defectos.map(d=>d[0]))];}
+function addHallazgo(fase,ref){
+ window._hallazgos=window._hallazgos||[];
+ window._hallazgos.push({ronda:1,fase:fase,ref:ref||'',componente:'',cod:'',defecto:'',desc:'',cant:1,fotos:[]});
+ repaintHallazgos();}
+function repaintHallazgos(){renderHallazgosEn('manVisual','Visual');renderHallazgosEn('manDimensional','Dimensional');renderHallazgosEn('manFuncional','Funcional');renderResumenR1();}
+function renderHallazgosEn(contId,fase){
+ const c=document.getElementById(contId);if(!c)return;
+ const hs=(window._hallazgos||[]).filter(h=>h.fase===fase);
+ if(!hs.length){c.innerHTML='';return;}
+ c.innerHTML='<div class="section-title" style="margin-top:12px">🔴 Hallazgos — '+esc(fase)+' ('+hs.length+')</div>'+hs.map(h=>{const gi=window._hallazgos.indexOf(h);
+  return `<div class="inline-h"><div class="grid2"><div class="field"><label>Código defecto SAP</label><select onchange="setHallazgo(${gi},'cod',this.value)"><option value="">—</option>${gruposDefectos().map(g=>`<optgroup label="${esc(g)}">${CFG.defectos.filter(d=>d[0]===g).map(d=>`<option value="${attr(d[1])}" ${h.cod===d[1]?'selected':''}>${attr(d[1])} — ${attr(d[2])}</option>`).join('')}</optgroup>`).join('')}</select></div><div class="field"><label>Cantidad de unidades</label><input type="number" min="1" value="${attr(h.cant)}" onchange="setHallazgo(${gi},'cant',this.value)"></div></div><div class="field"><label>Descripción / detalle</label><input value="${attr(h.desc)}" onchange="setHallazgo(${gi},'desc',this.value)"></div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><label class="mini-btn" style="cursor:pointer">📷 Foto<input type="file" accept="image/*" style="display:none" onchange="hallazgoFoto(${gi},this.files[0])"></label>${(h.fotos||[]).map(f=>`<img src="${f}" style="width:38px;height:38px;border-radius:6px;object-fit:cover">`).join('')}<button class="mini-btn" style="margin-left:auto;color:#991B1B" onclick="delHallazgo(${gi})">🗑 Quitar</button></div></div>`;}).join('');}
+function setHallazgo(i,k,val){
+ const h=window._hallazgos[i];h[k]=val;
+ if(k==='cod'){const d=CFG.defectos.find(x=>x[1]===val);if(d)h.defecto=d[2];}
+ repaintHallazgos();}
+function delHallazgo(i){window._hallazgos.splice(i,1);repaintHallazgos();}
+function comprimirFoto(file){return new Promise(res=>{const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const mx=900;let w=img.width,h=img.height;if(w>mx){h=Math.round(h*mx/w);w=mx;}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',0.72));};img.src=rd.result;};rd.readAsDataURL(file);});}
+async function hallazgoFoto(i,file){if(!file)return;const d=await comprimirFoto(file);window._hallazgos[i].fotos=window._hallazgos[i].fotos||[];window._hallazgos[i].fotos.push(d);repaintHallazgos();}
+
+/* ═══ 15. PERSONAL, SERIES, RESUMEN ═══ */
+function agregarPersonal(r){
+ const s=document.getElementById(r===1?'personalR1Sel':'personalR2Sel');const n=s.value;if(!n)return;
+ const arr=r===1?window._pR1:window._pR2;const cid=r===1?'personalR1Chips':'personalR2Chips';
+ if(!arr.includes(n)){arr.push(n);renderChips(cid,arr);}s.value='';}
+function renderChips(id,arr){const c=document.getElementById(id);if(c)c.innerHTML=arr.map((p,i)=>`<span class="chip">${esc(p)}<span class="rm" onclick="rmChip('${id}',${i})">✕</span></span>`).join('');}
+function rmChip(id,i){(id==='personalR1Chips'?window._pR1:window._pR2).splice(i,1);renderChips(id,window._pR1.concat());renderChips('personalR1Chips',window._pR1);renderChips('personalR2Chips',window._pR2);}
+function addSerie(s2){s2=(s2||'').trim();if(!s2)return;window._series=window._series||[];window._series.push({serie:s2,res:'OK'});renderSeries();}
+function renderSeries(){
+ const c=document.getElementById('seriesList');if(!c)return;
+ const s=window._series||[];
+ c.innerHTML=s.length?'<table class="dt"><tr><th>N° Serie</th><th>Resultado</th><th></th></tr>'+s.map((x,i)=>`<tr><td style="font-family:monospace">${esc(x.serie)}</td><td><select onchange="window._series[${i}].res=this.value"><option ${x.res==='OK'?'selected':''}>OK</option><option ${x.res==='NC'?'selected':''}>NC</option></select></td><td><button class="mini-btn" onclick="window._series.splice(${i},1);renderSeries()">✕</button></td></tr>`).join('')+'</table>':'<p style="font-size:12px;color:#94A3B8">Sin series escaneadas aún.</p>';
+ const n=parseInt(v('mCantM1'))||0;
+ if(n&&s.length&&s.length<n)c.innerHTML+='<div class="alert amber" style="margin-top:6px">Faltan series: '+s.length+' de '+n+'.</div>';}
+function renderResumenR1(){
+ const c=document.getElementById('resumenHallazgosR1');if(!c)return;
+ const hs=window._hallazgos||[];
+ c.innerHTML=hs.length?'<table class="dt"><tr><th>Fase</th><th>Código</th><th>Defecto</th><th>Cant</th></tr>'+hs.map(h=>`<tr><td>${esc(h.fase)}</td><td>${attr(h.cod)}</td><td>${esc(h.defecto||h.desc)}</td><td>${attr(h.cant)}</td></tr>`).join('')+'</table>':'<p style="font-size:12px;color:#94A3B8">Sin hallazgos registrados hasta ahora. ✅</p>';
+ const hay=hs.length>0;
+ document.getElementById('bloqueRonda2').style.display=hay?'block':'none';
+ document.getElementById('sinSegundaMuestra').style.display=hay?'none':'block';
+ if(hay){const m2=document.getElementById('mCantM2');if(m2&&!m2.value)m2.value=v('mCantM1');}}
+
+/* ═══ 16. FIRMA ═══ */
+function initSig(){
+ const c=document.getElementById('sigInspector');
+ if(!c||c.dataset.init)return;c.dataset.init='1';
+ const ctx=c.getContext('2d');ctx.lineWidth=2.2;ctx.lineCap='round';ctx.strokeStyle='#1a3a5c';
+ let drawing=false,empty=true;
+ const pos=e=>{const r=c.getBoundingClientRect();return[(e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height];};
+ c.addEventListener('pointerdown',e=>{drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p[0],p[1]);});
+ c.addEventListener('pointermove',e=>{if(!drawing)return;const p=pos(e);ctx.lineTo(p[0],p[1]);ctx.stroke();empty=false;const st=document.getElementById('sigStatus');st.textContent='✍️ Firmado';st.className='sig-status signed';});
+ ['pointerup','pointerleave'].forEach(ev=>c.addEventListener(ev,()=>drawing=false));
+ c._empty=()=>empty;
+ c._reset=()=>{ctx.clearRect(0,0,c.width,c.height);empty=true;const st=document.getElementById('sigStatus');st.textContent='Sin firma aún';st.className='sig-status';};}
+function clearSig(){const c=document.getElementById('sigInspector');if(c&&c._reset)c._reset();}
+
+/* ═══ 17. SERVIDOR — INICIAR + QR + AVANCE ═══ */
+function nextIdLocal(){let n=0;try{n=parseInt(localStorage.getItem('sole_mst_n')||'0');}catch(e){}n++;try{localStorage.setItem('sole_mst_n',String(n));}catch(e){}return 'MST-'+new Date().getFullYear()+'-'+String(n).padStart(4,'0');}
+function filaMuestreo(id,estado){
+ return [id,v('mFecha')||new Date().toISOString().split('T')[0],v('mFile'),v('mLotInsp'),v('mDocComp'),v('mDocMat'),v('mAlmFis'),v('mAlmCod'),v('mProveedor'),v('mCodigo').toUpperCase(),v('mDesc'),v('mLote'),v('mLinea'),v('mCantLote'),v('mSeveridad'),v('mCantM1'),window._hInicioR1||'',estado==='En proceso'?'':new Date().toTimeString().slice(0,5),(window._hallazgos||[]).length?'Sí':'No',v('mCantM2'),v('mHoraInicioR2'),v('mHoraFinR2'),v('mPersiste'),estado,'','','','','','',v('mVideoLink'),v('mObsGenerales'),'',sesion.nombre||'',new Date().toISOString()];}
+async function iniciarEnServidor(){
+ const cod=v('mCodigo'),lote=v('mLotInsp');
+ if(!cod||!lote){alert('Completa primero Código SAP y N° Lote Inspección SAP.');return;}
+ if(!window._hInicioR1){window._hInicioR1=new Date().toTimeString().slice(0,5);const hi=document.getElementById('mHoraInicioR1');if(hi&&!hi.value)hi.value=window._hInicioR1;if(!relojT0)iniciarReloj();}
+ let id='';
+ try{const r=await apiPost({accion:'iniciarMuestreo',muestreo:filaMuestreo('','En proceso'),correos:CFG.correos});id=r.id;}
+ catch(e){id=nextIdLocal();}
+ window._srvId=id;showQr(id,lote,cod.toUpperCase());}
+function showQr(id,lote,cod){
+ const url=location.origin+location.pathname+'?m='+encodeURIComponent(id);
+ document.getElementById('qrModal').style.display='flex';
+ document.getElementById('qrTitulo').textContent='🚀 Muestreo '+id;
+ document.getElementById('qrInfo').innerHTML='Lote SAP <b>'+esc(lote)+'</b> · '+esc(cod);
+ const cv=document.getElementById('qrCanvas');
+ if(window.QRCode)QRCode.toCanvas(cv,url,{width:220},()=>{});
+ document.getElementById('qrLinkBox').innerHTML='<a href="'+esc(url)+'" target="_blank">'+esc(url)+'</a>';}
+async function traerAvance(){
+ const id=window._srvId;
+ if(!id){alert('Primero pulsa 🚀 Iniciar muestreo + QR para tener ID de servidor.');return;}
+ const box=document.getElementById('evLinksBox');box.innerHTML='<div class="loading">⬇ Buscando avance del móvil...</div>';
+ try{const r=await apiPost({accion:'getAvance',id:id});let n=0;
+  (r.checklist||[]).forEach(row=>{const it=(window._chk||[]).find(c=>c.grupo===row[1]&&c.item===row[2]);if(it){it.res=row[3]||it.res;it.obs=row[4]||it.obs;n++;}});
+  (r.medidas||[]).forEach(row=>{const m=(window._medidas||[]).find(x=>x.fase===row[1]&&x.campo===row[2]);if(m){m.valor=row[4]||m.valor;n++;}});
+  (r.series||[]).forEach(row=>{if(!(window._series||[]).some(s=>s.serie===row[1])){window._series.push({serie:row[1],res:row[2]||'OK'});n++;}});
+  (r.hallazgos||[]).forEach(row=>{if(!(window._hallazgos||[]).some(h=>(h.cod+'|'+h.ref)===(row[5]+'|'+row[3]))){window._hallazgos.push({ronda:row[1]||1,fase:row[2]||'Visual',ref:row[3]||'',componente:row[4]||'',cod:row[5]||'',defecto:row[6]||'',desc:row[7]||'',cant:row[8]||1,fotos:[]});n++;}});
+  renderStepB(stepB);renderResumenR1();
+  const evs=r.evidencias||[];
+  box.innerHTML='<div class="alert green">✅ Avance traído: '+n+' registros actualizados.</div>'+(evs.length?'<div style="font-size:12px;margin-top:6px"><b>Evidencias:</b><br>'+evs.map(e=>`<a href="${attr(e[4])}" target="_blank">📷 ${attr(e[2]||e[1]||'foto')}</a>`).join('<br>')+'</div>':'');
+ }catch(e){box.innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}}
+
+/* ═══ 18. GUARDAR MUESTREO ═══ */
+async function guardarMuestreo(){
+ const msg=document.getElementById('successMsg');
+ const cod=v('mCodigo').toUpperCase(),lote=v('mLotInsp');
+ const sig=document.getElementById('sigInspector');
+ const firmaData=(sig&&sig._empty&&!sig._empty())?sig.toDataURL('image/png'):'';
+ if(!cod||!lote){msg.innerHTML='<div class="alert red">Completa Código SAP y N° Lote Inspección SAP (Paso 1).</div>';return;}
+ if(!firmaData){msg.innerHTML='<div class="alert red">Falta la firma del inspector (Paso 6).</div>';return;}
+ msg.innerHTML='<div class="loading">💾 Guardando muestreo...</div>';
+ const id=window._srvId||nextIdLocal();
+ const data={muestreo:filaMuestreo(id,'Pendiente de decisión'),
+  personal:[...(window._pR1||[]).map(n2=>[id,'1',n2]),...(window._pR2||[]).map(n2=>[id,'2',n2])],
+  hallazgos:(window._hallazgos||[]).map(h=>[id,h.ronda,h.fase,h.ref,h.componente,h.cod,h.defecto,h.desc,h.cant,'']),
+  medidas:(window._medidas||[]).filter(m=>m.valor).map(m=>[id,m.fase,m.campo,m.ficha,m.valor,m.unidad,m.herr,m.res||'']),
+  series:(window._series||[]).map(s=>[id,s.serie,s.res]),
+  checklist:(window._chk||[]).filter(c=>c.res).map(c=>[id,c.grupo,c.item,c.res,c.obs])};
+ try{
+  for(const h of (window._hallazgos||[])){for(let fi=0;fi<(h.fotos||[]).length;fi++){try{await apiPost({accion:'subirEvidencia',id:id,fase:h.fase,ref:h.ref,tipo:'foto',nombre:id+'_'+fi,dataUrl:h.fotos[fi],por:sesion.nombre});}catch(e){}}}
+  await apiPost({accion:'guardarMuestreo',data:data,correos:CFG.correos});
+  msg.innerHTML='<div class="alert green">✅ Guardado como <b>'+esc(id)+'</b> — Pendiente de decisión. Aviso enviado a jefatura.</div>';
+ }catch(e){
+  try{const pend=JSON.parse(localStorage.getItem('sole_pend')||'[]');pend.push(data);localStorage.setItem('sole_pend',JSON.stringify(pend));}catch(e2){}
+  msg.innerHTML='<div class="alert amber">⚠️ Sin conexión — guardado localmente, reintenta luego. Detalle: '+esc(e.message)+'</div>';}
+ renderGuiaQA32(id);
+ msg.scrollIntoView({behavior:'smooth'});}
+
+/* ═══ 19. GUÍA QA32 ESPEJO ═══ */
+function renderGuiaQA32(id){
+ const c=document.getElementById('guiaQA32Cont');if(!c)return;
+ const n=parseInt(v('mCantM1'))||0;
+ const arr=Array(n).fill('0010');let idx=0;
+ (window._hallazgos||[]).filter(h=>h.fase==='Visual'&&h.cod).forEach(h=>{const q=parseInt(h.cant)||1;for(let k=0;k<q&&idx<n;k++,idx++)arr[idx]=h.cod;});
+ const res=arr.reduce((a,x)=>{a[x]=(a[x]||0)+1;return a;},{});
+ const med=(window._medidas||[]).filter(m=>m.valor);
+ const ser=window._series||[];
+ let txt='GUIA QA32 — ESPEJO DE TRANSCRIPCION\nMuestreo '+id+' · '+v('mCodigo').toUpperCase()+' · Lote SAP '+v('mLotInsp')+'\n';
+ txt+='\n>> OPERACION 0010 — VISUAL\nAPARIENCIA DE EMBALAJE ('+n+' unidades):\n'+arr.map((x,i)=>'U'+(i+1)+': '+x).join(' · ')+'\nResumen: '+Object.keys(res).map(k=>k+' x'+res[k]).join(' · ')+'\n';
+ if(med.length)txt+='\n>> DIMENSIONAL / FUNCIONAL\n'+med.map(m=>'- '+m.campo+': '+m.valor+(m.unidad?' '+m.unidad:'')).join('\n')+'\n';
+ if(ser.length)txt+='\n>> SERIES (orden de unidad)\n'+ser.map((s,i)=>'U'+(i+1)+': '+s.serie+(s.res==='NC'?' (NC)':'')).join('\n')+'\n';
+ txt+='\nAl terminar: valorar, cerrar caracteristicas (candado) y decision de uso en QA11.';
+ window._guiaTxt=txt;
+ c.innerHTML='<div class="card" style="border:1.5px solid #93C5FD"><div class="section-title">📄 Guía QA32 espejo — transcribe en el orden que SAP pide</div><pre style="white-space:pre-wrap;font-size:12px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:12px;font-family:Consolas,monospace">'+esc(txt)+'</pre><button class="btn" style="width:100%;background:#0078D4;color:white" onclick="copiarGuia()">📋 Copiar guía</button></div>';}
+function copiarGuia(){navigator.clipboard.writeText(window._guiaTxt||'').then(()=>alert('Guía copiada ✅'));}
+/* ═══ 20. DECISIÓN — JEFATURA ═══ */
+async function cargarPendientes(){
+ const c=document.getElementById('pendientesCont');
+ c.innerHTML='<div class="loading">⚖️ Cargando pendientes...</div>';
+ const q=(v('decBusqueda')||'').toUpperCase();
+ try{
+  let ms=rowsToObjects('Muestreos',await apiGet('Muestreos'));
+  ms=ms.filter(m=>m['Estado']==='Pendiente de decisión');
+  if(q)ms=ms.filter(m=>((m['Código SAP']||'')+(m['N° Lote Inspección SAP']||'')+(m['ID Muestreo']||'')).toUpperCase().includes(q));
+  if(!ms.length){c.innerHTML='<div class="alert green">✅ Nada pendiente de decisión'+(q?' para "'+esc(q)+'"':'')+'.</div>';return;}
+  c.innerHTML=ms.map(m=>`<div class="card"><div class="section-title">${esc(m['ID Muestreo'])} · ${esc(m['Fecha']||'')}</div>
+  <div style="font-size:13px;margin-bottom:8px"><b style="font-family:monospace">${esc(m['Código SAP']||'')}</b> — ${esc(m['Descripción']||'')}<br>
+  <span style="font-size:12px;color:#64748B">Lote SAP ${esc(m['N° Lote Inspección SAP']||'—')} · ${esc(m['Proveedor']||'—')} · Hallazgos: ${esc(m['¿2do Muestreo?']==='Sí'?'Sí (2ª muestra)':'No')}</span></div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+  <button class="btn" style="flex:1;min-width:130px;background:#059669;color:white" onclick="decidir('${attr(m['ID Muestreo'])}','${esc(m['N° Lote Inspección SAP']||'')}','${esc(m['Código SAP']||'')}','Liberado')">✅ Liberar</button>
+  <button class="btn" style="flex:1;min-width:130px;background:#D97706;color:white" onclick="decidir('${attr(m['ID Muestreo'])}','${esc(m['N° Lote Inspección SAP']||'')}','${esc(m['Código SAP']||'')}','Tolerado')">⚠️ Tolerar</button>
+  <button class="btn" style="flex:1;min-width:130px;background:#DC2626;color:white" onclick="decidir('${attr(m['ID Muestreo'])}','${esc(m['N° Lote Inspección SAP']||'')}','${esc(m['Código SAP']||'')}','Bloqueado')">🔴 Bloquear</button>
+  </div></div>`).join('');
+ }catch(e){c.innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}}
+async function decidir(id,lote,cod,decision){
+ let extra='';
+ if(decision==='Tolerado'){extra=(prompt('⚠️ TOLERAR — escribe la justificación (obligatoria):','')||'').trim();if(!extra)return;}
+ if(decision==='Bloqueado'){extra=(prompt('🔴 BLOQUEADO — describe el reproceso / acción a aplicar:','')||'').trim();if(!extra)return;}
+ if(!confirm(decision.toUpperCase()+' — ¿confirmas la decisión del lote '+lote+'?'))return;
+ try{
+  await apiPost({accion:'actualizarFila',hoja:'Muestreos',colId:'ID Muestreo',valorId:id,
+   actualizaciones:{'Decisión Final':decision,'Justificación Tolerancia':extra,'Decidido Por':sesion.nombre||'Jefatura','Fecha Decisión':new Date().toISOString().slice(0,16).replace('T',' ')},correos:CFG.correos});
+  alert('✅ Decisión registrada y aviso enviado por correo.');cargarPendientes();
+ }catch(e){alert('❌ '+e.message);}}
+
+/* ═══ 21. REPORTES ═══ */
+async function cargarResumenDia(){
+ const f=v('resumenFecha')||new Date().toISOString().split('T')[0];
+ const c=document.getElementById('resumenContenido');
+ c.innerHTML='<div class="loading">Calculando '+esc(f)+'...</div>';
+ try{
+  const ms=rowsToObjects('Muestreos',await apiGet('Muestreos')).filter(m=>String(m['Fecha']||'').slice(0,10)===f);
+  const nL=ms.filter(m=>m['Decisión Final']==='Liberado').length,nB=ms.filter(m=>m['Decisión Final']==='Bloqueado').length,nT=ms.filter(m=>m['Decisión Final']==='Tolerado').length,nP=ms.filter(m=>m['Estado']==='Pendiente de decisión').length;
+  window._diaRows=ms;
+  c.innerHTML='<div class="grid3" style="margin-bottom:10px"><div class="card kpi" style="margin:0;background:#F0FDF4"><div class="n" style="color:#059669">'+nL+'</div><div class="l">Liberados</div></div><div class="card kpi" style="margin:0;background:#FFF7ED"><div class="n" style="color:#D97706">'+nT+'</div><div class="l">Tolerados</div></div><div class="card kpi" style="margin:0;background:#FEF2F2"><div class="n" style="color:#DC2626">'+nB+'</div><div class="l">Bloqueados</div></div></div><div class="grid3" style="margin-bottom:12px"><div class="card kpi" style="margin:0"><div class="n">'+ms.length+'</div><div class="l">Muestreos del día</div></div><div class="card kpi" style="margin:0;background:#EBF4FF"><div class="n" style="color:#1E40AF">'+nP+'</div><div class="l">Pendientes decisión</div></div><div class="card kpi" style="margin:0;background:#FEF3C7"><div class="n" style="color:#92400E">'+ms.filter(m=>m['¿2do Muestreo?']==='Sí').length+'</div><div class="l">Con 2ª muestra</div></div></div>'+(ms.length?'<div class="card"><table class="dt"><tr><th>ID</th><th>Código</th><th>Proveedor</th><th>Inspector</th><th>Estado</th><th>Decisión</th></tr>'+ms.map(m=>`<tr><td>${esc(m['ID Muestreo'])}</td><td style="font-family:monospace">${esc(m['Código SAP']||'')}</td><td>${esc(m['Proveedor']||'—')}</td><td>${esc(m['Creado Por']||'—')}</td><td>${esc(m['Estado']||'')}</td><td>${esc(m['Decisión Final']||'—')}</td></tr>`).join('')+'</table></div>':'<div class="alert blue">Sin muestreos en esa fecha.</div>');
+ }catch(e){c.innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}}
+function generarPDFResumen(){
+ const ms=window._diaRows||[];const f=v('resumenFecha');
+ if(!ms.length){alert('No hay muestreos cargados para esa fecha.');return;}
+ const d=document.createElement('div');
+ d.innerHTML='<h2 style="font-family:Arial">GRUPO SOLE — Resumen Diario de Calidad</h2><p style="font-size:12px">Fecha: '+f+' · Generado: '+new Date().toLocaleString()+'</p><table border="1" cellpadding="4" style="border-collapse:collapse;font-size:11px;width:100%"><tr style="background:#eee"><th>ID</th><th>Código</th><th>Lote SAP</th><th>Proveedor</th><th>Inspector</th><th>Decisión</th></tr>'+ms.map(m=>'<tr><td>'+esc(m['ID Muestreo'])+'</td><td>'+esc(m['Código SAP']||'')+'</td><td>'+esc(m['N° Lote Inspección SAP']||'')+'</td><td>'+esc(m['Proveedor']||'')+'</td><td>'+esc(m['Creado Por']||'')+'</td><td>'+esc(m['Decisión Final']||'—')+'</td></tr>').join('')+'</table>';
+ html2pdf().set({margin:10,filename:'Resumen_Calidad_'+f+'.pdf',html2canvas:{scale:2},jsPDF:{format:'a4'}}).from(d).save();}
+async function cargarRecurrencia(){
+ const c=document.getElementById('recurrenciaProveedor');
+ try{
+  const ms=rowsToObjects('Muestreos',await apiGet('Muestreos'));
+  const por={};ms.forEach(m=>{const p=m['Proveedor']||'(sin proveedor)';por[p]=por[p]||{t:0,b:0,r2:0};por[p].t++;if(m['Decisión Final']==='Bloqueado')por[p].b++;if(m['¿2do Muestreo?']==='Sí')por[p].r2++;});
+  const arr=Object.keys(por).map(p=>[p,por[p]]).sort((a,b)=>b[1].b-a[1].b||b[1].t-a[1].t);
+  c.innerHTML='<table class="dt"><tr><th>Proveedor</th><th>Muestreos</th><th>Bloqueados</th><th>Con 2ª muestra</th></tr>'+arr.map(x=>`<tr><td>${esc(x[0])}</td><td>${x[1].t}</td><td style="${x[1].b?'color:#DC2626;font-weight:700':''}">${x[1].b}</td><td>${x[1].r2}</td></tr>`).join('')+'</table><p style="font-size:11px;color:#94A3B8;margin-top:6px">Ordenado por bloqueos — útil para evaluaciones de proveedor.</p>';
+ }catch(e){c.innerHTML='<div class="alert amber">No disponible: '+esc(e.message)+'</div>';}}
+
+/* ═══ 22. CONFIG ═══ */
+function renderCfgAll(){
+ const cc=document.getElementById('cfgCorreos');if(cc&&!cc.value)cc.value=CFG.correos||'';
+ renderPersonalCfg();renderDefectosCfg();renderAlmacenCfg();renderProvUI();renderPlantillaCfg();}
+function renderPersonalCfg(){
+ const c=document.getElementById('personalCfgChips');if(!c)return;
+ c.innerHTML=CFG.personal.length?CFG.personal.map((p,i)=>`<span class="chip">${esc(p)}<span class="rm" onclick="rmPersonal(${i})">✕</span></span>`).join(''):'<span style="font-size:12px;color:#94A3B8">Sin personal aún — agrega arriba.</span>';}
+function rmPersonal(i){CFG.personal.splice(i,1);saveCfgAll();renderPersonalCfg();renderPersonalSelects();renderSesion();}
+function addPersonalALista(){
+ const i=document.getElementById('newPersonalInput');const n=(i.value||'').trim();if(!n)return;
+ if(!CFG.personal.includes(n))CFG.personal.push(n);saveCfgAll();i.value='';
+ renderPersonalCfg();renderPersonalSelects();}
+function renderDefectosCfg(){
+ const c=document.getElementById('defectosCfg');if(!c)return;
+ c.innerHTML='<table class="dt"><tr><th>Grupo</th><th>Código</th><th>Descripción</th><th></th></tr>'+CFG.defectos.map((d,i)=>`<tr><td>${esc(d[0])}</td><td style="font-family:monospace">${esc(d[1])}</td><td>${esc(d[2])}</td><td><button class="mini-btn" onclick="CFG.defectos.splice(${i},1);saveCfgAll();renderDefectosCfg()">✕</button></td></tr>`).join('')+'</table>';}
+function addDefecto(){
+ const g=document.getElementById('defGrupoNew').value,c=(document.getElementById('defCodNew').value||'').trim(),t=(document.getElementById('defTxtNew').value||'').trim().toUpperCase();
+ if(!c||!t){alert('Código y descripción son obligatorios.');return;}
+ CFG.defectos.push([g,c,t,/CONFORME|COMPLETO/.test(t)?'Conforme':'Defecto']);saveCfgAll();
+ document.getElementById('defCodNew').value='';document.getElementById('defTxtNew').value='';renderDefectosCfg();}
+function renderAlmacenCfg(){
+ const c=document.getElementById('almacenCfg');if(!c)return;
+ c.innerHTML='<div style="margin-bottom:6px"><b style="font-size:11px;color:#64748B">FÍSICOS:</b> '+CFG.almFis.map((a,i)=>`<span class="chip">${esc(a)}<span class="rm" onclick="CFG.almFis.splice(${i},1);saveCfgAll();renderAlmacenCfg()">✕</span></span>`).join('')+'</div><div><b style="font-size:11px;color:#64748B">CÓDIGOS:</b> '+CFG.almCod.map((a,i)=>`<span class="chip">${esc(a)}<span class="rm" onclick="CFG.almCod.splice(${i},1);saveCfgAll();renderAlmacenCfg()">✕</span></span>`).join('')+'</div>';}
+function addAlmacen(){
+ const i=document.getElementById('almNew');const a=(i.value||'').trim().toUpperCase();if(!a)return;
+ if(/^\d{4}$/.test(a)){if(!CFG.almCod.includes(a))CFG.almCod.push(a);}else{if(!CFG.almFis.includes(a))CFG.almFis.push(a);}
+ saveCfgAll();i.value='';renderAlmacenCfg();}
+function renderPlantillaCfg(){
+ const s=document.getElementById('cfgLinea');if(!s)return;
+ const cur=s.value;fillLineas('cfgLinea');if(cur)s.value=cur;
+ const l=s.value;const c=document.getElementById('plantillaCfg');
+ const pls=(CFG.plantillas||[]).filter(p=>p[0]===l);
+ c.innerHTML='<div style="font-size:11px;color:#64748B;margin-bottom:6px">'+(pls.length?pls.length+' campos configurados para esta línea.':'Sin plantilla aún — agrega campos abajo (dimensionales y funcionales por línea).')+'</div>'+
+ (pls.length?'<table class="dt"><tr><th>Fase</th><th>Campo</th><th>Unidad</th><th>Herramienta</th><th></th></tr>'+pls.map(p=>{const gi=CFG.plantillas.indexOf(p);return `<tr><td>${esc(p[1])}</td><td>${esc(p[2])}</td><td>${esc(p[3])}</td><td>${esc(p[4])}</td><td><button class="mini-btn" onclick="CFG.plantillas.splice(${gi},1);saveCfgAll();renderPlantillaCfg()">✕</button></td></tr>`;}).join('')+'</table>':'')+
+ '<div class="grid3" style="margin-top:8px"><select id="plFase" style="padding:9px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:12px"><option value="dimensional">Dimensional</option><option value="funcional">Funcional</option></select><input id="plCampo" placeholder="Campo (ej. ALTURA TOTAL)" style="padding:9px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:12px"><input id="plUnidad" placeholder="Unidad (mm, V...)" style="padding:9px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:12px"></div><div style="display:flex;gap:8px;margin-top:6px"><input id="plHerr" placeholder="Herramienta (balanza, vernier...)" style="flex:1;padding:9px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:12px"><button class="btn" style="background:#2563EB;color:white" onclick="addPlantilla()">+ Agregar</button></div>';}
+function addPlantilla(){
+ const l=document.getElementById('cfgLinea').value;if(!l){alert('Elige una línea.');return;}
+ const f=document.getElementById('plFase').value,c=(document.getElementById('plCampo').value||'').trim(),u=(document.getElementById('plUnidad').value||'').trim(),h=(document.getElementById('plHerr').value||'').trim();
+ if(!c){alert('Escribe el nombre del campo.');return;}
+ CFG.plantillas=CFG.plantillas||[];CFG.plantillas.push([l,f,c.toUpperCase(),u,h,'']);
+ saveCfgAll();document.getElementById('plCampo').value='';document.getElementById('plUnidad').value='';renderPlantillaCfg();}
+function promptNuevoMaterial(){
+ const v2=(prompt('Material nuevo — formato: CODIGO | Descripción','')||'').trim();
+ if(!v2)return;const parts=v2.split('|');
+ const cod=(parts[0]||'').trim().toUpperCase(),desc=(parts[1]||'').trim();
+ if(!cod)return;
+ MAESTRO.push({'Código SAP':cod,'Descripción':desc});window._maestroOK=true;
+ apiPost({accion:'guardarFilas',hoja:'Maestro_Codigos',filas:[[cod,desc,'','','','','','','','','','','','']]}).catch(()=>{});
+ alert('Material '+cod+' agregado.');}
+async function cargarArchivoMaestro(file){
+ if(!file)return;const buf=await file.arrayBuffer();
+ try{
+  const wb=XLSX.read(buf,{type:'array'});let rows=[];
+  for(const sn of wb.SheetNames){const aoa=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,defval:''});if(aoa.length>3){rows=aoa;break;}}
+  if(!rows.length){alert('Hoja vacía.');return;}
+  let hr=rows.findIndex(r=>r.filter(c=>String(c).trim()).length>=3);if(hr<0)hr=0;
+  const h=rows[hr].map(c=>String(c).trim().toLowerCase());
+  const find=(...ks)=>h.findIndex(x=>ks.some(k=>x.includes(k)));
+  const iC=find('material','codigo','código'),iD=find('texto','descrip'),iE=find('antiguo','eam'),iN=find('ean'),iP=find('peso bruto'),iPN=find('peso neto'),iV=find('volumen'),iG=find('grupo'),iCe=find('centro');
+  const out=[];const seen={};
+  rows.slice(hr+1).forEach(r=>{
+   const cod=String(r[iC>=0?iC:0]||'').trim().toUpperCase();
+   if(!cod||seen[cod])return;seen[cod]=1;
+   out.push([cod,String(r[iD>=0?iD:1]||'').trim(),String(r[iG>=0?iG:'']||'').trim(),'', '', '',String(r[iE>=0?iE:'']||'').trim(),String(r[iN>=0?iN:'']||'').trim(),String(r[iP>=0?iP:'']||'').trim(),String(r[iPN>=0?iPN:'']||'').trim(),String(r[iV>=0?iV:'']||'').trim(),'',String(r[iG>=0?iG:'']||'').trim(),String(r[iCe>=0?iCe:'']||'').trim()]);});
+  window._maeRows=out;
+  document.getElementById('eamPreview').innerHTML='<div class="alert blue">📊 <b>'+out.length+' materiales</b> detectados (deduplicados).</div><button class="btn btn-primary" onclick="guardarMaestroBase()">💾 Guardar en Maestro_Codigos</button>';
+ }catch(e){alert('Error leyendo el maestro: '+e.message);}}
+async function guardarMaestroBase(){
+ const rows=window._maeRows||[];if(!rows.length)return;
+ const box=document.getElementById('eamPreview');box.innerHTML='<div class="loading">💾 Guardando '+rows.length+' materiales...</div>';
+ try{for(let i=0;i<rows.length;i+=300){await apiPost({accion:'guardarFilas',hoja:'Maestro_Codigos',filas:rows.slice(i,i+300)});}
+  window._maestroOK=false;await ensureMaestro();
+  box.innerHTML='<div class="alert green">✅ Maestro guardado: '+rows.length+' materiales. Ya autocompleta en toda la app.</div>';
+ }catch(e){box.innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}}
+async function cargarArchivoProveedores(file){
+ if(!file)return;const buf=await file.arrayBuffer();
+ try{
+  const wb=XLSX.read(buf,{type:'array'});let rows=[];
+  for(const sn of wb.SheetNames){const aoa=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,defval:''});if(aoa.length>3){rows=aoa;break;}}
+  let hr=rows.findIndex(r=>r.filter(c=>String(c).trim()).length>=2);if(hr<0)hr=0;
+  const h=rows[hr].map(c=>String(c).trim().toLowerCase());
+  const iR=h.findIndex(x=>x.includes('ruc')),iP=h.findIndex(x=>x.includes('proveedor')||x.includes('razon')||x.includes('razón'));
+  const out=[];
+  rows.slice(hr+1).forEach(r=>{const nom=String(r[iP>=0?iP:0]||'').trim();if(!nom)return;out.push([String(r[iR>=0?iR:'']||'').trim(),nom,'','','']);});
+  window._provRows=out;
+  document.getElementById('provPreview').innerHTML='<div class="alert blue">📊 <b>'+out.length+' proveedores</b> detectados.</div><button class="btn btn-primary" onclick="guardarProvBase()">💾 Guardar proveedores</button>';
+ }catch(e){alert('Error: '+e.message);}}
+async function guardarProvBase(){
+ const rows=window._provRows||[];if(!rows.length)return;
+ const box=document.getElementById('provPreview');box.innerHTML='<div class="loading">💾 Guardando...</div>';
+ try{for(let i=0;i<rows.length;i+=300){await apiPost({accion:'guardarFilas',hoja:'Maestro_Proveedores',filas:rows.slice(i,i+300)});}
+  rows.forEach(r=>addProveedorString((r[0]?r[0]+' ':'')+r[1]));renderProvUI();
+  box.innerHTML='<div class="alert green">✅ Proveedores guardados y cargados en la app.</div>';
+ }catch(e){box.innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}}
+function addProveedorManual(){
+ const i=document.getElementById('newProvInput');const t=(i.value||'').trim();if(!t)return;
+ addProveedorString(t);i.value='';renderProvUI();}
+
+/* ═══ 23. MODO MÓVIL (QR — ?m=ID) ═══ */
+async function initMobile(id){
+ loadCfg();
+ if(!sesion.nombre){const n=(prompt('¿Quién está en campo? (tu nombre)','')||'Inspector').trim();sesion.nombre=n;localStorage.setItem('sole_sesion',JSON.stringify(sesion));}
+ window._srvId=id;window._mob={chk:[],med:[],ser:[],hal:[]};
+ document.body.innerHTML='<div class="mob"><div class="mob-head"><div style="font-weight:800">📱 Modo campo — '+esc(id)+'</div><div style="font-size:11px;opacity:.8">'+esc(sesion.nombre)+'</div></div><div class="mob-tabs" id="mobTabs"></div><div id="mobCont"></div><div id="mobStatus" style="text-align:center;font-size:12px;color:#64748B;margin:10px 0"></div><button class="btn btn-primary" onclick="mobSync()">🔄 Sincronizar avance</button></div>';
+ let av=null;try{av=await apiPost({accion:'getAvance',id:id});}catch(e){}
+ if(av){
+  (av.checklist||[]).forEach(r=>window._mob.chk.push({grupo:r[1],item:r[2],res:r[3]||'',obs:r[4]||''}));
+  (av.medidas||[]).forEach(r=>window._mob.med.push({fase:r[1],campo:r[2],ficha:r[3]||'',valor:r[4]||'',unidad:r[5]||'',herr:r[6]||''}));
+  (av.series||[]).forEach(r=>window._mob.ser.push({serie:r[1],res:r[2]||'OK'}));
+  (av.hallazgos||[]).forEach(r=>window._mob.hal.push({ronda:r[1]||1,fase:r[2]||'Visual',ref:r[3]||'',componente:'',cod:r[5]||'',defecto:r[6]||'',desc:r[7]||'',cant:r[8]||1,fotos:[]}));}
+ if(!window._mob.chk.length)window._mob.chk=CFG.checklist.map(r=>({grupo:r[0],item:r[1],res:'',obs:''}));
+ window._mobTab='chk';mobRender();}
+function mobRender(){
+ const t=window._mobTab;
+ document.getElementById('mobTabs').innerHTML=[['chk','✅ Checklist'],['med','📐 Medidas'],['ser','🏷 Series'],['hal','🔴 Hallazgo']].map(x=>`<button class="${t===x[0]?'on':''}" onclick="window._mobTab='${x[0]}';mobRender()">${x[1]}</button>`).join('');
+ const c=document.getElementById('mobCont');
+ if(t==='chk'){
+  c.innerHTML=window._mob.chk.map((it,i)=>`<div class="mob-item"><div style="font-size:10px;color:#94A3B8">${esc(it.grupo)}</div><div style="font-size:12.5px;margin:2px 0 6px">${esc(it.item)}</div><select onchange="window._mob.chk[${i}].res=this.value" style="width:100%;padding:8px;border:1.5px solid #E2E8F0;border-radius:8px"><option value="" ${!it.res?'selected':''}>—</option><option value="C" ${it.res==='C'?'selected':''}>✓ Conforme</option><option value="NC" ${it.res==='NC'?'selected':''}>✗ No conforme</option><option value="NA" ${it.res==='NA'?'selected':''}>N/A</option></select></div>`).join('');
+ }else if(t==='med'){
+  c.innerHTML=window._mob.med.map((m,i)=>`<div class="mob-item"><b style="font-size:12.5px">${esc(m.campo)}</b> ${m.unidad?'('+esc(m.unidad)+')':''}<input value="${attr(m.valor)}" onchange="window._mob.med[${i}].valor=this.value" placeholder="Valor medido" style="width:100%;margin-top:6px;padding:10px;border:1.5px solid #E2E8F0;border-radius:8px;font-weight:700"></div>`).join('')+(window._mob.med.length?'':'<div class="mob-item">Sin medidas — créalas en la laptop (plantilla) y sincroniza.</div>');
+ }else if(t==='ser'){
+  c.innerHTML='<div class="mob-item"><input placeholder="Escanea o tipea la serie + Enter" onkeydown="if(event.key===\'Enter\'){window._mob.ser.push({serie:this.value.trim(),res:\'OK\'});this.value=\'\';mobRender();}" style="width:100%;padding:10px;border:1.5px solid #E2E8F0;border-radius:8px;font-family:monospace"></div>'+window._mob.ser.map((s,i)=>`<div class="mob-item" style="display:flex;gap:8px;align-items:center"><span style="flex:1;font-family:monospace;font-size:12px">${esc(s.serie)}</span><select onchange="window._mob.ser[${i}].res=this.value"><option ${s.res==='OK'?'selected':''}>OK</option><option ${s.res==='NC'?'selected':''}>NC</option></select><button class="mini-btn" onclick="window._mob.ser.splice(${i},1);mobRender()">✕</button></div>`).join('');
+ }else{
+  c.innerHTML='<div class="mob-item"><select id="mobHFase" style="width:100%;padding:10px;margin-bottom:6px;border:1.5px solid #E2E8F0;border-radius:8px"><option>Visual</option><option>Dimensional</option><option>Funcional</option></select><select id="mobHCod" style="width:100%;padding:10px;margin-bottom:6px;border:1.5px solid #E2E8F0;border-radius:8px"><option value="">— Código de defecto —</option>'+gruposDefectos().map(g=>`<optgroup label="${esc(g)}">${CFG.defectos.filter(d=>d[0]===g).map(d=>`<option value="${attr(d[1])}">${attr(d[1])} — ${esc(d[2])}</option>`).join('')}</optgroup>`).join('')+'</select><input id="mobHDesc" placeholder="Detalle del hallazgo" style="width:100%;padding:10px;margin-bottom:6px;border:1.5px solid #E2E8F0;border-radius:8px"><input id="mobHCant" type="number" min="1" value="1" style="width:100%;padding:10px;margin-bottom:6px;border:1.5px solid #E2E8F0;border-radius:8px"><input id="mobHFoto" type="file" accept="image/*" capture="environment" style="width:100%;font-size:12px"><button class="btn" style="width:100%;background:#DC2626;color:white;margin-top:8px" onclick="mobAddHallazgo()">+ Registrar hallazgo</button></div>'+window._mob.hal.map((h,i)=>`<div class="mob-item"><b style="font-size:12px">${esc(h.cod)} — ${esc(h.defecto||h.desc)}</b><div style="font-size:11px;color:#64748B">${esc(h.fase)} · cant ${esc(h.cant)}${(h.fotos||[]).length?' · 📷':''}</div></div>`).join('');}}
+async function mobAddHallazgo(){
+ const fase=document.getElementById('mobHFase').value,cod=document.getElementById('mobHCod').value,desc=(document.getElementById('mobHDesc').value||'').trim(),cant=parseInt(document.getElementById('mobHCant').value)||1;
+ if(!cod){alert('Elige el código de defecto.');return;}
+ const d=CFG.defectos.find(x=>x[1]===cod);
+ const h={ronda:1,fase:fase,ref:desc||'',componente:'',cod:cod,defecto:d?d[2]:'',desc:desc,cant:cant,fotos:[]};
+ const f=document.getElementById('mobHFoto');
+ if(f&&f.files[0]){try{const durl=await comprimirFoto(f.files[0]);await apiPost({accion:'subirEvidencia',id:window._srvId,fase:fase,ref:desc,tipo:'foto',nombre:window._srvId+'_mob_'+Date.now(),dataUrl:durl,por:sesion.nombre});h.fotos.push(durl);}catch(e){}}
+ window._mob.hal.push(h);window._mobTab='hal';mobRender();mobSync();}
+async function mobSync(){
+ const m=window._mob,id=window._srvId;const b=document.getElementById('mobStatus');
+ b.textContent='⏳ Sincronizando...';
+ try{
+  await apiPost({accion:'sincronizarAvance',id:id,
+   checklist:m.chk.filter(c=>c.res).map(c=>[id,c.grupo,c.item,c.res,c.obs||'']),
+   medidas:m.med.filter(x=>x.valor).map(x=>[id,x.fase,x.campo,x.ficha||'',x.valor,x.unidad||'',x.herr||'','']),
+   series:m.ser.map(s=>[id,s.serie,s.res]),
+   hallazgos:m.hal.map(h=>[id,h.ronda||1,h.fase,h.ref||'',h.componente||'',h.cod||'',h.defecto||'',h.desc||'',h.cant||1,''])});
+  b.innerHTML='✅ Sincronizado a las '+new Date().toTimeString().slice(0,5)+' — la laptop lo trae con "⬇ Traer avance".';
+ }catch(e){b.innerHTML='❌ '+esc(e.message);}}
+
+/* ═══ 24. ARRANQUE ═══ */
+loadCfg();renderSesion();renderPersonalSelects();renderCfgAll();initDropZone();
+(function(){
+ const mid=QS.get('m');
+ if(mid){initMobile(mid);}
+ else{renderHome();}
+})();
+</script>
+
+</body>
+</html>
