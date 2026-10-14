@@ -705,11 +705,43 @@ async function buscarFicha(){
  let ms=[],vals=[];
  try{ms=rowsToObjects('Muestreos',await apiGet('Muestreos')).filter(x=>String(x['Código SAP']||'').toUpperCase()===cod);}catch(e){}
  try{vals=rowsToObjects('Validaciones_Fichas',await apiGet('Validaciones_Fichas')).filter(x=>String(x['Código SAP']||'').toUpperCase()===cod);}catch(e){}
- out.innerHTML=`<div class="card ficha-header"><div class="code">${attr(cod)}</div><div class="desc">${attr(m?m['Descripción']:'(no está en el maestro — créalo en ⚙️ Config)')}</div>
- ${m?`<div class="meta">${m['EAM']?'EAM: '+attr(m['EAM'])+' · ':''}${m['EAN']?'EAN: '+attr(m['EAN'])+' · ':''}${m['Peso Bruto']?'Peso bruto: '+attr(m['Peso Bruto'])+' · ':''}Línea: ${attr(detectarLinea(m)||'—')}</div>`:''}</div>
- <div class="card"><div class="section-title">🧾 Muestreos anteriores (${ms.length})</div>${ms.length?'<table class="dt"><tr><th>ID</th><th>Fecha</th><th>Lote SAP</th><th>Estado</th><th>Decisión</th></tr>'+ms.slice(-10).reverse().map(x=>`<tr><td>${attr(x['ID Muestreo'])}</td><td>${attr(x['Fecha'])}</td><td>${attr(x['N° Lote Inspección SAP'])}</td><td>${attr(x['Estado'])}</td><td>${attr(x['Decisión Final']||'—')}</td></tr>').join('')+'</table>':'<p style="font-size:12px;color:#94A3B8">Sin muestreos registrados.</p>'}</div>
- <div class="card"><div class="section-title">📥 Validaciones de ficha (${vals.length})</div>${vals.length?'<table class="dt"><tr><th>Revisión</th><th>Validó</th><th>Resultado</th><th>Fecha</th></tr>'+vals.slice(-10).reverse().map(v=>`<tr><td>${attr(v['Revisión'])}</td><td>${attr(v['Validado Por'])}</td><td>${attr(v['Resultado'])}</td><td>${attr(String(v['Fecha']).slice(0,10))}</td></tr>').join('')+'</table>':'<p style="font-size:12px;color:#94A3B8">Sin validaciones registradas.</p>'}</div>`;}
-
+out.innerHTML='';
+let html='<div class="card ficha-header">';
+html+='<div class="code">'+attr(cod)+'</div>';
+html+='<div class="desc">'+attr(m?m['Descripción']:'(no está en el maestro)')+'</div>';
+if(m){
+  let meta='';
+  if(m['EAM'])meta+='EAM: '+attr(m['EAM'])+' · ';
+  if(m['EAN'])meta+='EAN: '+attr(m['EAN'])+' · ';
+  if(m['Peso Bruto'])meta+='Peso bruto: '+attr(m['Peso Bruto'])+' · ';
+  meta+='Línea: '+attr(detectarLinea(m)||'—');
+  html+='<div class="meta">'+meta+'</div>';
+}
+html+='</div>';
+html+='<div class="card"><div class="section-title">🧾 Muestreos anteriores ('+ms.length+')</div>';
+if(ms.length){
+  html+='<table class="dt"><tr><th>ID</th><th>Fecha</th><th>Lote SAP</th><th>Estado</th><th>Decisión</th></tr>';
+  ms.slice(-10).reverse().forEach(x=>{
+    html+='<tr><td>'+attr(x['ID Muestreo'])+'</td><td>'+attr(x['Fecha'])+'</td><td>'+attr(x['N° Lote Inspección SAP'])+'</td><td>'+attr(x['Estado'])+'</td><td>'+attr(x['Decisión Final']||'—')+'</td></tr>';
+  });
+  html+='</table>';
+}else{
+  html+='<p style="font-size:12px;color:#94A3B8">Sin muestreos registrados.</p>';
+}
+html+='</div>';
+html+='<div class="card"><div class="section-title">📥 Validaciones de ficha ('+vals.length+')</div>';
+if(vals.length){
+  html+='<table class="dt"><tr><th>Revisión</th><th>Validó</th><th>Resultado</th><th>Fecha</th></tr>';
+  vals.slice(-10).reverse().forEach(v2=>{
+    html+='<tr><td>'+attr(v2['Revisión'])+'</td><td>'+attr(v2['Validado Por'])+'</td><td>'+attr(v2['Resultado'])+'</td><td>'+attr(String(v2['Fecha']).slice(0,10))+'</td></tr>';
+  });
+  html+='</table>';
+}else{
+  html+='<p style="font-size:12px;color:#94A3B8">Sin validaciones registradas.</p>';
+}
+html+='</div>';
+out.innerHTML=html;
+}
 /* ═══ 9. INGRESOS ═══ */
 let ING_WB=null,ING_AOA=null,ING_SHEET='';
 const ING_FIELDS=['Fecha Ingreso','Doc Material','Código SAP','Descripción','Cant Lote','Doc Compras','File','Almacén','Proveedor','Cant Muestra','Lote SAP','Fecha Contenedor'];
