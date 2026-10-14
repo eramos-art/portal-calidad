@@ -800,69 +800,187 @@ async function guardarIngresosBase(){
 
 /* ═══ 10. VALIDAR FICHA ═══ */
 let FICHA_PDF=null;
-const GLOSARIO={installation:'instalación',instructions:'instrucciones',user:'usuario',water:'agua',hot:'caliente',cold:'fría',pressure:'presión',voltage:'voltaje',power:'potencia',capacity:'capacidad',temperature:'temperatura',dimensions:'dimensiones',weight:'peso',net:'neto',gross:'bruto',model:'modelo',brand:'marca',safety:'seguridad',warning:'advertencia',caution:'precaución',danger:'peligro',important:'importante',note:'nota',specifications:'especificaciones',features:'características',operation:'operación',maintenance:'mantenimiento',cleaning:'limpieza',warranty:'garantía',service:'servicio',switch:'interruptor',knob:'perilla',burner:'quemador',oven:'horno',grill:'parrilla',tray:'bandeja',door:'puerta',glass:'vidrio',stainless:'acero',steel:'inoxidable',heating:'calentamiento',thermostat:'termostato',ignition:'encendido',flame:'llama',ventilation:'ventilación',filter:'filtro',remote:'control remoto',battery:'batería',cable:'cable',plug:'enchufe',connection:'conexión',inlet:'entrada',outlet:'salida',valve:'válvula',hose:'manguera',drain:'desagüe',mounting:'montaje',wall:'pared',screw:'tornillo',anchor:'anclaje',minimum:'mínimo',maximum:'máximo',clearance:'distancia libre',frequency:'frecuencia',current:'corriente',energy:'energía',efficiency:'eficiencia',class:'clase',volume:'volumen',freezer:'congelador',refrigerator:'refrigerador',defrost:'descongelación',compressor:'compresor',refrigerant:'refrigerante',type:'tipo',size:'tamaño',color:'color',material:'material',control:'control',display:'pantalla',timer:'temporizador',function:'función',mode:'modo',lock:'bloqueo',standard:'norma',serial:'serie',number:'número',date:'fecha',children:'niños',surface:'superficie',keep:'conservar',away:'lejos'};
+const GLOSARIO={
+ installation:'instalación',instructions:'instrucciones',user:'usuario',
+ water:'agua',hot:'caliente',cold:'fría',pressure:'presión',
+ voltage:'voltaje',power:'potencia',capacity:'capacidad',
+ temperature:'temperatura',dimensions:'dimensiones',weight:'peso',
+ net:'neto',gross:'bruto',model:'modelo',brand:'marca',
+ safety:'seguridad',warning:'advertencia',caution:'precaución',
+ danger:'peligro',important:'importante',note:'nota',
+ specifications:'especificaciones',features:'características',
+ operation:'operación',maintenance:'mantenimiento',
+ cleaning:'limpieza',warranty:'garantía',service:'servicio',
+ switch:'interruptor',knob:'perilla',burner:'quemador',oven:'horno',
+ grill:'parrilla',tray:'bandeja',door:'puerta',glass:'vidrio',
+ stainless:'acero',steel:'inoxidable',heating:'calentamiento',
+ thermostat:'termostato',ignition:'encendido',flame:'llama',
+ ventilation:'ventilación',filter:'filtro',remote:'control remoto',
+ battery:'batería',cable:'cable',plug:'enchufe',
+ connection:'conexión',inlet:'entrada',outlet:'salida',
+ valve:'válvula',hose:'manguera',drain:'desagüe',
+ mounting:'montaje',wall:'pared',screw:'tornillo',anchor:'anclaje',
+ minimum:'mínimo',maximum:'máximo',clearance:'distancia libre',
+ frequency:'frecuencia',current:'corriente',energy:'energía',
+ efficiency:'eficiencia',class:'clase',volume:'volumen',
+ freezer:'congelador',refrigerator:'refrigerador',
+ defrost:'descongelación',compressor:'compresor',
+ refrigerant:'refrigerante',type:'tipo',size:'tamaño',
+ color:'color',material:'material',control:'control',
+ display:'pantalla',timer:'temporizador',function:'función',
+ mode:'modo',lock:'bloqueo',standard:'norma',serial:'serie',
+ number:'número',date:'fecha',children:'niños',
+ surface:'superficie',keep:'conservar',away:'lejos'};
 function initDropZone(){
- const dz=document.getElementById('dropZone');if(!dz||dz.dataset.init)return;dz.dataset.init='1';
- ['dragover','dragenter'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.style.background='#EBF4FF';}));
- ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.style.background='#F8FBFF';}));
- dz.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)procesarFichaArrastrada(f);});}
+ const dz=document.getElementById('dropZone');
+ if(!dz||dz.dataset.init)return;
+ dz.dataset.init='1';
+ ['dragover','dragenter'].forEach(ev=>dz.addEventListener(ev,e=>{
+  e.preventDefault();dz.style.background='#EBF4FF';}));
+ ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{
+  e.preventDefault();dz.style.background='#F8FBFF';}));
+ dz.addEventListener('drop',e=>{
+  const f=e.dataTransfer.files[0];
+  if(f)procesarFichaArrastrada(f);});}
 async function procesarFichaArrastrada(file){
  if(!file)return;
- if(file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')){alert('Arrastra un archivo PDF.');return;}
- const info=document.getElementById('fichaCargadaInfo');info.innerHTML='<div class="loading">📄 Leyendo PDF...</div>';
- const buf=await file.arrayBuffer();let text='';
- try{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+ const okType=file.type==='application/pdf'||file.name.toLowerCase().endsWith('.pdf');
+ if(!okType){alert('Arrastra un archivo PDF.');return;}
+ const info=document.getElementById('fichaCargadaInfo');
+ info.innerHTML='<div class="loading">📄 Leyendo PDF...</div>';
+ const buf=await file.arrayBuffer();
+ let text='';
+ try{
+  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   const pdf=await pdfjsLib.getDocument({data:buf}).promise;
-  for(let p=1;p<=Math.min(pdf.numPages,10);p++){const pg=await pdf.getPage(p);const tc=await pg.getTextContent();text+=tc.items.map(it=>it.str).join(' ')+'\n';}
+  const maxPag=Math.min(pdf.numPages,10);
+  for(let p=1;p<=maxPag;p++){
+   const pg=await pdf.getPage(p);
+   const tc=await pg.getTextContent();
+   text+=tc.items.map(it=>it.str).join(' ')+'\n';
+  }
  }catch(e){text='';}
  FICHA_PDF={url:URL.createObjectURL(file),text:text,nombre:file.name};
- info.innerHTML=`<div class="alert green">✅ <b>${esc(file.name)}</b> cargada (${Math.round(file.size/1024)} KB). ${text?('Texto extraído: '+text.length+' caracteres.'):'PDF escaneado sin texto — llena los campos a mano.'}</div>`;
+ const kb=Math.round(file.size/1024);
+ let det=text?'Texto extraído: '+text.length+' caracteres.':'PDF escaneado sin texto — llena los campos a mano.';
+ info.innerHTML='<div class="alert green">✅ <b>'+esc(file.name)+'</b> cargada ('+kb+' KB). '+det+'</div>';
  document.getElementById('bloqueValidacion').style.display='block';
  if(text)detectarCamposTecnicos(text);
  renderHistorialValidaciones('');}
 function detectarCamposTecnicos(text){
  const t=text.replace(/\s+/g,' ');
- const pat=[['Voltaje',/(\d{2,3})\s*V\b/i,'V'],['Potencia',/(\d{3,5})\s*W\b/i,'W'],['Corriente',/(\d+(?:\.\d+)?)\s*A\b/i,'A'],['Presión',/(\d+(?:\.\d+)?)\s*(?:MPa|psi|bar|kPa)/i,''],['Caudal',/(\d+(?:\.\d+)?)\s*(?:L\/min|GPM)/i,'L/min'],['Capacidad',/(\d+(?:\.\d+)?)\s*(?:L\b|Lt\b)/i,'L'],['Temperatura',/(\d{2,4})\s*°?\s*C/i,'°C'],['Dimensiones',/(\d{2,4})\s*[xX×]\s*(\d{2,4})\s*[xX×]?\s*(\d{2,4})?/,'mm'],['Peso',/(\d+(?:\.\d+)?)\s*kg/i,'kg'],['Frecuencia',/(\d{2})\s*Hz/i,'Hz']];
+ const pat=[
+  ['Voltaje',/(\d{2,3})\s*V\b/i,'V'],
+  ['Potencia',/(\d{3,5})\s*W\b/i,'W'],
+  ['Corriente',/(\d+(?:\.\d+)?)\s*A\b/i,'A'],
+  ['Presión',/(\d+(?:\.\d+)?)\s*(?:MPa|psi|bar|kPa)/i,''],
+  ['Caudal',/(\d+(?:\.\d+)?)\s*(?:L\/min|GPM)/i,'L/min'],
+  ['Capacidad',/(\d+(?:\.\d+)?)\s*(?:L\b|Lt\b)/i,'L'],
+  ['Temperatura',/(\d{2,4})\s*°?\s*C/i,'°C'],
+  ['Dimensiones',/(\d{2,4})\s*[xX×]\s*(\d{2,4})\s*[xX×]?\s*(\d{2,4})?/,'mm'],
+  ['Peso',/(\d+(?:\.\d+)?)\s*kg/i,'kg'],
+  ['Frecuencia',/(\d{2})\s*Hz/i,'Hz']];
  window._campos=[];
- pat.forEach(p=>{const m=t.match(p[1]);if(m)window._campos.push({campo:p[0],valor:m[0],unidad:p[2]});});
+ pat.forEach(p=>{
+  const m=t.match(p[1]);
+  if(m)window._campos.push({campo:p[0],valor:m[0],unidad:p[2]});
+ });
  renderCampos();}
 function renderCampos(){
  const c=document.getElementById('tablaExtraccion');
- if(!window._campos||!window._campos.length){c.innerHTML='<p style="font-size:12px;color:#94A3B8">No se detectaron campos automáticos — agrégalos a mano.</p>';return;}
- c.innerHTML='<table class="dt"><tr><th>Campo</th><th>Valor detectado</th><th></th></tr>'+window._campos.map((f,i)=>`<tr><td><input value="${attr(f.campo)}" onchange="window._campos[${i}].campo=this.value" style="width:100%;border:none;background:transparent;font-weight:600"></td><td><input value="${attr(f.valor)}" onchange="window._campos[${i}].valor=this.value" style="width:100%;border:none;background:transparent"></td><td><button class="mini-btn" onclick="window._campos.splice(${i},1);renderCampos()">✕</button></td></tr>').join('')+'</table>';}
-function addCampoManual(){window._campos=window._campos||[];window._campos.push({campo:'',valor:''});renderCampos();}
-function traducirLinea(l){return l.replace(/[A-Za-zÁÉÍÓÚáéíóúÑñ']+/g,w=>{const k=w.toLowerCase();if(GLOSARIO[k])return GLOSARIO[k];const s=k.endsWith('s')?k.slice(0,-1):null;if(s&&GLOSARIO[s])return GLOSARIO[s];return w;});}
+ if(!window._campos||!window._campos.length){
+  c.innerHTML='<p style="font-size:12px;color:#94A3B8">Sin campos automáticos — agrégalos a mano.</p>';
+  return;}
+ let html='<table class="dt"><tr><th>Campo</th><th>Valor detectado</th><th></th></tr>';
+ window._campos.forEach((f,i)=>{
+  html+='<tr>';
+  html+='<td><input value="'+attr(f.campo)+'" onchange="window._campos['+i+'].campo=this.value" style="width:100%;border:none;background:transparent;font-weight:600"></td>';
+  html+='<td><input value="'+attr(f.valor)+'" onchange="window._campos['+i+'].valor=this.value" style="width:100%;border:none;background:transparent"></td>';
+  html+='<td><button class="mini-btn" onclick="window._campos.splice('+i+',1);renderCampos()">✕</button></td>';
+  html+='</tr>';
+ });
+ html+='</table>';
+ c.innerHTML=html;}
+function addCampoManual(){
+ window._campos=window._campos||[];
+ window._campos.push({campo:'',valor:''});
+ renderCampos();}
+function traducirLinea(l){
+ return l.replace(/[A-Za-zÁÉÍÓÚáéíóúÑñ']+/g,w=>{
+  const k=w.toLowerCase();
+  if(GLOSARIO[k])return GLOSARIO[k];
+  const s=k.endsWith('s')?k.slice(0,-1):null;
+  if(s&&GLOSARIO[s])return GLOSARIO[s];
+  return w;});}
 function traducirFichaAutomatico(){
  const c=document.getElementById('traduccionCont');
- if(!FICHA_PDF||!FICHA_PDF.text){c.innerHTML='<div class="alert amber">No hay texto extraído (PDF escaneado) — usa los campos a mano.</div>';return;}
+ if(!FICHA_PDF||!FICHA_PDF.text){
+  c.innerHTML='<div class="alert amber">No hay texto extraído — usa los campos a mano.</div>';
+  return;}
  const lines=FICHA_PDF.text.split('\n').filter(l=>l.trim()).slice(0,120);
- c.innerHTML='<div style="max-height:420px;overflow:auto;border:1px solid #E2E8F0;border-radius:10px;padding:12px">'+lines.map(l=>`<div style="font-size:13.5px;font-weight:600;line-height:1.5">${esc(traducirLinea(l))}</div><div class="en" style="margin-bottom:6px">${esc(l)}</div>`).join('')+'</div><p style="font-size:11px;color:#94A3B8;margin-top:6px">Traducción por glosario técnico interno — revisa términos clave antes de validar.</p>';}
+ let html='<div style="max-height:420px;overflow:auto;border:1px solid #E2E8F0;border-radius:10px;padding:12px">';
+ lines.forEach(l=>{
+  html+='<div style="font-size:13.5px;font-weight:600;line-height:1.5">'+esc(traducirLinea(l))+'</div>';
+  html+='<div class="en" style="margin-bottom:6px">'+esc(l)+'</div>';
+ });
+ html+='</div>';
+ html+='<p style="font-size:11px;color:#94A3B8;margin-top:6px">Traducción por glosario técnico interno — revisa términos clave antes de validar.</p>';
+ c.innerHTML=html;}
 function togglePreview(){
  const c=document.getElementById('pdfPreviewCont');
  if(c.innerHTML){c.innerHTML='';return;}
  if(!FICHA_PDF)return;
- c.innerHTML=`<iframe src="${FICHA_PDF.url}" style="width:100%;height:520px;border:1px solid #E2E8F0;border-radius:10px;margin-top:10px"></iframe>`;}
+ c.innerHTML='<iframe src="'+FICHA_PDF.url+'" style="width:100%;height:520px;border:1px solid #E2E8F0;border-radius:10px;margin-top:10px"></iframe>';}
 async function guardarValidacionFicha(){
  const msg=document.getElementById('validacionMsg');
- const cod=document.getElementById('vCodigo').value.trim(),res=document.getElementById('vResultado').value,val=document.getElementById('vValidadoPor').value;
- if(!cod||!res||!val){msg.innerHTML='<div class="alert red">Completa Código SAP, Validado por y Resultado.</div>';return;}
+ const cod=document.getElementById('vCodigo').value.trim();
+ const res=document.getElementById('vResultado').value;
+ const val=document.getElementById('vValidadoPor').value;
+ if(!cod||!res||!val){
+  msg.innerHTML='<div class="alert red">Completa Código SAP, Validado por y Resultado.</div>';
+  return;}
  msg.innerHTML='<div class="loading">Guardando...</div>';
- try{await apiPost({accion:'guardarFilas',hoja:'Validaciones_Fichas',filas:[[cod,document.getElementById('vRevision').value,val,res,document.getElementById('vCambios').value,document.getElementById('vObservaciones').value,new Date().toISOString()]]});
+ const fila=[cod,
+  document.getElementById('vRevision').value,
+  val,res,
+  document.getElementById('vCambios').value,
+  document.getElementById('vObservaciones').value,
+  new Date().toISOString()];
+ try{
+  await apiPost({accion:'guardarFilas',hoja:'Validaciones_Fichas',filas:[fila]});
   msg.innerHTML='<div class="alert green">✅ Validación guardada para '+esc(cod)+'</div>';
   renderHistorialValidaciones(cod);
- }catch(e){msg.innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}}
+ }catch(e){
+  msg.innerHTML='<div class="alert red">❌ '+esc(e.message)+'</div>';}}
 async function renderHistorialValidaciones(cod){
  const c=document.getElementById('historialValidaciones');
- const sel=document.getElementById('vValidadoPor');if(sel&&!sel.options.length)sel.innerHTML='<option value="">Seleccionar...</option>'+CFG.personal.map(p=>`<option>${esc(p)}</option>`).join('');
- if(!cod){c.innerHTML='<p style="font-size:12px;color:#94A3B8">Arrastra una ficha o escribe un código.</p>';return;}
- try{const vals=rowsToObjects('Validaciones_Fichas',await apiGet('Validaciones_Fichas')).filter(x=>String(x['Código SAP']||'').toUpperCase()===cod);
-  c.innerHTML=vals.length?'<table class="dt"><tr><th>Revisión</th><th>Validó</th><th>Resultado</th><th>Fecha</th></tr>'+vals.slice(-10).reverse().map(v=>`<tr><td>${attr(v['Revisión'])}</td><td>${attr(v['Validado Por'])}</td><td>${attr(v['Resultado'])}</td><td>${attr(String(v['Fecha']).slice(0,10))}</td></tr>').join('')+'</table>':'<p style="font-size:12px;color:#94A3B8">Primera validación de este código.</p>';
- }catch(e){c.innerHTML='<p style="font-size:12px;color:#94A3B8">Historial no disponible.</p>';}}
+ const sel=document.getElementById('vValidadoPor');
+ if(sel&&!sel.options.length){
+  sel.innerHTML='<option value="">Seleccionar...</option>'+CFG.personal.map(p=>'<option>'+esc(p)+'</option>').join('');}
+ if(!cod){
+  c.innerHTML='<p style="font-size:12px;color:#94A3B8">Arrastra una ficha o escribe un código.</p>';
+  return;}
+ try{
+  const vals=rowsToObjects('Validaciones_Fichas',await apiGet('Validaciones_Fichas'))
+   .filter(x=>String(x['Código SAP']||'').toUpperCase()===cod);
+  if(!vals.length){
+   c.innerHTML='<p style="font-size:12px;color:#94A3B8">Primera validación de este código.</p>';
+   return;}
+  let html='<table class="dt"><tr><th>Revisión</th><th>Validó</th><th>Resultado</th><th>Fecha</th></tr>';
+  vals.slice(-10).reverse().forEach(v2=>{
+   html+='<tr><td>'+attr(v2['Revisión'])+'</td><td>'+attr(v2['Validado Por'])+'</td><td>'+attr(v2['Resultado'])+'</td><td>'+attr(String(v2['Fecha']).slice(0,10))+'</td></tr>';
+  });
+  html+='</table>';
+  c.innerHTML=html;
+ }catch(e){
+  c.innerHTML='<p style="font-size:12px;color:#94A3B8">Historial no disponible.</p>';}}
 function irAMuestreoDesdeValidacion(){
  const cod=document.getElementById('vCodigo').value.trim();
- if(cod){setVal('mCodigo',cod);cargarFichaReferencia();}
- switchTab('B');if(window.renderStepB)renderStepB(0);}
-/* ═══ 11. MUESTREO — NAVEGACIÓN ═══ */
+ if(cod){
+  setVal('mCodigo',cod);
+  cargarFichaReferencia();}
+ switchTab('B');
+ if(window.renderStepB)renderStepB(0);}
 let stepB=0;
 const STEP_TITLES=[['1','Contexto, material y ficha'],['2','Fase Visual'],['3','Fase Dimensional'],['4','Fase Funcional'],['5','Series y 2ª muestra'],['6','Cierre y firma']];
 function v(id){const el=document.getElementById(id);return el?(el.value||'').trim():'';}
